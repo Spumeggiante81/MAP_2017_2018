@@ -1,4 +1,4 @@
-package esercitazione_1;
+package data;
 
 public class Data {
 	private Object data[][]; //è una matrice nxm di tipo Object dove ogni riga modella una transazione 

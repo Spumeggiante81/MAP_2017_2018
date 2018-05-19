@@ -1,4 +1,4 @@
-package esercitazione_1;
+package data;
 
 public class DiscreteAttribute extends Attribute {
 	String values[]; //array di oggetti String uno per ciascun valore del dominio discreto

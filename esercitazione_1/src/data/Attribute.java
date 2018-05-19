@@ -1,4 +1,4 @@
-package esercitazione_1;
+package data;
 
 public abstract class Attribute {	
 	protected String name; //nome simbolico dell'attributo

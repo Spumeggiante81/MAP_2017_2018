@@ -1,13 +1,14 @@
-package esercitazione_1;
+package data;
 
  class ContinuosAttribute extends Attribute 
 {
-	 private double max; 
+	private double max; 
 	private double min;  
 	 
-	public ContinuosAttribute(String name2, int index2, double min, double max) {
-		super(name2, index2);
-		// TODO Auto-generated constructor stub
+	public ContinuosAttribute(String name, int index, double min, double max) {
+		super(name, index);
+		this.max = max;
+		this.min = min;
 	}
 
 	/**
