@@ -5,6 +5,8 @@ package data;
 	private double max; 
 	private double min;  
 	 
+	
+	//gadaleta
 	public ContinuosAttribute(String name, int index, double min, double max) {
 		super(name, index);
 		this.max = max;
