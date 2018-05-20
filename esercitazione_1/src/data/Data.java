@@ -14,14 +14,33 @@ public class Data {
 		
 		attributeSet = new Attribute[5]; 
 		
-		String outLookValues[]=new String[3]; 
-		outLookValues[0]="overcast"; 
-		outLookValues[1]="Rain"; 
-		outLookValues[2]="sunny"; 
-		attributeSet[0]= new DiscreteAttribute("Outlook",0,outLookValues); 
+		String OutLookValues[]=new String[3]; 
+		OutLookValues[0]="Overcast"; 
+		OutLookValues[1]="Rain"; 
+		OutLookValues[2]="Sunny"; 
+		attributeSet[0]= new DiscreteAttribute("Outlook",0,OutLookValues); 
 		
-		// SIMILMENTE PER GLI ALTRI
+		String TemperatureValues[]=new String[3]; 
+		TemperatureValues[0]="Hot"; 
+		TemperatureValues[1]="Mild"; 
+		TemperatureValues[2]="Cool"; 
+		attributeSet[1]= new DiscreteAttribute("Temperature",1,TemperatureValues); 
 		
+		String HumidityValues[]=new String[2]; 
+		HumidityValues[0]="Hight"; 
+		HumidityValues[1]="Normal";  
+		attributeSet[2]= new DiscreteAttribute("Humidity",0,HumidityValues); 
+		
+		String WindValues[]=new String[3]; 
+		WindValues[0]="Weak"; 
+		WindValues[1]="Strong"; 
+		attributeSet[3]= new DiscreteAttribute("Wind",0,WindValues); 
+		
+		String PlayTennisValues[]=new String[3]; 
+		PlayTennisValues[0]="overcast"; 
+		PlayTennisValues[1]="Rain"; 
+		PlayTennisValues[2]="sunny"; 
+		attributeSet[4]= new DiscreteAttribute("PlayTennis",0,PlayTennisValues); 
 		
 	}
        int getNumberOfExamples() {
@@ -30,7 +49,7 @@ public class Data {
        }
        /**
         * restutuisce la dimensione di NumberOfAttribute
-        * @return
+        * @return numerOfExaples dimensione di NumberOfAttribute
         */
        
        int getNumberOfExplanatoryAttributes() { // da finire
@@ -45,10 +64,19 @@ public class Data {
        
        Object getAttributeValue(int exampleIndex, int attributeIndex) { //da finire
 		return attributeIndex;
+		
+		
     	   
        }
        public String toString() { //da finire
-    	   return null;
+    	   return "a";
+       }
+       
+       
+       public static void main(String args[])
+       { 
+    	 Data trainingSet=new Data();
+    	 System.out.println(trainingSet);
        }
     	   
 }   	   

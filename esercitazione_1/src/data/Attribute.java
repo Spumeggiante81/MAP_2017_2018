@@ -13,5 +13,39 @@ public abstract class Attribute {
 		this.name = name;
 		this.index = index;
 	}
+	
+	/**
+	 * 
+	 * @return restituisce il nome dell'attributo
+	 */
+	String getname()
+	{
+		return name;
 
+	}
+	
+	/**
+	 * 
+	 * @return restituisce identificativo numerico dell'attributo
+	 */
+	int getIndex()
+	{
+		return index;
+
+	}
+	
+	/**
+	 * Overriding metodo toString
+	 */
+	public String toString()
+	{
+	
+		return name;
+
+	}
+	
+	
+	
+	
+	
 }
