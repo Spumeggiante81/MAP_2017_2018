@@ -6,7 +6,8 @@ public abstract class Attribute {
 	
 	/**
 	 * Costruttore della classe
-	 * inizializza i valori name, index
+	 * @param name nome che descrive l'attributo
+	 * @param index indice associato all'attributo
 	 */
 	
 	public Attribute(String name, int index) {
@@ -15,33 +16,29 @@ public abstract class Attribute {
 	}
 	
 	/**
-	 * 
-	 * @return restituisce il nome dell'attributo
+	 * Ritorna il nome dell'attributo in analisi
+	 * @return nome attributo
 	 */
 	String getname()
 	{
 		return name;
-
 	}
 	
 	/**
-	 * 
+	 * Ritorna l'indice dell'attributo in analisi
 	 * @return restituisce identificativo numerico dell'attributo
 	 */
 	int getIndex()
 	{
 		return index;
-
 	}
 	
 	/**
-	 * Overriding metodo toString
+	 * Ritorna in formato String i valori contenuti nell'attributo in analisi
 	 */
 	public String toString()
 	{
-	
 		return name;
-
 	}
 	
 	

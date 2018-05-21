@@ -14,62 +14,163 @@ public class Data {
 		
 		attributeSet = new Attribute[5]; 
 		
-		String OutLookValues[]=new String[3]; 
-		OutLookValues[0]="Overcast"; 
-		OutLookValues[1]="Rain"; 
-		OutLookValues[2]="Sunny"; 
-		attributeSet[0]= new DiscreteAttribute("Outlook",0,OutLookValues); 
+		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
+		attributeSet[0] = new DiscreteAttribute("Outlook", 0, outLookValues);
 		
-		String TemperatureValues[]=new String[3]; 
-		TemperatureValues[0]="Hot"; 
-		TemperatureValues[1]="Mild"; 
-		TemperatureValues[2]="Cool"; 
-		attributeSet[1]= new DiscreteAttribute("Temperature",1,TemperatureValues); 
+		String temperatureValues[] = {"Hot", "Mid", "Cold"};
+		attributeSet[1] = new DiscreteAttribute("Temperature", 1, temperatureValues);
 		
-		String HumidityValues[]=new String[2]; 
-		HumidityValues[0]="Hight"; 
-		HumidityValues[1]="Normal";  
-		attributeSet[2]= new DiscreteAttribute("Humidity",0,HumidityValues); 
+		String humidityValues[] = {"Hight", "Normal"};
+		attributeSet[2] = new DiscreteAttribute("Humidity", 2, humidityValues);
 		
-		String WindValues[]=new String[3]; 
-		WindValues[0]="Weak"; 
-		WindValues[1]="Strong"; 
-		attributeSet[3]= new DiscreteAttribute("Wind",0,WindValues); 
+		String windValues[] = {"Weak", "Strong"};
+		attributeSet[3] = new DiscreteAttribute("Wind", 3, windValues);
 		
-		String PlayTennisValues[]=new String[3]; 
-		PlayTennisValues[0]="overcast"; 
-		PlayTennisValues[1]="Rain"; 
-		PlayTennisValues[2]="sunny"; 
-		attributeSet[4]= new DiscreteAttribute("PlayTennis",0,PlayTennisValues); 
+		String playTennisValues[] = {"No", "Yes"};
+		attributeSet[4] = new DiscreteAttribute("PlayTennis", 4, playTennisValues);
+		
+        data[0][0] = "Sunny";
+        data[0][1] = "Hot";
+        data[0][2] = "High";
+        data[0][3] = "Weak";
+        data[0][4] = "No";
+        
+        data[1][0] = "Sunny";
+        data[1][1] = "Hot";
+        data[1][2] = "High";
+        data[1][3] = "Strong";
+        data[1][4] = "No";
+        
+        data[2][0] = "Overcast";
+        data[2][1] = "Hot";
+        data[2][2] = "High";
+        data[2][3] = "Weak";
+        data[2][4] = "Yes";
+        
+        data[3][0] = "Rain";
+        data[3][1] = "Mild";
+        data[3][2] = "High";
+        data[3][3] = "Weak";
+        data[3][4] = "Yes";
+        
+        data[4][0] = "Rain";
+        data[4][1] = "Cool";
+        data[4][2] = "Normal";
+        data[4][3] = "Weak";
+        data[4][4] = "Yes";
+        
+        data[5][0] = "Rain";
+        data[5][1] = "Cool";
+        data[5][2] = "Normal";
+        data[5][3] = "Strong";
+        data[5][4] = "No";
+        
+        data[6][0] = "Overcast";
+        data[6][1] = "Cool";
+        data[6][2] = "Normal";
+        data[6][3] = "Strong";
+        data[6][4] = "Yes";
+        
+        data[7][0] = "Sunny";
+        data[7][1] = "Mild";
+        data[7][2] = "High";
+        data[7][3] = "Weak";
+        data[7][4] = "No";
+        
+        data[8][0] = "Sunny";
+        data[8][1] = "Cool";
+        data[8][2] = "Normal";
+        data[8][3] = "Weak";
+        data[8][4] = "Yes";
+        
+        data[9][0] = "Rain";
+        data[9][1] = "Mild";
+        data[9][2] = "High";
+        data[9][3] = "Weak";
+        data[9][4] = "No";
+        
+        data[10][0] = "Sunny";
+        data[10][1] = "Mild";
+        data[10][2] = "Normal";
+        data[10][3] = "Strong";
+        data[10][4] = "Yes";
+        
+        data[11][0] = "Overcast";
+        data[11][1] = "Mild";
+        data[11][2] = "High";
+        data[11][3] = "Strong";
+        data[11][4] = "Yes";
+        
+        data[12][0] = "Overcast";
+        data[12][1] = "Hot";
+        data[12][2] = "Normal";
+        data[12][3] = "Weak";
+        data[12][4] = "Yes";
+        
+        data[13][0] = "Rain";
+        data[13][1] = "Mild";
+        data[13][2] = "High";
+        data[13][3] = "Strong";
+        data[13][4] = "No";
 		
 	}
+	/**
+	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
+	 * @return numero di transazioni (tuple)
+	 */
        int getNumberOfExamples() {
-    	   return numberOfExamples; 
-    	   
+    	   return this.numberOfExamples; 
        }
+       
        /**
-        * restutuisce la dimensione di NumberOfAttribute
-        * @return numerOfExaples dimensione di NumberOfAttribute
+        * restutuisce il numero di attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
+        * @return numero di attributi 
         */
        
-       int getNumberOfExplanatoryAttributes() { // da finire
-		return numberOfExamples;
+       int getNumberOfExplanatoryAttributes() {
+		return this.attributeSet.length;
     	   
        }
-       
-       Attribute[]getAttributeSchema(){ //da finire
+
+       /**
+        * Restituisce lo schema degli attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
+        * @return schema degli attributi
+        */
+       Attribute[] getAttributeSchema(){
 		return attributeSet;
-    	   
+       }
+       /**
+        * Ritorna il valore riportato nella transazione in posizione "exampleIndex" e riportato all'interno dell'attributo con indice "attributeIndex" presente
+        * nella collezione in analisi
+        * @param exampleIndex posizione della transazione (tupla) all'interno di cui si vuole ricavare il valore desiderato
+        * @param attributeIndex indice dell'attributo quale definisce il valore desiderato
+        * @return
+        */
+       Object getAttributeValue(int exampleIndex, int attributeIndex) {
+		return this.data[exampleIndex][attributeIndex];
        }
        
-       Object getAttributeValue(int exampleIndex, int attributeIndex) { //da finire
-		return attributeIndex;
-		
-		
-    	   
-       }
-       public String toString() { //da finire
-    	   return "a";
+       /**
+        * Ritorna in formato String tutti dati presenti all'interno della collezione in analisi
+        */
+       public String toString() {
+    	   //incomincio definendo una stinga "vuota" ( qualora la collezione sia vuota)
+    	   String string = "";
+   			//inizio a ciclare per ogni tupla presente all'interno della collezione
+   			for (int i = 0; i < this.numberOfExamples; i++){
+   				//riporto la posizione della tupla nella collezione
+   				string += (i+1) +":";
+   				//inizio a ciclare per ogni attributo quali descrivono la tupla
+   				for (int j = 0; j < this.attributeSet.length; j++){
+   					//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
+   					//e lo concateno a tutti gli altri presenti nella stessa tupla
+   					string += data[i][j].toString() + ",";
+   				}
+   				//terminati gli attributi, termino la riga quale definisce la tupla in posizione i-esima e passo alla tupla successiva, qualora ce ne siano altre,
+   				//altrimenti la funzione restituisce la stringa ricavata
+   				string += "\n";
+   			}
+   			return string;
        }
        
        

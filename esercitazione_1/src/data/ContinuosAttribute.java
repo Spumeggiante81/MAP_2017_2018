@@ -1,6 +1,5 @@
 package data;
 
-//modifica 20Maggio2018
  class ContinuosAttribute extends Attribute 
 {
 	private double max; 
@@ -8,11 +7,12 @@ package data;
 	 
 	
 	/**
-	 * Estende attribute e modella un attributo continuo numerico
-	 * @param name
-	 * @param index
-	 * @param min
-	 * @param max
+	 * Costruttore della classe; Oltre a definirne il nome e l'indice, esso conterrà un intervallo [min,max] quale definisce
+	 * il dominio dei valori quali rappresentano tale attributo continuo (ergo, i valori accettabili)
+	 * @param name nome che descrive l'attributo continuo
+	 * @param index indice associato all'attributo continuo
+	 * @param min parte sinistra dell'intervallo all'interno del cui è definitio il dominio dell'attributo continuo
+	 * @param max parte destra dell'intervallo all'interno del cui è definitio il dominio dell'attributo continuo
 	 */
 	public ContinuosAttribute(String name, int index, double min, double max) {
 		super(name, index);
@@ -25,9 +25,7 @@ package data;
 	 * @return valore normalizzato 
 	 */
     double getScaledValue(double v) {
-    	double v2; 
-    	v2=(v-min)/(max-min); 
-    	return v2; 
+    	return(v-min)/(max-min);  
     }
     
 	

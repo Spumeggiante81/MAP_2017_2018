@@ -4,37 +4,32 @@ public class DiscreteAttribute extends Attribute {
 	String values[]; //array di oggetti String uno per ciascun valore del dominio discreto
 	
 	/**
-	 * @param name2 nome dell'attributo
-	 * @param index2 identificativo numerico
+	 * Costruttore della classe; Oltre a definirne il nome e l'indice, esso conterrà una serie di valori "discreti" quali definiscono
+	 * il dominio di tale attributo discreto (ergo, i valori accettabili)
+	 * @param name nome dell'attributo
+	 * @param index identificativo numerico
 	 * @param values array di stringhe rappresentanti il dominio dell'attributo
 	 */
-	public DiscreteAttribute(String name2, int index2, String values[]) {
-		super(name2, index2);
+	public DiscreteAttribute(String name, int index, String values[]) {
+		super(name, index);
 		this.values = values;
 	}
 
 	/**
-	 * @return dim dimensione del vettore
+	 * Indica il numero di valori discreti quali definiscono il dominio dell'attributo in analisi
+	 * @return numero di valori discreti nel dominio
 	 */
 	int getNumberOfDistinctValues() {
-		int contavalues=0; //dimensione del vettore 
-		     while(values[contavalues]!=null) 
-		    	 contavalues+=1;
-		    return contavalues; 
-		
+		return this.values.length;
 	}
+	
 	/**
-	 * //restituisce un valore in posizione i di values
-	 * @param i idice della posizione del vettore vales[]
-	 * @return val[i] restituisce un valore in posizione i di values
+	 * restituisce un valore nella i-esima posizione
+	 * @param i posizione del valore discreto contenuto all'interno dell'attributo in analisi
+	 * @return restituisce il valore discreto trovato
 	 */
 	String getValues(int i) {  
 		return values[i]; 
-		
 	}
-	
-	
-
-	
 	
 }
