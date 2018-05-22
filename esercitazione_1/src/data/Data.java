@@ -154,7 +154,7 @@ public class Data {
         * Ritorna in formato String tutti dati presenti all'interno della collezione in analisi
         */
        public String toString() {
-    	   //incomincio definendo una stinga "vuota" ( qualora la collezione sia vuota)
+    	   //incomincio definendo una stringa "vuota" ( qualora la collezione sia vuota)
     	   String string = "";
    			//inizio a ciclare per ogni tupla presente all'interno della collezione
    			for (int i = 0; i < this.numberOfExamples; i++){
