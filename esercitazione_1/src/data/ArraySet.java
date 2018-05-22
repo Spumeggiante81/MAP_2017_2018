@@ -1,5 +1,7 @@
 package data;
 
+
+//Gadaleta
 import java.util.Arrays;
 
 public class ArraySet {
