@@ -1,9 +1,14 @@
 package data;
 
 
-//Gadaleta
+
 import java.util.Arrays;
 
+/**
+ * Modella un vettore di interi e restituisce un vettore di booleani
+ * 
+ *
+ */
 public class ArraySet {
 	
 	private boolean set[];
@@ -14,7 +19,11 @@ public class ArraySet {
 			set[i]=false;
 	}
 	
-	//return true if add is changing the arraySet
+	/**
+	 * @param i
+	 * @return ritorna vero se modifica il dataset
+	 * Modifica il vettore in caso di i non valido
+	 */
 	boolean add(int i){
 		if(i>=set.length)
 		{
@@ -28,28 +37,36 @@ public class ArraySet {
 		set[i]=true;
 		if(i>=size)
 			size=i+1;
-		return !added;
-		
-		
+		return !added;	
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @return cancella 
+	 */
 	boolean delete(int i){
-		if(i<size){
+		if(i<size)
+		{
 			boolean deleted=set[i];
 			set[i]=false;
-			if(i==size-1){
+			if(i==size-1)
+			{
 				//update size
 				int j;
 				for(j=size-1;j>=0 && !set[j];j--);
-				
+		
 				size=j+1;
-			}
-			
-			return deleted;
+			}	
+		return deleted;
 		}
 		return false;
 	}
 	
+	/**
+	 * @param i
+	 * @return Restituisce il valore di set[i]
+	 */
 	boolean get(int i){
 		return set[i];
 	}
