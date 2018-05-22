@@ -5,8 +5,10 @@ public abstract class Attribute {
 	protected int index;   //identificativo numerico dell'attributo
 	
 	/**
-	 * Costruttore della classe
-	 * inizializza i valori name, index
+	 * <b> Attribute </b>
+	 * 
+	 * @param name
+	 * @param index
 	 */
 	
 	public Attribute(String name, int index) {
@@ -15,17 +17,17 @@ public abstract class Attribute {
 	}
 	
 	/**
-	 * 
-	 * @return restituisce il nome dell'attributo
+	 * <b> getName </b>
+	 * @return <b> name </b> restituisce il nome dell'attributo
 	 */
-	String getname()
+	String getName()
 	{
 		return name;
 
 	}
 	
 	/**
-	 * 
+	 * ge
 	 * @return restituisce identificativo numerico dell'attributo
 	 */
 	int getIndex()
