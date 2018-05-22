@@ -30,24 +30,5 @@ public class DiscreteAttribute extends Attribute {
 	 */
 	String getValues(int i) {  
 		return values[i]; 
-	}
-	
-	/**
-	 * 
-	 * @param data struttura dati
-	 * @param idList
-	 * @param v valore da confrontare
-	 * @return  restituisce il numero di volte che v è presente in data
-	 */
-	int frequency(Data data,ArraySet idList,String v)
-	{
-		int occorrenze = 0;
-		
-		if (data.equals(v))
-			occorrenze+=1;
-		return occorrenze;
-		
-	}
-	
-	
+	}	
 }
