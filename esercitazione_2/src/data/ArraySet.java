@@ -71,6 +71,10 @@ public class ArraySet {
 		return set[i];
 	}
 	
+	/**
+	 * ritorna l'array degli indici di interesse presenti nell'arraySet
+	 * @return array di interi
+	 */
 	int[] toArray(){
 		int a[]=new int[0];
 		for(int i=0;i<size;i++){

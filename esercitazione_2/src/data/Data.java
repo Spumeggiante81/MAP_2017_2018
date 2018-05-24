@@ -131,6 +131,10 @@ public class Data {
 		return this.attributeSet.length;
     	   
        }
+       
+       Attribute getAttribute(int index){
+    	   return attributeSet[index];
+       }
 
        /**
         * Restituisce lo schema degli attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
@@ -177,7 +181,16 @@ public class Data {
        public static void main(String args[])
        { 
     	 Data trainingSet=new Data();
+    	 DiscreteAttribute attr = (DiscreteAttribute)trainingSet.getAttribute(4);
+    	 ArraySet as = new ArraySet();
+    	 as.add(0);
+    	 as.add(5);
+    	 as.add(7);
+    	 as.add(2);
+    	 as.add(10);
+    	 int k = attr.frequency(trainingSet, as, "Yes");
     	 System.out.println(trainingSet);
+    	 System.out.println(k);
        }
     	   
 }   	   
