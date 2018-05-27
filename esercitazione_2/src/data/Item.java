@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package
 data;
 
@@ -48,4 +49,10 @@ public abstract class Item {
 	
 	
 	
+=======
+package data;
+
+public abstract class Item {
+
+>>>>>>> e658db28ea828e470d7643d883157b073d740c9d
 }
