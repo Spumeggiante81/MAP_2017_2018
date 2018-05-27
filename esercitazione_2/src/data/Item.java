@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-package
-data;
+package data;
 
 public abstract class Item {
 	Attribute attribute;//attributo coinvolto nell'item
@@ -44,15 +42,15 @@ public abstract class Item {
 		return (String) value;
 	}
 	
+	/**
+	 * Classe astratta che calcola la distanza per item discreto e continuo
+	 * @param a
+	 * @return
+	 */
+	public abstract double distance(Object a);
+}	
 	
 	
 	
 	
-	
-=======
-package data;
 
-public abstract class Item {
-
->>>>>>> e658db28ea828e470d7643d883157b073d740c9d
-}

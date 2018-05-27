@@ -28,6 +28,16 @@ package data;
     	return(v-min)/(max-min);  
     }
     
+    /**
+	 * Implementazione della funzione distance per tipo continuo
+	 * da fare
+	 */
+	public double distance(Object a){
+		return 0;
+		
+	
+}
+    
 	
 
 }
