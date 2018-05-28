@@ -6,15 +6,14 @@ package data;
  *
  */
 public class Tuple {
-	private Tuple[] tuple;
-	private Item[] item;
+	private Item[] tuple;
 	
 	/**
 	 * Costruttore della classe tuple che ne definisce la dimensione
 	 * @param size
 	 */
 	Tuple(int size){
-		tuple=new Tuple[size];
+		tuple=new Item[size];
 		
 	}
 	
@@ -29,7 +28,7 @@ public class Tuple {
 	
 	
 	Item get(int i){
-		return item[i];
+		return tuple[i];
 	}
 	
 
@@ -39,7 +38,7 @@ public class Tuple {
 	 * @param i
 	 */
 	void add(Item c, int i){
-	 tuple[i]=(Tuple) c.value;
+	 tuple[i]= (Item) c.value;
 	}
 	
 	/**

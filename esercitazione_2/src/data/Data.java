@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Random;
+
 public class Data {
 	private Object data[][]; //è una matrice nxm di tipo Object dove ogni riga modella una transazione 
 	private int numberOfExamples; //numero di righe in data 
@@ -211,6 +213,39 @@ public class Data {
 	}
 	
 	
+	//????
+	int[] sampling(int k)
+	{
+		int centroidIndexes[]=new int[k];//??
+		Random rand=new Random();
+		rand.setSeed(System.currentTimeMillis());
+		for(int i=0;i<k;i++)
+		{
+			boolean found=false;
+			int c;
+			do
+			{
+				found=false;
+				c=rand.nextInt(getNumberOfExamples());
+				for(int j=0;j<i;j++)
+				{
+					if(compare(centroidIndexes[j],c))
+					{
+						found=true;
+						break;
+					}
+				}
+			}
+			while(found);
+			centroidIndexes[i]=c;
+		}
+		return centroidIndexes;
+	}
+	
+	private boolean compare(int i, int c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	private int String(Object[] objects) {
 		// TODO Auto-generated method stub
 		return 0;
