@@ -192,6 +192,32 @@ public class Data {
     	 System.out.println(trainingSet);
     	 System.out.println(k);
        }
+       
+    /**
+     * Crea e restituisce un oggetto di Tuple che modella come seguenza di coppie
+     * attributo valore la iesima riga in data
+     * 
+     * @param index
+     * @return
+     */
+       
+    //DUBBIO
+	public Tuple getItemSet(int index) {
+		Tuple tuple=new Tuple(explanatorySet.length);
+		for(int i=0;i<explanatorySet.length;i++)
+			tuple.add(new DiscreteItem((DiscreteAttribute) explanatorySet[i],(String) data[index][i]), i);
+		
+		return tuple;
+	}
+	
+	
+	private int String(Object[] objects) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
     	   
 }   	   
        

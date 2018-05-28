@@ -20,6 +20,10 @@ public class DiscreteItem extends Item{
 	}
 
 
+	//public DiscreteItem(Attribute attribute) {
+	//}
+
+
 	/**Restituisce valore 0 oppure 1
 	 * @param a
 	 * @return 0 se la condizione è verificata 1 altrimenti
