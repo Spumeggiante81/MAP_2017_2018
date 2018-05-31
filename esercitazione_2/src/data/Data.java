@@ -253,9 +253,43 @@ public class Data {
 		return 0;
 	}
 	
+	private Object computePrototype(ArraySet idList, Attribute attribute) {
+		int frequency(Data data,ArraySet idList,String v)
+		{
+			int count = 0;
+			/*
+			 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
+			 */
+			int j = this.getIndex();
+			/*
+			 * Ricavo l'arraySet, dove contiene tutti gli indici (righe) di interesse
+			 */
+			int arraySet [] = idList.toArray();
+			/*
+			 * Ciclo per la lunghezza dell'arraySet (dato l'indice delle righe di nostro interesse sono definite al suo interno)
+			 */
+			for (int i = 0; i < arraySet.length; i++){
+				/*
+				 * Ricavo l'indice della riga da cui poter poi ricavare il valore da confrontare con v
+				 */
+				int riga = arraySet[i];
+				String value = (String)data.getAttributeValue(riga, j);
+				if (value.compareTo(v)==0) count++;
+			}
+			return computePrototype(idList, (DiscreteAttribute)attribute); 
+		}
+		}
+}
+	
+					 
+	
+		 
+
+			 
+	
 	
 	
     	   
-}   	   
+   	   
        
 
