@@ -1,6 +1,6 @@
 package data;
 
-//AGGIORNAMENTO 28/05/2018
+
 
 import java.util.Random;
 
@@ -197,15 +197,13 @@ public class Data {
     	 System.out.println(k);
        }
        
-    /**
-     * Crea e restituisce un oggetto di Tuple che modella come seguenza di coppie
-     * attributo valore la iesima riga in data
-     * 
-     * @param index
-     * @return
-     */
+   	/**
+   	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
+   	 * la iesima riga in data
+   	 * @param index indice di riga
+   	 * @return
+   	 */
        
-    //DUBBIO
 	public Tuple getItemSet(int index) {
 		Tuple tuple=new Tuple(explanatorySet.length);
 		for(int i=0;i<explanatorySet.length;i++)
@@ -215,7 +213,12 @@ public class Data {
 	}
 	
 	
-	//????
+	/**
+	 * 
+	 * @param k numero di cluster da generare
+	 * @return array di k interi rappresentanti gli indici di riga in data 
+	 * per le tuple inizialmente scelte come centroidi
+	 */
 	int[] sampling(int k)
 	{
 		int centroidIndexes[]=new int[k];//??
@@ -244,7 +247,7 @@ public class Data {
 		return centroidIndexes;
 	}
 	
-	private boolean compare(int i, int c) {
+	private boolean compare(int i, int j) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -253,6 +256,7 @@ public class Data {
 		return 0;
 	}
 	
+
 	
 	
     	   

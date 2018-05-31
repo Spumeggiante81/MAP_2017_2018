@@ -29,7 +29,7 @@ public abstract class Item {
 	 * 
 	 * @return Restituisce value
 	 */
-	Attribute getValue()
+	Object getValue()
 	{
 		return (Attribute) value;
 	}
