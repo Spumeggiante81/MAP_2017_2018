@@ -28,18 +28,9 @@ public class Tuple {
 	
 	
 	Item get(int i){
-		return tuple[i];
+		return  tuple[i];
 	}
 	
-
-	/**
-	 * Memorizza c nel vettore tuple
-	 * @param c
-	 * @param i
-	 */
-	void add(Item c, int i){
-	 tuple[i]= (Item) c.value;
-	}
 	
 	/**
 	 * Determina la distanza fra la tupla riferita da obj e quella riferita da this
@@ -54,7 +45,7 @@ public class Tuple {
 		return distance;
 	}
 	
-	/**
+	/** 
 	 * 
 	 * @param data
 	 * @param clusteredData
@@ -72,13 +63,15 @@ public class Tuple {
 		return p;
 	}
 
-	public void add(DiscreteItem discreteItem, int string, int i) {
-		// TODO Auto-generated method stub
+	/**
+	 * Memorizza c in tuple[i]
+	 * @param c
+	 * @param i
+	 */
+	public void add(Item c, int i) {
+		tuple[i]=c;
 		
 	}
-	
-	
-	
 	
 
 }
