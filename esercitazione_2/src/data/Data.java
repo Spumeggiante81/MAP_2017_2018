@@ -208,7 +208,7 @@ public class Data {
 		Tuple tuple=new Tuple(explanatorySet.length);
 		for(int i=0;i<explanatorySet.length;i++)
 			tuple.add(new DiscreteItem((DiscreteAttribute) explanatorySet[i],(String) data[index][i]), i);
-		
+	
 		return tuple;
 	}
 	
@@ -251,52 +251,19 @@ public class Data {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	private int String(Object[] objects) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	private Object computePrototype(ArraySet idList, Attribute attribute) {
+		return computePrototype(idList, (DiscreteAttribute) attribute);
 	}
 	
-<<<<<<< HEAD
-	private Object computePrototype(ArraySet idList, Attribute attribute) {
-		int frequency(Data data,ArraySet idList,String v)
-		{
-			int count = 0;
-			/*
-			 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
-			 */
-			int j = this.getIndex();
-			/*
-			 * Ricavo l'arraySet, dove contiene tutti gli indici (righe) di interesse
-			 */
-			int arraySet [] = idList.toArray();
-			/*
-			 * Ciclo per la lunghezza dell'arraySet (dato l'indice delle righe di nostro interesse sono definite al suo interno)
-			 */
-			for (int i = 0; i < arraySet.length; i++){
-				/*
-				 * Ricavo l'indice della riga da cui poter poi ricavare il valore da confrontare con v
-				 */
-				int riga = arraySet[i];
-				String value = (String)data.getAttributeValue(riga, j);
-				if (value.compareTo(v)==0) count++;
-			}
-			return computePrototype(idList, (DiscreteAttribute)attribute); 
-		}
-		}
+	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
+		String centroid = "";
+		/*
+		 * TODO: implementare il resto del codice quale permette di ricavare, tra i valori assumibili dall'attributo passato come parametro,
+		 * il valore più frequente (centroide) tra quelli definiti dal cluster (ArraySet).
+		 * 
+		 * Suggerimento: c'è bisogno di usare il metodo "frequency"
+		 */
+		return centroid;
+	}
 }
-	
-					 
-	
-		 
-
-			 
-	
-=======
-
->>>>>>> abcdddb7e8f42bc900cb79e259b9b4d013023844
-	
-	
-    	   
-   	   
-       
-

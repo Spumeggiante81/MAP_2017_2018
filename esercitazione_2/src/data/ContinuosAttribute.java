@@ -30,14 +30,10 @@ package data;
     
     /**
 	 * Implementazione della funzione distance per tipo continuo
-	 * da fare
+	 * TODO
 	 */
 	public double distance(Object a){
 		return 0;
 		
-	
-}
-    
-	
-
+	}
 }

@@ -16,13 +16,7 @@ public class DiscreteItem extends Item{
 	 */
 	DiscreteItem(DiscreteAttribute attribute, String value) {
 		super(attribute, value);
-		// TODO Auto-generated constructor stub
 	}
-
-
-	//public DiscreteItem(Attribute attribute) {
-	//}
-
 
 	/**Restituisce valore 0 oppure 1
 	 * @param a
@@ -33,12 +27,5 @@ public class DiscreteItem extends Item{
 			return 0;
 		else
 			return 1;
-		
-	
-}
-	
-	
-	
-	
-
+	}
 }

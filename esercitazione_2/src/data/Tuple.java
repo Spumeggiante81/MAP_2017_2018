@@ -38,10 +38,16 @@ public class Tuple {
 	 * @return 
 	 */
 	double getDistance(Tuple obj){
-		double distance;
-		
-		//Non lo inserisco in un ciclo in quanto viene richiamato in un ciclo
-		distance=obj.getDistance(obj)-this.getDistance(obj);
+		double distance = 0;
+		/*
+		 * Si parte dal presupposto che:
+		 * 	
+		 * 		-1 : entrambe le tuple in analisi abbiano la stessa dimensione;
+		 * 		-2 : le posizioni degli attributi all'interno delle tuple corrispondano.
+		 */
+		for (int i = 0; i < this.getLength(); i++){
+			distance += this.get(i).distance(obj.get(i));
+		}
 		return distance;
 	}
 	
