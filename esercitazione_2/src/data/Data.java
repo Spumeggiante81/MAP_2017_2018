@@ -255,7 +255,7 @@ public class Data {
 	 */
 	private boolean compare(int i, int j) 
 	{
-		boolean uguale = false;
+		//boolean uguale = false;
 		Tuple tupla_i;
 		//Tuple tupla_j;
 		
