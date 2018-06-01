@@ -247,9 +247,24 @@ public class Data {
 		return centroidIndexes;
 	}
 	
-	private boolean compare(int i, int j) {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * 
+	 * @param i indice di riga dell'insieme Data
+	 * @param j indice di riga dell'insieme Data
+	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
+	 */
+	private boolean compare(int i, int j) 
+	{
+		boolean uguale = false;
+		do
+		{
+			for(int colonna=0;colonna<attributeSet.length;colonna++){
+				uguale=(data[i][colonna]==data[j][colonna]);//senza equals 
+				uguale=data[i][colonna].equals(data[j][colonna]);//con equals
+				
+			}
+		}while(uguale);
+		return uguale;
 	}
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
@@ -266,4 +281,5 @@ public class Data {
 		 */
 		return centroid;
 	}
+
 }
