@@ -1,5 +1,7 @@
 package data;
 
+
+//Classe definita dalla prof insieme ai suoi metodi
 public class Cluster {
 	private Tuple centroid;
 
@@ -72,6 +74,5 @@ public class Cluster {
 
 }
 
-
-}	
+	
 	

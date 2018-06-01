@@ -256,15 +256,26 @@ public class Data {
 	private boolean compare(int i, int j) 
 	{
 		boolean uguale = false;
-		do
+		Tuple tupla_i;
+		//Tuple tupla_j;
+		
+	tupla_i=this.getItemSet(i);
+	//tupla_j=this.getItemSet(j);
+	return tupla_i.equals(this.getItemSet(j));
+	
+		
+	
+		/**do
 		{
 			for(int colonna=0;colonna<attributeSet.length;colonna++){
+				this.getItemSet(i),this.getItemSet(j);
 				uguale=(data[i][colonna]==data[j][colonna]);//senza equals 
 				uguale=data[i][colonna].equals(data[j][colonna]);//con equals
 				
+				
 			}
-		}while(uguale);
-		return uguale;
+		}while(uguale);*/
+		//return uguale;
 	}
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
@@ -280,6 +291,10 @@ public class Data {
 		 * Suggerimento: c'è bisogno di usare il metodo "frequency"
 		 */
 		return centroid;
+	}
+	public String getValue(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
