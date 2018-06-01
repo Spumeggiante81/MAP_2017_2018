@@ -253,30 +253,30 @@ public class Data {
 	 * @param j indice di riga dell'insieme Data
 	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
 	 */
-	private boolean compare(int i, int j) 
-	{
-		//boolean uguale = false;
-		Tuple tupla_i;
-		//Tuple tupla_j;
+	private boolean compare(int i, int j)  
+	{ 
+		//boolean uguale = false; 
+		Tuple tupla_i; 
+		//Tuple tupla_j; 
 		
-	tupla_i=this.getItemSet(i);
-	//tupla_j=this.getItemSet(j);
-	return tupla_i.equals(this.getItemSet(j));
+	tupla_i=this.getItemSet(i); 
+	//tupla_j=this.getItemSet(j); 
+	return tupla_i.equals(this.getItemSet(j)); 
 	
 		
 	
-		/**do
-		{
-			for(int colonna=0;colonna<attributeSet.length;colonna++){
-				this.getItemSet(i),this.getItemSet(j);
-				uguale=(data[i][colonna]==data[j][colonna]);//senza equals 
-				uguale=data[i][colonna].equals(data[j][colonna]);//con equals
-				
-				
-			}
-		}while(uguale);*/
-		//return uguale;
-	}
+		/**do 
+		{ 
+			for(int colonna=0;colonna<attributeSet.length;colonna++){ 
+				this.getItemSet(i),this.getItemSet(j); 
+				uguale=(data[i][colonna]==data[j][colonna]);//senza equals  
+				uguale=data[i][colonna].equals(data[j][colonna]);//con equals 
+				 
+				 
+			} 
+		}while(uguale);*/ 
+		//return uguale; 
+	} 
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
 		return computePrototype(idList, (DiscreteAttribute) attribute);
