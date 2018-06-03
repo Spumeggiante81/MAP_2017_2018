@@ -266,9 +266,15 @@ public class Data {
 	} 
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
+		int count= frequency(attribute, idList);
+		String centroid=""; 
 		return computePrototype(idList, (DiscreteAttribute) attribute);
 	}
 	
+	private int frequency(Attribute attribute, ArraySet idList) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
 		String centroid = "";
 		/*
