@@ -181,22 +181,6 @@ public class Data {
    			return string;
        }
        
-       
-       public static void main(String args[])
-       { 
-    	 Data trainingSet=new Data();
-    	 DiscreteAttribute attr = (DiscreteAttribute)trainingSet.getAttribute(4);
-    	 ArraySet as = new ArraySet();
-    	 as.add(0);
-    	 as.add(5);
-    	 as.add(7);
-    	 as.add(2);
-    	 as.add(10);
-    	 int k = attr.frequency(trainingSet, as, "Yes");
-    	 System.out.println(trainingSet);
-    	 System.out.println(k);
-       }
-       
    	/**
    	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
    	 * la iesima riga in data
@@ -266,15 +250,9 @@ public class Data {
 	} 
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
-		int count= frequency(attribute, idList);
-		String centroid=""; 
 		return computePrototype(idList, (DiscreteAttribute) attribute);
 	}
-	
-	private int frequency(Attribute attribute, ArraySet idList) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
 		String centroid = "";
 		/*
