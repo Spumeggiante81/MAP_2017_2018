@@ -237,7 +237,7 @@ public class Data {
 					if(compare(centroidIndexes[j],c))
 					{
 						found=true;
-						break;
+						break; //forza uscita da questo ciclo for(int j=0;j<i;j++)
 					}
 				}
 			}
@@ -263,19 +263,6 @@ public class Data {
 	//tupla_j=this.getItemSet(j); 
 	return tupla_i.equals(this.getItemSet(j)); 
 	
-		
-	
-		/**do 
-		{ 
-			for(int colonna=0;colonna<attributeSet.length;colonna++){ 
-				this.getItemSet(i),this.getItemSet(j); 
-				uguale=(data[i][colonna]==data[j][colonna]);//senza equals  
-				uguale=data[i][colonna].equals(data[j][colonna]);//con equals 
-				 
-				 
-			} 
-		}while(uguale);*/ 
-		//return uguale; 
 	} 
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
