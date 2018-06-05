@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class ClusterSet {
 	//Attributi
-	 private Cluster[] C;
+	private Cluster[] C;
 	private int i = 0; //indica la posizione per memorizzare un nuovo cluster in C
-	private ArraySet a;
+	//private ArraySet a;
 	
 	//Metodi
 	
@@ -98,7 +98,7 @@ public class ClusterSet {
 	    		//C[i] è il riferimento del mio vettpre di cluster
 	    		//contain della classe Cluster verifica se la transazione e presente
 	    		//restituisce il cluster [i] corrispondente
-	    		return C[id];
+	    		return C[i];
 	    }
 		return null;//restituisce null
 	}	
