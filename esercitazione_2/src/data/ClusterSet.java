@@ -6,6 +6,7 @@ public class ClusterSet {
 	//Attributi
 	 private Cluster[] C;
 	private int i = 0; //indica la posizione per memorizzare un nuovo cluster in C
+	private ArraySet a;
 	
 	//Metodi
 	
@@ -41,7 +42,7 @@ public class ClusterSet {
 	 * Sceglie i centroidi, crea un cluster per ogni centroide e lo memorizza in C(ClusterSet)
 	 * @param data
 	 */
-	void inizializeCentroids(Data data){
+	void initializeCentroids(Data data){
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);
@@ -82,7 +83,25 @@ public class ClusterSet {
 		}
 		return C;
 	}
-}	
 	
+	/**
+	 * Identifica e restituisce il cluster a cui la tupla rappresentante l'esempio identificato da id
+	 * Restituisce null se la tupla non è inclusa in nessun cluster
+	 * @param id
+	 * @return
+	 */
+	Cluster currentCluster(int id){
+	    for(int i=0;i<this.i;i++) 
+	    	//this.i non so cosa faccia l'ho copiata dal ciclo precedente
+	    {
+	    	if(C[i].contain(id)) 
+	    		//C[i] è il riferimento del mio vettpre di cluster
+	    		//contain della classe Cluster verifica se la transazione e presente
+	    		//restituisce il cluster [i] corrispondente
+	    		return C[id];
+	    }
+		return null;//restituisce null
+	}	
+}
 
 
