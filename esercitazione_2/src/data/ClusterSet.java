@@ -101,6 +101,16 @@ public class ClusterSet {
 	    		return C[i];
 	    }
 		return null;//restituisce null
+	}
+
+	public void updateCentroids(Data data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public char[] toString(Data data) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
 
