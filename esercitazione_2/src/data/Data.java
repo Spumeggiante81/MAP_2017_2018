@@ -247,7 +247,7 @@ public class Data {
 	//tupla_j=this.getItemSet(j); 
 	return tupla_i.equals(this.getItemSet(j)); 
 	
-	} 
+	}  
 	
 	private Object computePrototype(ArraySet idList, Attribute attribute) {
 		return computePrototype(idList, (DiscreteAttribute) attribute);
