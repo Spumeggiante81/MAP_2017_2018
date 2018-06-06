@@ -113,9 +113,27 @@ public class ClusterSet {
 		
 		
 	}
+	
+	/**
+	 * Restituisce una stringa fatta da ciascun centroide dell'insieme dei cluster
+	 * @return
+	 */
+	public String ToString(){
+		
+		String str="";
+	
+		for(int i=0;i<C.length;i++){
+			if(C[i]!=null){
+				str+=":"+C[i].getCentroid()+"\n";
+			}
+		}
+		return str;
+		
+	}
 
 	/**
-	 * Restituisce una sctringa che descrive lo stato di ciascun cluster
+	 * Definito dalla prof
+	 * Restituisce una stringa che descrive lo stato di ciascun cluster in C
 	 * @param data
 	 * @return
 	 */
