@@ -95,22 +95,39 @@ public class ClusterSet {
 	    	//this.i non so cosa faccia l'ho copiata dal ciclo precedente
 	    {
 	    	if(C[i].contain(id)) 
-	    		//C[i] è il riferimento del mio vettpre di cluster
-	    		//contain della classe Cluster verifica se la transazione e presente
+	    		//C[i] è il riferimento del mio vettore di cluster
+	    		//contain della classe Cluster verifica se la transazione è presente
 	    		//restituisce il cluster [i] corrispondente
 	    		return C[i];
 	    }
 		return null;//restituisce null
 	}
 
+	/**
+	 * Calcola il nuovo centroide per ciascun cluster in C
+	 * @param data
+	 */
 	public void updateCentroids(Data data) {
+		data.sampling(i);
 		// TODO Auto-generated method stub
+		
 		
 	}
 
-	public char[] toString(Data data) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Restituisce una sctringa che descrive lo stato di ciascun cluster
+	 * @param data
+	 * @return
+	 */
+	public String toString(Data data) {
+		String str="";
+		
+		for(int i=0;i<C.length;i++){
+			if(C[i]!=null){
+				str+=":"+C[i].toString(data)+"\n";
+			}
+		}
+		return str;
 	}	
 }
 
