@@ -8,7 +8,6 @@ public class Data {
 	private Object data[][]; //è una matrice nxm di tipo Object dove ogni riga modella una transazione 
 	private int numberOfExamples; //numero di righe in data 
 	private Attribute attributeSet[]; //vettore di attributi
-	private Attribute explanatorySet[];
 	
 	Data(){
 		data=new Object[14][5]; 
@@ -189,9 +188,9 @@ public class Data {
    	 */
        
 	public Tuple getItemSet(int index) {
-		Tuple tuple=new Tuple(explanatorySet.length);
-		for(int i=0;i<explanatorySet.length;i++)
-			tuple.add(new DiscreteItem((DiscreteAttribute) explanatorySet[i],(String) data[index][i]), i);
+		Tuple tuple=new Tuple(attributeSet.length);
+		for(int i=0;i<attributeSet.length;i++)
+			tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i],(String) data[index][i]), i);
 	
 		return tuple;
 	}
@@ -254,18 +253,20 @@ public class Data {
 	}
 
 	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
-		String centroid = "";
-		/*
-		 * TODO: implementare il resto del codice quale permette di ricavare, tra i valori assumibili dall'attributo passato come parametro,
-		 * il valore più frequente (centroide) tra quelli definiti dal cluster (ArraySet).
-		 * 
-		 * Suggerimento: c'è bisogno di usare il metodo "frequency"
-		 */
-		return centroid;
+		String moreFrequentCentroid = "";
+		int countFrequency, countFrequencyCentroid = 0;
+		for (int i = 0; i < attribute.getNumberOfDistinctValues(); i++){
+			countFrequency = attribute.frequency(this, idList, attribute.getValues(i));
+			if (countFrequency > countFrequencyCentroid){
+				countFrequencyCentroid = countFrequency;
+				moreFrequentCentroid = attribute.getValues(i);
+			}
+		}
+		return moreFrequentCentroid;
 	}
+	
 	public String getValue(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		return (String)this.getAttributeValue(i, j);
 	}
 
 }

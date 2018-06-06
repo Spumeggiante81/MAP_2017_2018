@@ -23,9 +23,29 @@ public class DiscreteItem extends Item{
 	 * @return 0 se la condizione è verificata 1 altrimenti
 	 */
 	public double distance(Object a){
-		if(getValue().equals(a))
-			return 0;
-		else
-			return 1;
+		return this.equals(a) == true ? 0 : 1;
 	}
+	
+    /**
+     * Controlla se l'oggetto corrente è uguale all'oggetto da confrontare
+     * @return true se l'oggetto è uguale, altrimenti false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DiscreteItem other = (DiscreteItem) obj;
+        if (this.getAttribute().getName().compareTo(other.getAttribute().getName()) != 0)
+            return false;
+        if (this.getValue() == null) {
+            if (other.getValue() != null)
+                return false;
+        } else if (!this.getValue().equals(other.getValue()))
+            return false;
+        return true;
+    }
 }

@@ -31,7 +31,7 @@ public abstract class Item {
 	 */
 	Object getValue()
 	{
-		return (Attribute) value;
+		return value;
 	}
 	
 	/**
