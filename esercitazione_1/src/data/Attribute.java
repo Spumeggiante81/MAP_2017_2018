@@ -38,7 +38,7 @@ public abstract class Attribute {
 	 */
 	public String toString()
 	{
-		return name;
+		return name; 
 	}
 	
 	
