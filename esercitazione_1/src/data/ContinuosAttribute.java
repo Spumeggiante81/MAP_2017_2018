@@ -15,8 +15,8 @@ package data;
 	 * @param max parte destra dell'intervallo all'interno del cui è definitio il dominio dell'attributo continuo
 	 */
 	public ContinuosAttribute(String name, int index, double min, double max) {
-		super(name, index);
-		this.max = max;
+		super(name, index);//serve per invocare il mmetodo o costruttore della superclasse di parametri corrispondenti
+		this.max = max;//valorizzo attributo con il valore contenuto nel parametro
 		this.min = min;
 	}
 

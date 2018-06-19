@@ -119,7 +119,7 @@ public class Data {
 	 * @return numero di transazioni (tuple)
 	 */
        int getNumberOfExamples() {
-    	   return this.numberOfExamples; 
+    	   return numberOfExamples; //this superfluo in assenza di omonimia
        }
        
        /**
@@ -128,7 +128,7 @@ public class Data {
         */
        
        int getNumberOfExplanatoryAttributes() {
-		return this.attributeSet.length;
+		return attributeSet.length;
     	   
        }
 
@@ -147,7 +147,7 @@ public class Data {
         * @return
         */
        Object getAttributeValue(int exampleIndex, int attributeIndex) {
-		return this.data[exampleIndex][attributeIndex];
+		return data[exampleIndex][attributeIndex];
        }
        
        /**
@@ -157,14 +157,17 @@ public class Data {
     	   //incomincio definendo una stringa "vuota" ( qualora la collezione sia vuota)
     	   String string = "";
    			//inizio a ciclare per ogni tupla presente all'interno della collezione
-   			for (int i = 0; i < this.numberOfExamples; i++){
+   			for (int i = 0; i < numberOfExamples; i++){
    				//riporto la posizione della tupla nella collezione
    				string += (i+1) +":";
    				//inizio a ciclare per ogni attributo quali descrivono la tupla
-   				for (int j = 0; j < this.attributeSet.length; j++){
+   				for (int j = 0; j < attributeSet.length; j++){
    					//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
    					//e lo concateno a tutti gli altri presenti nella stessa tupla
-   					string += data[i][j].toString() + ",";
+   					//CONCATENAZIONE SEPARATA PER NON STAMPARE LA VIRGOLA A FINE RIGA
+   					string += data[i][j].toString();
+   					if(j<attributeSet.length-1)
+   					  string +=  ",";
    				}
    				//terminati gli attributi, termino la riga quale definisce la tupla in posizione i-esima e passo alla tupla successiva, qualora ce ne siano altre,
    				//altrimenti la funzione restituisce la stringa ricavata

@@ -20,7 +20,7 @@ public class DiscreteAttribute extends Attribute {
 	 * @return numero di valori discreti nel dominio
 	 */
 	int getNumberOfDistinctValues() {
-		return this.values.length;
+		return values.length;
 	}
 	
 	/**
