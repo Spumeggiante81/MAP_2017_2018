@@ -58,9 +58,8 @@ public class ClusterSet {
 	 * e quello riferito dal metodo getcentroid
 	 * associare il valore al cluster che ha la distanza minima e restituirlo
 	 * 
-	 * 
-	 * @param tuple
 	 * Calcola la distanza tra la tupla riferita da tuple ed il centroide di ciascun cluster C
+	 * @param tuple
 	 * @return restituisce il Cluster più vicino sulla base della distanza calcolata da getDistance della classe Tuple
 	 */
 	Cluster nearestCluster(Tuple tuple)
@@ -96,7 +95,6 @@ public class ClusterSet {
 	 */
 	public Cluster currentCluster(int id){
 	    for(int i=0;i<this.i;i++) 
-	    	//this.i non so cosa faccia l'ho copiata dal ciclo precedente
 	    {
 	    	if(C[i].contain(id)) 
 	    		//C[i] è il riferimento del mio vettore di cluster

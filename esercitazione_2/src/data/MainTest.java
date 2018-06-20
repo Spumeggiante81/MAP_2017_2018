@@ -15,4 +15,3 @@ public class MainTest {
 		System.out.println(kmeans.getC().toString(data));		
 	}
 }
-

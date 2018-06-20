@@ -88,9 +88,9 @@ public class Data {
         
         data[9][0] = "Rain";
         data[9][1] = "Mild";
-        data[9][2] = "High";
+        data[9][2] = "Normal";
         data[9][3] = "Weak";
-        data[9][4] = "No";
+        data[9][4] = "Yes";
         
         data[10][0] = "Sunny";
         data[10][1] = "Mild";
@@ -166,7 +166,7 @@ public class Data {
    			//inizio a ciclare per ogni tupla presente all'interno della collezione
    			for (int i = 0; i < this.numberOfExamples; i++){
    				//riporto la posizione della tupla nella collezione
-   				string += (i+1) +":";
+   				string += i +":";
    				//inizio a ciclare per ogni attributo quali descrivono la tupla
    				for (int j = 0; j < this.attributeSet.length; j++){
    					//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
@@ -191,7 +191,6 @@ public class Data {
 		Tuple tuple=new Tuple(attributeSet.length);
 		for(int i=0;i<attributeSet.length;i++)
 			tuple.add(new DiscreteItem((DiscreteAttribute) attributeSet[i],(String) data[index][i]), i);
-	
 		return tuple;
 	}
 	
@@ -204,7 +203,7 @@ public class Data {
 	 */
 	int[] sampling(int k)
 	{
-		int centroidIndexes[]=new int[k];//??
+		int centroidIndexes[]=new int[k];
 		Random rand=new Random();
 		rand.setSeed(System.currentTimeMillis());
 		for(int i=0;i<k;i++)
@@ -237,25 +236,19 @@ public class Data {
 	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
 	 */
 	private boolean compare(int i, int j)  
-	{ 
-		//boolean uguale = false; 
-		Tuple tupla_i; 
-		//Tuple tupla_j; 
-		
-	tupla_i=this.getItemSet(i); 
-	//tupla_j=this.getItemSet(j); 
-	return tupla_i.equals(this.getItemSet(j)); 
-	
+	{  
+		 Tuple tupla_i=this.getItemSet(i);
+		 return tupla_i.equals(this.getItemSet(j)); 
 	}  
 	
-	private Object computePrototype(ArraySet idList, Attribute attribute) {
+	public Object computePrototype(ArraySet idList, Attribute attribute) {
 		return computePrototype(idList, (DiscreteAttribute) attribute);
 	}
 
-	private String computePrototype(ArraySet idList, DiscreteAttribute attribute){
-		String moreFrequentCentroid = "";
-		int countFrequency, countFrequencyCentroid = 0;
-		for (int i = 0; i < attribute.getNumberOfDistinctValues(); i++){
+	public String computePrototype(ArraySet idList, DiscreteAttribute attribute){
+		String moreFrequentCentroid = attribute.getValues(0);
+		int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attribute.getValues(0));;
+		for (int i = 1; i < attribute.getNumberOfDistinctValues(); i++){
 			countFrequency = attribute.frequency(this, idList, attribute.getValues(i));
 			if (countFrequency > countFrequencyCentroid){
 				countFrequencyCentroid = countFrequency;
