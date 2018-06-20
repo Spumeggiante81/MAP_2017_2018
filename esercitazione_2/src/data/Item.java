@@ -31,7 +31,7 @@ public abstract class Item {
 	 */
 	Object getValue()
 	{
-		return (Attribute) value;
+		return value;
 	}
 	
 	/**
@@ -50,8 +50,7 @@ public abstract class Item {
 	public abstract double distance(Object a);
 
 	public void update(Data data, ArraySet clusteredData) {
-		// TODO Auto-generated method stub
-		
+		this.value = data.computePrototype(clusteredData, attribute);
 	}
 }	
 	

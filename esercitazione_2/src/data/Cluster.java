@@ -21,9 +21,7 @@ public class Cluster {
 	void computeCentroid(Data data){
 		for(int i=0;i<centroid.getLength();i++){
 			centroid.get(i).update(data,clusteredData);
-			
 		}
-		
 	}
 	//return true if the tuple is changing cluster
 	boolean addData(int id){

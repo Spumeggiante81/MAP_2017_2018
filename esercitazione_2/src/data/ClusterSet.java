@@ -42,7 +42,7 @@ public class ClusterSet {
 	 * Sceglie i centroidi, crea un cluster per ogni centroide e lo memorizza in C(ClusterSet)
 	 * @param data
 	 */
-	void initializeCentroids(Data data){
+	public void initializeCentroids(Data data){
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);
@@ -58,9 +58,8 @@ public class ClusterSet {
 	 * e quello riferito dal metodo getcentroid
 	 * associare il valore al cluster che ha la distanza minima e restituirlo
 	 * 
-	 * 
-	 * @param tuple
 	 * Calcola la distanza tra la tupla riferita da tuple ed il centroide di ciascun cluster C
+	 * @param tuple
 	 * @return restituisce il Cluster più vicino sulla base della distanza calcolata da getDistance della classe Tuple
 	 */
 	Cluster nearestCluster(Tuple tuple)
@@ -72,14 +71,18 @@ public class ClusterSet {
 		 * 		
 		 * 		distanza = 0 => tutti gli elementi della tupla corrispondono con quelli presenti nel centroide
 		 */
-		double distanza = tuple.getLength();
+		double nearestDistance = tuple.getLength();
 		Cluster C = null;
 		for(int i = 0 ; i < this.i ;i++)
 		{
 			//ricordando che getCentroid della classe Cluster restituisce il centroide in 
 			//una tupla
-			if(distanza < (tuple.getDistance(this.C[i].getCentroid())))
+			double distance = tuple.getDistance(this.C[i].getCentroid());
+			if(distance < nearestDistance){
 				C = this.C[i];
+				nearestDistance = distance;
+			}
+				
 		}
 		return C;
 	}
@@ -90,9 +93,8 @@ public class ClusterSet {
 	 * @param id
 	 * @return
 	 */
-	Cluster currentCluster(int id){
+	public Cluster currentCluster(int id){
 	    for(int i=0;i<this.i;i++) 
-	    	//this.i non so cosa faccia l'ho copiata dal ciclo precedente
 	    {
 	    	if(C[i].contain(id)) 
 	    		//C[i] è il riferimento del mio vettore di cluster
@@ -108,10 +110,9 @@ public class ClusterSet {
 	 * @param data
 	 */
 	public void updateCentroids(Data data) {
-		data.sampling(i);
-		// TODO Auto-generated method stub
-		
-		
+		for (int i = 0; i < this.i; i++){
+			this.get(i).computeCentroid(data);
+		}
 	}
 	
 	/**
@@ -142,7 +143,7 @@ public class ClusterSet {
 		
 		for(int i=0;i<C.length;i++){
 			if(C[i]!=null){
-				str+=":"+C[i].toString(data)+"\n";
+				str+=i+":"+C[i].toString(data)+"\n";
 			}
 		}
 		return str;
