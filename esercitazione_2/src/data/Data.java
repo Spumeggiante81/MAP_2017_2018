@@ -20,10 +20,10 @@ public class Data {
 		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
 		attributeSet[0] = new DiscreteAttribute("Outlook", 0, outLookValues);
 		
-		String temperatureValues[] = {"Hot", "Mid", "Cold"};
+		String temperatureValues[] = {"Hot", "Mild", "Cold"};
 		attributeSet[1] = new DiscreteAttribute("Temperature", 1, temperatureValues);
 		
-		String humidityValues[] = {"Hight", "Normal"};
+		String humidityValues[] = {"High", "Normal"};
 		attributeSet[2] = new DiscreteAttribute("Humidity", 2, humidityValues);
 		
 		String windValues[] = {"Weak", "Strong"};

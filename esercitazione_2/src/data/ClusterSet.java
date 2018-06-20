@@ -43,11 +43,16 @@ public class ClusterSet {
 	 * @param data
 	 */
 	public void initializeCentroids(Data data){
+		/*
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);
 			this.add(new Cluster(centroidI));//memorizza il centroide
 		}
+		*/
+		this.add(new Cluster(data.getItemSet(2))); //Centroide iniziale 1 = Overcast, Hot, High, Weak, Yes
+		this.add(new Cluster(data.getItemSet(5))); // Centroide iniziale 2 = Rain, Cool, Normal, Strong, No
+		this.add(new Cluster(data.getItemSet(10))); // Centroide iniziale 3 = Sunny, Mild, Normal, Strong, Yes
 	}
 		
 	
