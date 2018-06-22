@@ -43,6 +43,7 @@ public class ClusterSet {
 	 * @param data
 	 */
 	public void initializeCentroids(Data data){
+		//TODO inizializza centroid
 		/*
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){

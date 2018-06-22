@@ -23,7 +23,10 @@ public class DiscreteItem extends Item{
 	 * @return 0 se la condizione è verificata 1 altrimenti
 	 */
 	public double distance(Object a){
-		return this.equals(a) == true ? 0 : 1;
+		return equals(a) == true ? 0 : 1; /*
+		invoca il metodo equals  sull'oggetto su cui è invocato distance passando a 
+		this superfluo perchè stai invocando il metodo equals sull'oggetto corrente
+		*/ 
 	}
 	
     /**
@@ -32,7 +35,7 @@ public class DiscreteItem extends Item{
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj)//si sta conforntando due oggetti
             return true;
         if (obj == null)
             return false;

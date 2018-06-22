@@ -7,8 +7,6 @@ public abstract class Attribute {
 	/**
 	 * <b> Attribute </b>
 	 * 
-	 * @param name
-	 * @param index
 	 * Costruttore della classe
 	 * @param name nome che descrive l'attributo
 	 * @param index indice associato all'attributo

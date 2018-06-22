@@ -33,9 +33,10 @@ public class KMeansMiner {
 					oldCluster.removeTuple(i);
 			}
 			//STEP 3
-			C.updateCentroids(data);
 			System.out.println("Numero di Iterazione:"+numberOfIterations);
-			System.out.println(this.getC().toString(data));		
+			System.out.println(this.getC().toString(data));	
+			C.updateCentroids(data);
+				
 		}
 		while(changedCluster);
 		return numberOfIterations;
