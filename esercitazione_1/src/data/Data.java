@@ -7,6 +7,8 @@ public class Data {
 	private Attribute explanatorySet[];
 	
 	Data(){
+		
+		//PROVA
 		data=new Object[14][5]; 
 		
 		numberOfExamples=14; 
