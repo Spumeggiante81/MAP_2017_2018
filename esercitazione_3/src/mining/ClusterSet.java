@@ -46,19 +46,12 @@ public class ClusterSet {
 	 * @param data
 	 */
 	public void initializeCentroids(Data data){
-		//TODO inizializza centroid
-		/*
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);
 			this.add(new Cluster(centroidI));//memorizza il centroide
 		}
-		*/
-		this.add(new Cluster(data.getItemSet(2))); //Centroide iniziale 1 = Overcast, Hot, High, Weak, Yes
-		this.add(new Cluster(data.getItemSet(5))); // Centroide iniziale 2 = Rain, Cool, Normal, Strong, No
-		this.add(new Cluster(data.getItemSet(10))); // Centroide iniziale 3 = Sunny, Mild, Normal, Strong, Yes
 	}
-		
 	
 	/**
 	 * Logica usata
@@ -80,15 +73,15 @@ public class ClusterSet {
 		 * 		
 		 * 		distanza = 0 => tutti gli elementi della tupla corrispondono con quelli presenti nel centroide
 		 */
-		double nearestDistance = tuple.getLength();
-		Cluster C = null;
+		double nearestDistance = tuple.getDistance(this.get(0).getCentroid());
+		Cluster C = this.get(0);
 		for(int i = 0 ; i < this.i ;i++)
 		{
 			//ricordando che getCentroid della classe Cluster restituisce il centroide in 
 			//una tupla
-			double distance = tuple.getDistance(this.C[i].getCentroid());
+			double distance = tuple.getDistance(this.get(i).getCentroid());
 			if(distance < nearestDistance){
-				C = this.C[i];
+				C = this.get(i);
 				nearestDistance = distance;
 			}
 				
@@ -123,28 +116,10 @@ public class ClusterSet {
 			this.get(i).computeCentroid(data);
 		}
 	}
-	
-	/**
-	 * Restituisce una stringa fatta da ciascun centroide dell'insieme dei cluster
-	 * @return
-	 */
-	public String ToString(){
-		
-		String str="";
-	
-		for(int i=0;i<C.length;i++){
-			if(C[i]!=null){
-				str+=":"+C[i].getCentroid()+"\n";
-			}
-		}
-		return str;
-		
-	}
 
 	/**
-	 * Definito dalla prof
 	 * Restituisce una stringa che descrive lo stato di ciascun cluster in C
-	 * @param data
+	 * @param data La collezione di dati su cui si riferiscono i Cluster da stampare 
 	 * @return
 	 */
 	public String toString(Data data) {

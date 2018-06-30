@@ -20,9 +20,8 @@ public class ClusterSet {
 	}
 	
 	/**
-	 * Asseggna c a C[i]
-	 * Incrementa i
-	 * @param c
+	 * Inserisce un nuovo Cluster nel Set
+	 * @param c Cluster da aggiungere
 	 */
 	void add(Cluster c){
 			C[i]=c;
@@ -30,9 +29,8 @@ public class ClusterSet {
 		} 
 	
 	/**
-	 * Restituisce C[i]
-	 * @param i
-	 * @return
+	 * Ritorna il Cluster presente nella i-esima posizione nel Set
+	 * @return Cluster
 	 */
 	Cluster get(int i){
 		return C[i];
@@ -43,30 +41,18 @@ public class ClusterSet {
 	 * @param data
 	 */
 	public void initializeCentroids(Data data){
-		//TODO inizializza centroid
-		/*
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);
 			this.add(new Cluster(centroidI));//memorizza il centroide
 		}
-		*/
-		this.add(new Cluster(data.getItemSet(2))); //Centroide iniziale 1 = Overcast, Hot, High, Weak, Yes
-		this.add(new Cluster(data.getItemSet(5))); // Centroide iniziale 2 = Rain, Cool, Normal, Strong, No
-		this.add(new Cluster(data.getItemSet(10))); // Centroide iniziale 3 = Sunny, Mild, Normal, Strong, Yes
 	}
 		
 	
 	/**
-	 * Logica usata
-	 * volevo associare a distanza un valore massimo in modo ciclando si sarebbe aggiornato con il valore minimo
-	 * double distanza2=tuple.getDistance(C[i].getCentroid()); Calcolare la distanza fra l'oggetto riferito da Tuple 
-	 * e quello riferito dal metodo getcentroid
-	 * associare il valore al cluster che ha la distanza minima e restituirlo
-	 * 
-	 * Calcola la distanza tra la tupla riferita da tuple ed il centroide di ciascun cluster C
-	 * @param tuple
-	 * @return restituisce il Cluster più vicino sulla base della distanza calcolata da getDistance della classe Tuple
+	 * Tra i Cluster presenti nel Set, individua e restituisce quello più "vicino" alla tupla passata per paramentro
+	 * @param tuple Tupla da cui ricercare il Cluster associabile
+	 * @return Cluster
 	 */
 	Cluster nearestCluster(Tuple tuple)
 	{
@@ -120,28 +106,10 @@ public class ClusterSet {
 			this.get(i).computeCentroid(data);
 		}
 	}
-	
-	/**
-	 * Restituisce una stringa fatta da ciascun centroide dell'insieme dei cluster
-	 * @return
-	 */
-	public String ToString(){
-		
-		String str="";
-	
-		for(int i=0;i<C.length;i++){
-			if(C[i]!=null){
-				str+=":"+C[i].getCentroid()+"\n";
-			}
-		}
-		return str;
-		
-	}
 
 	/**
-	 * Definito dalla prof
 	 * Restituisce una stringa che descrive lo stato di ciascun cluster in C
-	 * @param data
+	 * @param data La collezione di dati su cui si riferiscono i Cluster da stampare 
 	 * @return
 	 */
 	public String toString(Data data) {

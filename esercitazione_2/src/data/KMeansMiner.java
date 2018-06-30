@@ -32,9 +32,6 @@ public class KMeansMiner {
 					//il nodo va rimosso dal suo vecchio cluster
 					oldCluster.removeTuple(i);
 			}
-			//STEP 3
-			System.out.println("Numero di Iterazione:"+numberOfIterations);
-			System.out.println(this.getC().toString(data));	
 			C.updateCentroids(data);
 				
 		}

@@ -5,16 +5,15 @@ import data.Data;
 public class KMeansMiner {
 
 	ClusterSet C;
-	//CAMBIA LA VISIBILITà COME RICHIESTO DA MAINTEST    NON E' UN COSTRUTTORE
+
 	public KMeansMiner (int k){
 		this.C = new ClusterSet (k);
 	}
 	
-	ClusterSet getC(){
+	public ClusterSet getC(){
 		return this.C;
 	}
 	
-	//CAMBIA LA VISIBILITà COME RICHIESTO DA MAINTEST 
 	public int kmeans(Data data){
 		int numberOfIterations=0;
 		//STEP 1
@@ -36,8 +35,6 @@ public class KMeansMiner {
 					oldCluster.removeTuple(i);
 			}
 			//STEP 3
-			System.out.println("Numero di Iterazione:"+numberOfIterations);
-			System.out.println(this.getC().toString(data));	
 			C.updateCentroids(data);
 				
 		}

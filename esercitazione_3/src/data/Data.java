@@ -10,13 +10,13 @@ public class Data {
 	private Object data[][]; //è una matrice nxm di tipo Object dove ogni riga modella una transazione 
 	private int numberOfExamples; //numero di righe in data 
 	private Attribute attributeSet[]; //vettore di attributi
-	
-	//MODIFICATA LA VISIBILITA COME RICHIESTO DALLA CLASSE MAINTEST
+	private int distinctTuples;
 	public Data(){
 		data=new Object[14][5]; 
 		
 		numberOfExamples=14; 
 		
+        //distinctTuples = countDistinctTuples();
 		
 		attributeSet = new Attribute[5]; 
 		
@@ -124,7 +124,6 @@ public class Data {
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
 	 * @return numero di transazioni (tuple)
 	 */
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA KMEANSMINER
       public int getNumberOfExamples() {
     	   return this.numberOfExamples; 
        }
@@ -133,7 +132,6 @@ public class Data {
         * restutuisce il numero di attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
         * @return numero di attributi 
         */
-     //CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
       public int getNumberOfExplanatoryAttributes() {
 		return this.attributeSet.length;
     	   
@@ -208,7 +206,7 @@ public class Data {
 	 * @return array di k interi rappresentanti gli indici di riga in data 
 	 * per le tuple inizialmente scelte come centroidi
 	 */
-	int[] sampling(int k)
+	public int[] sampling(int k)
 	{
 		int centroidIndexes[]=new int[k];
 		Random rand=new Random();
@@ -268,5 +266,20 @@ public class Data {
 	public String getValue(int i, int j) {
 		return (String)this.getAttributeValue(i, j);
 	}
-
+	
+	private int countDistinctTuples(){
+		
+		Data data=null;
+		boolean uguaglianza=false;
+		int contatore=0;
+		for(int i=0;i<data.getNumberOfExplanatoryAttributes();i++){ 
+			for(int j=0;j<data.getNumberOfExamples();j++){
+				uguaglianza=data.compare(i, j);
+				if(!(uguaglianza))
+					distinctTuples+=1;
+			}
+		}
+		return distinctTuples;
+		
+	}
 }
