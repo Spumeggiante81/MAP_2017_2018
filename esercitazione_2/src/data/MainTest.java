@@ -11,7 +11,7 @@ public class MainTest {
 		int k=3;
 		KMeansMiner kmeans=new KMeansMiner(k); // KmeansMiner kmeans=new KmeansMiner(k); 
 		int numIter=kmeans.kmeans(data);
-		//System.out.println("Numero di Iterazione:"+numIter);
-		//System.out.println(kmeans.getC().toString(data));		
+		System.out.println("Numero di Iterazione:"+numIter);
+		System.out.println(kmeans.getC().toString(data));		
 	}
 }

@@ -21,13 +21,11 @@ public class Tuple {
 	 * 
 	 * @return restituisce il numero di tuple
 	 */
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
 	public int getLength(){
 		return tuple.length;
 		
 	}
 	
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
 	public Item get(int i){
 		return  tuple[i];
 	}
@@ -38,7 +36,6 @@ public class Tuple {
 	 * @param obj 
 	 * @return 
 	 */
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
 	public double getDistance(Tuple obj){
 		double distance = 0;
 		/*

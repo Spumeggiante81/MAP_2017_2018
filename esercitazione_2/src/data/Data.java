@@ -8,7 +8,6 @@ public class Data {
 	private Object data[][]; //è una matrice nxm di tipo Object dove ogni riga modella una transazione 
 	private int numberOfExamples; //numero di righe in data 
 	private Attribute attributeSet[]; //vettore di attributi
-	private int distinctTuples;// conta il numero di tuple distinte
 	Data(){
 		data=new Object[14][5]; 
 		
@@ -114,10 +113,7 @@ public class Data {
         data[13][1] = "Mild";
         data[13][2] = "High";
         data[13][3] = "Strong";
-        data[13][4] = "No";
-        
-        distinctTuples=countDistinctTuples();
-		
+        data[13][4] = "No";		
 	}
 	/**
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
@@ -265,22 +261,5 @@ public class Data {
 	
 	public String getValue(int i, int j) {
 		return (String)this.getAttributeValue(i, j);
-	}
-	
-	private int countDistinctTuples(){
-		
-		Data data=null;
-		boolean uguaglianza=false;
-		int contatore=0;
-		
-		for(int i=0;i<data.getNumberOfExplanatoryAttributes();i++){ 
-			for(int j=0;j<data.getNumberOfExamples();j++){
-				uguaglianza=data.compare(i, j);
-				if(!(uguaglianza))
-					distinctTuples+=1;
-			}
-		}
-		return distinctTuples;
-		
 	}
 }
