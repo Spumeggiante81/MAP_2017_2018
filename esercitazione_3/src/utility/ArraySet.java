@@ -14,7 +14,6 @@ public class ArraySet {
 	private boolean set[];
 	private int size=0;
 	
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
 	public ArraySet (){
 		set=new boolean[50];
 		for(int i=0;i<set.length;i++)
@@ -26,7 +25,6 @@ public class ArraySet {
 	 * @return ritorna vero se modifica il dataset
 	 * Modifica il vettore in caso di i non valido
 	 */
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
 	public boolean add(int i){
 		if(i>=set.length)
 		{

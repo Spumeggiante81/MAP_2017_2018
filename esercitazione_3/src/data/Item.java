@@ -44,13 +44,13 @@ public abstract class Item {
 		return (String) value;
 	}
 	
-	/**
-	 * Classe astratta che calcola la distanza per item discreto e continuo
-	 * @param a
-	 * @return
-	 */
 	public abstract double distance(Object a);
 
+	/**
+	 * Modifica il valore dell'item, in base ai valori dello stesso tipo, presenti nelle tuple definite nella lista (clusteredData) 
+	 * @param data Collezione di dati da cui ricavare le tuple
+	 * @param clusteredData lista di indici su cui sono definite le tuple da usare
+	 */
 	public void update(Data data, ArraySet clusteredData) {
 		value = data.computePrototype(clusteredData, attribute);
 	}
