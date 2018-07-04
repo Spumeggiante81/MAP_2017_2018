@@ -56,7 +56,7 @@ public class Tuple {
 	 * @param clusteredData
 	 * @return
 	 */
-	//CAMBIA LA VISIBILITA COME RICHIESTO DA CLUSTER
+	
 	public double avgDistance(Data data,int clusteredData[]){
 		double p=0.0, sumD=0.0;
 		
