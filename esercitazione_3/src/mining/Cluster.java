@@ -10,38 +10,58 @@ public class Cluster {
 
 	private ArraySet clusteredData; 
 	
-
+	/**
+	 * Costruttore di classe
+	 * @param centroid
+	 */
 	Cluster(Tuple centroid){
 		this.centroid=centroid;
 		clusteredData=new ArraySet();
 		
 	}
 	
+	/**
+	 * Ricava il centroide del Cluster in analisi
+	 * @return
+	 */
 	Tuple getCentroid(){
 		return centroid;
 	}
 	
+	/**
+	 * Modifica il centroide in base alle tuple ad esso associate
+	 * @param data Collezione di dati da cui ricavare le tuple
+	 */
 	void computeCentroid(Data data){
 		for(int i=0;i<centroid.getLength();i++){
 			centroid.get(i).update(data,clusteredData);
 		}
 	}
-	//return true if the tuple is changing cluster
+
+	/**
+	 * Aggiunge una tupla associata al cluster
+	 * @param id indice su cui è riferito la tupla
+	 * @return true se l'operazione ha "modificato" la struttura dati, false altrimenti (ovvero, qualora fosse già presente e quindi non serve aggiungerlo nuovamente)
+	 */
 	boolean addData(int id){
-		return clusteredData.add(id);
-		
+		return clusteredData.add(id);	
 	}
 	
-	//verifica se una transazione è clusterizzata nell'array corrente
+	/**
+	 * Verifica se una tupla è associata o meno al cluster in analisi
+	 * @param id indice su cui è riferito la tupla
+	 * @return true se la tupla è associata al cluster, false altrimenti
+	 */
 	boolean contain(int id){
 		return clusteredData.get(id);
 	}
 	
-
-	//remove the tuplethat has changed the cluster
+	/**
+	 * Rimuove l'associazione della data tupla con il cluster
+	 * @param id indice su cui è riferito la tupla
+	 */
 	void removeTuple(int id){
 		clusteredData.delete(id);
-		
 	}
 	
 	public String toString(){
@@ -52,8 +72,6 @@ public class Cluster {
 		return str;
 		
 	}
-	
-
 	
 	public String toString(Data data){
 		String str="Centroid=(";
@@ -72,8 +90,4 @@ public class Cluster {
 		return str;
 		
 	}
-
 }
-
-	
-	

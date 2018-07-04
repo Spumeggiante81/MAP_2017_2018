@@ -10,7 +10,7 @@ public class Tuple {
 	
 	/**
 	 * Costruttore della classe tuple che ne definisce la dimensione
-	 * @param size
+	 * @param size numero di elementi che definiscono la tupla
 	 */
 	Tuple(int size){
 		tuple=new Item[size];
@@ -26,6 +26,11 @@ public class Tuple {
 		
 	}
 	
+	/**
+	 * Restituisce l'elemento Item nella i-esima posizione
+	 * @param i indice dell'elemento Item
+	 * @return Item
+	 */
 	public Item get(int i){
 		return  tuple[i];
 	}
@@ -33,8 +38,8 @@ public class Tuple {
 	
 	/**
 	 * Determina la distanza fra la tupla riferita da obj e quella riferita da this
-	 * @param obj 
-	 * @return 
+	 * @param obj Tupla da confrontare con quello in analisi
+	 * @return 0, se le tuple corrispondono per tutti i valori, =! 0 altrimenti
 	 */
 	public double getDistance(Tuple obj){
 		double distance = 0;
@@ -51,12 +56,12 @@ public class Tuple {
 	}
 	
 	/** 
-	 * 
-	 * @param data
-	 * @param clusteredData
+	 * Calcola la media delle distanze di tutte le tuple passati nel parametro
+	 * @param data collezione di dati da cui ricavare le tuple
+	 * @param clusteredData lista di indici delle tuple da usare per ricavare la media
 	 * @return
 	 */
-	
+
 	public double avgDistance(Data data,int clusteredData[]){
 		double p=0.0, sumD=0.0;
 		
@@ -70,9 +75,9 @@ public class Tuple {
 	}
 
 	/**
-	 * Memorizza c in tuple[i]
-	 * @param c
-	 * @param i
+	 * Aggiunge un elemento Item nella posizione i-esima della tupla in analisi
+	 * @param c Item da aggiungere
+	 * @param i posizione su cui memorizzare l'item nella tupla
 	 */
 	public void add(Item c, int i) {
 		tuple[i]=c;

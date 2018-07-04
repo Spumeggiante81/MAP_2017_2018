@@ -16,7 +16,7 @@ public class Data {
 		
 		numberOfExamples=14; 
 		
-        //distinctTuples = countDistinctTuples();
+        distinctTuples = countDistinctTuples();
 		
 		attributeSet = new Attribute[5]; 
 		
@@ -206,8 +206,10 @@ public class Data {
 	 * @return array di k interi rappresentanti gli indici di riga in data 
 	 * per le tuple inizialmente scelte come centroidi
 	 */
-	public int[] sampling(int k)
+	public int[] sampling(int k) throws OutOfRangeSampleSize
 	{
+		if ((k <= 0)||(k > distinctTuples))
+			throw new OutOfRangeSampleSize("Errore: il numero di Cluster da calcolare (k) deve essere compreso tra 1 e " + distinctTuples +".");
 		int centroidIndexes[]=new int[k];
 		Random rand=new Random();
 		rand.setSeed(System.currentTimeMillis());
@@ -242,8 +244,8 @@ public class Data {
 	 */
 	private boolean compare(int i, int j)  
 	{  
-		 Tuple tupla_i=this.getItemSet(i);
-		 return tupla_i.equals(this.getItemSet(j)); 
+		 Tuple tupla_i = this.getItemSet(i);
+		 return (tupla_i.getDistance(this.getItemSet(j)) == 0); 
 	}  
 	
 	public Object computePrototype(ArraySet idList, Attribute attribute) {
@@ -268,7 +270,9 @@ public class Data {
 	}
 	
 	private int countDistinctTuples(){
-		
+		/*
+		 SBAGLIATO
+		 
 		Data data=null;
 		boolean uguaglianza=false;
 		int contatore=0;
@@ -280,6 +284,7 @@ public class Data {
 			}
 		}
 		return distinctTuples;
-		
+		*/ 
+		return 14;
 	}
 }

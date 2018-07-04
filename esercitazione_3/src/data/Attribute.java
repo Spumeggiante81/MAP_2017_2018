@@ -5,8 +5,6 @@ public abstract class Attribute {
 	protected int index;   //identificativo numerico dell'attributo
 	
 	/**
-	 * <b> Attribute </b>
-	 * 
 	 * Costruttore della classe
 	 * @param name nome che descrive l'attributo
 	 * @param index indice associato all'attributo
@@ -18,8 +16,6 @@ public abstract class Attribute {
 	}
 	
 	/**
-	 * <b> getName </b>
-	 * @return <b> name </b> restituisce il nome dell'attributo
 	 * Ritorna il nome dell'attributo in analisi
 	 * @return nome attributo
 	 */
@@ -43,10 +39,5 @@ public abstract class Attribute {
 	public String toString()
 	{
 		return name;
-	}
-	
-	
-	
-	
-	
+	}	
 }

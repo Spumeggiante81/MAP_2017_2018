@@ -3,6 +3,7 @@ package mining;
 import java.util.Arrays;
 
 import data.Data;
+import data.OutOfRangeSampleSize;
 import data.Tuple;
 
 public class ClusterSet {
@@ -44,8 +45,9 @@ public class ClusterSet {
 	/**
 	 * Sceglie i centroidi, crea un cluster per ogni centroide e lo memorizza in C(ClusterSet)
 	 * @param data
+	 * @throws OutOfRangeSampleSize 
 	 */
-	public void initializeCentroids(Data data){
+	public void initializeCentroids(Data data) throws OutOfRangeSampleSize{
 		int centroidIndex[]=data.sampling(C.length); //restituisce la posizione di "0.9,1" e "2,2.2"
 		for(int i=0;i<centroidIndex.length;i++){
 			Tuple centroidI=data.getItemSet(centroidIndex[i]);

@@ -34,6 +34,5 @@ package data;
 	 */
 	public double distance(Object a){
 		return 0;
-		
 	}
 }
