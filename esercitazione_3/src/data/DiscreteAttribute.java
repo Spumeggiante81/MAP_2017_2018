@@ -66,4 +66,8 @@ public class DiscreteAttribute extends Attribute {
 		return count;
 	}
 	
+	public double distance(Object a){
+		return 10;
+	}
+	
 }

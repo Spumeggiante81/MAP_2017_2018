@@ -15,6 +15,7 @@ public class MainTest {
 		System.out.println(data);
 		do{
 			try {
+				
 				int k;
 				System.out.println("Inserisci il numero di Cluster (k) da calcolare :");
 				k = Keyboard.readInt();

@@ -23,7 +23,8 @@ public class DiscreteItem extends Item{
 	 * @return 0 se la condizione è verificata 1 altrimenti
 	 */
 	public double distance(Object a){
-		return equals(a) == true ? 0 : 1; /*
+		return equals(a) == true ? 0 : 1;
+		/*
 		invoca il metodo equals  sull'oggetto su cui è invocato distance passando a 
 		this superfluo perchè stai invocando il metodo equals sull'oggetto corrente
 		*/ 
@@ -35,20 +36,33 @@ public class DiscreteItem extends Item{
      */
     @Override
     public boolean equals(Object obj) {
+    	/*System.out.println(
+    			this.getAttribute().getName() + " - "  + ((DiscreteItem) obj).getAttribute().getName()
+    			+ " - valori: " + this.getValue() + " - " + ((DiscreteItem) obj).getValue()
+    		);*/
         if (this == obj)//si sta conforntando due oggetti
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
-            return false;
+        	return false;
         DiscreteItem other = (DiscreteItem) obj;
         if (this.getAttribute().getName().compareTo(other.getAttribute().getName()) != 0)
             return false;
-        if (this.getValue() == null) {
+        try{
+        	if (!(this.getValue().equals(other.getValue())))
+        		return false;
+        } catch(NullPointerException e){
+        	if (other.getValue() != null)
+                return false;
+        }
+        
+        return true;
+        /*if (this.getValue() == null) {
             if (other.getValue() != null)
                 return false;
         } else if (!this.getValue().equals(other.getValue()))
             return false;
-        return true;
+        return true;*/
     }
 }

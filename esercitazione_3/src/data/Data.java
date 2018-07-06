@@ -12,11 +12,12 @@ public class Data {
 	private Attribute attributeSet[]; //vettore di attributi
 	private int distinctTuples;
 	public Data(){
-		data=new Object[14][5]; 
+		
 		
 		numberOfExamples=14; 
 		
-        distinctTuples = countDistinctTuples();
+		data=new Object[numberOfExamples][5]; 
+		
 		
 		attributeSet = new Attribute[5]; 
 		
@@ -118,7 +119,12 @@ public class Data {
         data[13][2] = "High";
         data[13][3] = "Strong";
         data[13][4] = "No";
-		
+
+        
+        
+        distinctTuples = countDistinctTuples();
+        
+        System.out.println("distinctTuples = " + distinctTuples);
 	}
 	/**
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
@@ -242,10 +248,9 @@ public class Data {
 	 * @param j indice di riga dell'insieme Data
 	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
 	 */
-	private boolean compare(int i, int j)  
-	{  
-		 Tuple tupla_i = this.getItemSet(i);
-		 return (tupla_i.getDistance(this.getItemSet(j)) == 0); 
+	private boolean compare(int i, int j)  {  
+		 //Tuple tupla_i = this.getItemSet(i);
+		 return (this.getItemSet(i).getDistance(this.getItemSet(j)) == 0); 
 	}  
 	
 	public Object computePrototype(ArraySet idList, Attribute attribute) {
@@ -264,27 +269,33 @@ public class Data {
 		}
 		return moreFrequentCentroid;
 	}
-	
+
 	public String getValue(int i, int j) {
 		return (String)this.getAttributeValue(i, j);
 	}
+
 	
+	/**
+	 * @return distinctTuples : Conta il numero di transazioni distinte memorizzate in Data
+	 */
 	private int countDistinctTuples(){
-		/*
-		 SBAGLIATO
-		 
-		Data data=null;
-		boolean uguaglianza=false;
-		int contatore=0;
-		for(int i=0;i<data.getNumberOfExplanatoryAttributes();i++){ 
-			for(int j=0;j<data.getNumberOfExamples();j++){
-				uguaglianza=data.compare(i, j);
-				if(!(uguaglianza))
-					distinctTuples+=1;
+		int num = 0;
+		
+		boolean[] escluse = new boolean[numberOfExamples];
+		for(int i=0;i<numberOfExamples-1;i++){
+			if (!escluse[i]){
+				escluse[i] = false;
+				for(int j=i+1;j<numberOfExamples;j++){
+					if (compare(i,j)){
+						num++;
+						escluse[j] = true;
+					}
+				}
 			}
+		
 		}
-		return distinctTuples;
-		*/ 
-		return 14;
-	}
+		
+		return  numberOfExamples-num;
+	}	
 }
+
