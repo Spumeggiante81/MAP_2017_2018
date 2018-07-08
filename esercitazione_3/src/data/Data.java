@@ -284,7 +284,6 @@ public class Data {
 		boolean[] escluse = new boolean[numberOfExamples];
 		for(int i=0;i<numberOfExamples-1;i++){
 			if (!escluse[i]){
-				escluse[i] = false;
 				for(int j=i+1;j<numberOfExamples;j++){
 					if (compare(i,j)){
 						num++;
