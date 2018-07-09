@@ -211,7 +211,7 @@ public class Keyboard {
 		String token = getNextToken();
 		int value;
 		try {
-			value = Integer.parseInt(token);
+			value = Integer.parseInt(token);//NumberFormatException
 		} catch (Exception exception) {
 			error("Error reading int data, MIN_VALUE value returned.");
 			value = Integer.MIN_VALUE;
