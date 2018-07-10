@@ -3,13 +3,13 @@ package data;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeSet;
-
-import utility.ArraySet;
 
 public class Data {
 	
@@ -49,11 +49,8 @@ public class Data {
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples; //numero di righe in data 
 	private List<Attribute> explanatorySet = new LinkedList<Attribute>();
-	private int distinctTuples;
 	
 	public Data(){
-		
-		numberOfExamples=14;
 		
 		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
 		explanatorySet.add(new DiscreteAttribute("Outlook", 0, outLookValues));
@@ -187,6 +184,8 @@ public class Data {
         tempData.add(ex13);
         
         data = new ArrayList<Example>(tempData);
+        
+        this.numberOfExamples = data.size();
 	}
 	/**
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
@@ -277,8 +276,8 @@ public class Data {
 	 */
 	public int[] sampling(int k) throws OutOfRangeSampleSize
 	{
-		if ((k <= 0)||(k > distinctTuples))
-			throw new OutOfRangeSampleSize("Errore: il numero di Cluster da calcolare (k) deve essere compreso tra 1 e " + distinctTuples +".");
+		if ((k <= 0)||(k > this.getNumberOfExamples()))
+			throw new OutOfRangeSampleSize("Errore: il numero di Cluster da calcolare (k) deve essere compreso tra 1 e " + this.getNumberOfExamples() +".");
 		int centroidIndexes[]=new int[k];
 		Random rand=new Random();
 		rand.setSeed(System.currentTimeMillis());
@@ -316,11 +315,11 @@ public class Data {
 		 return (this.getItemSet(i).getDistance(this.getItemSet(j)) == 0); 
 	}  
 	
-	public Object computePrototype(ArraySet idList, Attribute attribute) {
+	public Object computePrototype(Set<Integer> idList, Attribute attribute) {
 		return computePrototype(idList, (DiscreteAttribute) attribute);
 	}
 
-	public String computePrototype(ArraySet idList, DiscreteAttribute attribute){
+	public String computePrototype(Set<Integer> idList, DiscreteAttribute attribute){
 		Iterator iter = attribute.iterator();
 		String attributeValue = (String)iter.next();
 		String moreFrequentCentroid = attributeValue;
@@ -338,29 +337,6 @@ public class Data {
 
 	public String getValue(int i, int j) {
 		return (String)this.getAttributeValue(i, j);
-	}
-
-	
-	/**
-	 * @return distinctTuples : Conta il numero di transazioni distinte memorizzate in Data
-	 */
-	private int countDistinctTuples(){
-		int num = 0;
-		
-		boolean[] escluse = new boolean[numberOfExamples];
-		for(int i=0;i<numberOfExamples-1;i++){
-			if (!escluse[i]){
-				for(int j=i+1;j<numberOfExamples;j++){
-					if (compare(i,j)){
-						num++;
-						escluse[j] = true;
-					}
-				}
-			}
-		
-		}
-		
-		return  numberOfExamples-num;
 	}	
 }
 

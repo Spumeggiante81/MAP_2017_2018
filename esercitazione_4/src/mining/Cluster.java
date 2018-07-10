@@ -1,14 +1,17 @@
 package mining;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import data.Data;
 import data.Tuple;
-import utility.ArraySet;
 
 //Classe definita dalla prof insieme ai suoi metodi
 public class Cluster {
 	private Tuple centroid;
 
-	private ArraySet clusteredData; 
+	private Set<Integer> clusteredData = new HashSet<Integer>(); 
 	
 	/**
 	 * Costruttore di classe
@@ -16,8 +19,6 @@ public class Cluster {
 	 */
 	Cluster(Tuple centroid){
 		this.centroid=centroid;
-		clusteredData=new ArraySet();
-		
 	}
 	
 	/**
@@ -53,7 +54,7 @@ public class Cluster {
 	 * @return true se la tupla è associata al cluster, false altrimenti
 	 */
 	boolean contain(int id){
-		return clusteredData.get(id);
+		return clusteredData.contains(id);
 	}
 	
 	/**
@@ -61,7 +62,7 @@ public class Cluster {
 	 * @param id indice su cui è riferito la tupla
 	 */
 	void removeTuple(int id){
-		clusteredData.delete(id);
+		clusteredData.remove(id);
 	}
 	
 	public String toString(){
@@ -78,7 +79,7 @@ public class Cluster {
 		for(int i=0;i<centroid.getLength();i++)
 			str+=centroid.get(i)+ " ";
 		str+=")\nExamples:\n";
-		int array[]=clusteredData.toArray();
+		int array [] = clusteredData.stream().mapToInt(Integer::intValue).toArray();
 		for(int i=0;i<array.length;i++){
 			str+="[";
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)

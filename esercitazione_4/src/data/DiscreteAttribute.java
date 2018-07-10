@@ -1,12 +1,11 @@
 package data;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import utility.ArraySet;
 
 public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	private Set<String> values;
@@ -40,7 +39,7 @@ public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	 * @param v valore da confrontare
 	 * @return  frequenza di v nelle tuple 
 	 */
-	int frequency(Data data,ArraySet idList,String v)
+	int frequency(Data data,Set<Integer> idList,String v)
 	{
 		int count = 0;
 		/*
@@ -50,7 +49,7 @@ public class DiscreteAttribute extends Attribute implements Iterable<String> {
 		/*
 		 * Ricavo l'arraySet, dove contiene tutti gli indici (righe) di interesse
 		 */
-		int arraySet [] = idList.toArray();
+		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
 		/*
 		 * Ciclo per la lunghezza dell'arraySet (dato l'indice delle righe di nostro interesse sono definite al suo interno)
 		 */

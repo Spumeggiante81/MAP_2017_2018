@@ -12,6 +12,7 @@ public class MainTest {
 	public static void main(String[] args) {	
 	
 		char c = 'y';
+		String answer;
 		Data data =new Data();
 		System.out.println(data);
 		do{
@@ -29,13 +30,9 @@ public class MainTest {
 				char [] answers = new char [] {'y', 'n'};
 				do{
 					System.out.println("Vuoi ripetere l'esecuzione? (y/n)");
-					//gestire con un if
-					c = Keyboard.readChar();//gestire con un if
-				}while (new String(answers).indexOf(c) == -1);
-				
-				
-			}catch (OutOfRangeSampleSize e){
-				System.out.println(e.getMessage());
+					answer = Keyboard.readString();
+					c = answer.charAt(0);
+				}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));
 			}
 			catch (Exception e){
 				System.err.println(e.getMessage());

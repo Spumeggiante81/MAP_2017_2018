@@ -1,6 +1,7 @@
 package data;
 
-import utility.ArraySet;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Item {
 	Attribute attribute;//attributo coinvolto nell'item
@@ -47,11 +48,11 @@ public abstract class Item {
 	public abstract double distance(Object a);
 
 	/**
-	 * Modifica il valore dell'item, in base ai valori dello stesso tipo, presenti nelle tuple definite nella lista (clusteredData) 
+	 * Modifica il valore dell'item, in base ai valori dello stesso tipo, presenti nelle tuple definite nella lista (clusteredData)
 	 * @param data Collezione di dati da cui ricavare le tuple
 	 * @param clusteredData lista di indici su cui sono definite le tuple da usare
 	 */
-	public void update(Data data, ArraySet clusteredData) {
+	public void update(Data data, Set<Integer> clusteredData) {
 		value = data.computePrototype(clusteredData, attribute);
 	}
 }	
