@@ -221,13 +221,13 @@ public class Keyboard {
 
 	// -----------------------------------------------------------------
 	// Returns a long integer read from stvalueandard input.
-	// -----------------------------------------------------------------
+	// ----------------------------------------------------------------n-
 	public static long readLong() {
 		String token = getNextToken();
 		long value;
 		try {
 			value = Long.parseLong(token);
-		} catch (Exception exception) {
+		} catch (NumberFormatException exception) {
 			value = Long.MIN_VALUE;
 			error("Error reading long data, MIN_VALUE value returned");
 		}

@@ -28,11 +28,11 @@ public class MainTest {
 				System.out.println(kmeans.getC().toString(data));
 				char [] answers = new char [] {'y', 'n'};
 				do{
-					System.out.println("Vuoi ripetere l'esecuzione? (y/n)");
+					System.out.println("Vuoi ripetere l'esecuzione?  ");
 						answer = Keyboard.readString();
 							c = answer.charAt(0);
 							if (c != 'y' && c != 'n' ){
-								System.out.print("Valore immesso non valido. ");
+								System.out.println("Valore immesso non valido. Scegli un valore fra y/n");
 							}
 					}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));	
 			}
