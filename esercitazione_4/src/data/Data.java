@@ -185,14 +185,14 @@ public class Data {
         
         data = new ArrayList<Example>(tempData);
         
-        this.numberOfExamples = data.size();
+        numberOfExamples = data.size();
 	}
 	/**
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
 	 * @return numero di transazioni (tuple)
 	 */
       public int getNumberOfExamples() {
-    	   return this.numberOfExamples; 
+    	  return numberOfExamples; 
        }
        
        /**
@@ -200,7 +200,7 @@ public class Data {
         * @return numero di attributi 
         */
       public int getNumberOfExplanatoryAttributes() {
-		return this.explanatorySet.size();
+    	  return explanatorySet.size();
     	   
        }
        
@@ -238,12 +238,15 @@ public class Data {
    				//riporto la posizione della tupla nella collezione
    				string += (i+1) +":";
    				//inizio a ciclare per ogni attributo quali descrivono la tupla
-   				for (int j = 0; j < this.getNumberOfExplanatoryAttributes(); j++){
+   				//for (int j = 0; j < this.getNumberOfExplanatoryAttributes(); j++){ this inutile
+   				for (int j = 0; j < getNumberOfExplanatoryAttributes(); j++){
    					//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
    					//e lo concateno a tutti gli altri presenti nella stessa tupla
    					//CONCATENAZIONE SEPARATA PER NON STAMPARE LA VIRGOLA A FINE RIGA
-   					string += this.getAttributeValue(i,j).toString();
-   					if(j<this.getNumberOfExplanatoryAttributes()-1)
+   					//string += this.getAttributeValue(i,j).toString(); this inutile
+   					string += getAttributeValue(i,j).toString();
+   					//if(j<this.getNumberOfExplanatoryAttributes()-1) this inutile
+   					if(j<getNumberOfExplanatoryAttributes()-1)
    					  string +=  ",";
    				}
    				//terminati gli attributi, termino la riga quale definisce la tupla in posizione i-esima e passo alla tupla successiva, qualora ce ne siano altre,
@@ -261,9 +264,9 @@ public class Data {
    	 */
        
 	public Tuple getItemSet(int index) {
-		Tuple tuple=new Tuple(this.getNumberOfExplanatoryAttributes());
-		for(int i=0;i<this.getNumberOfExplanatoryAttributes();i++)
-			tuple.add(new DiscreteItem((DiscreteAttribute) this.getAttribute(i),(String) this.getAttributeValue(index, i)), i);
+		Tuple tuple=new Tuple(getNumberOfExplanatoryAttributes());
+		for(int i=0;i<getNumberOfExplanatoryAttributes();i++)
+			tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i),(String) getAttributeValue(index, i)), i);
 		return tuple;
 	}
 	
@@ -311,7 +314,6 @@ public class Data {
 	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
 	 */
 	private boolean compare(int i, int j)  {  
-		 //Tuple tupla_i = this.getItemSet(i);
 		 return (this.getItemSet(i).getDistance(this.getItemSet(j)) == 0); 
 	}  
 	
@@ -336,7 +338,7 @@ public class Data {
 	}
 
 	public String getValue(int i, int j) {
-		return (String)this.getAttributeValue(i, j);
+		return (String)getAttributeValue(i, j);
 	}	
 }
 

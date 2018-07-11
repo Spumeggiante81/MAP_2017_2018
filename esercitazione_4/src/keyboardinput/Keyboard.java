@@ -212,15 +212,15 @@ public class Keyboard {
 		int value;
 		try {
 			value = Integer.parseInt(token);
-		} catch (Exception exception) {
-			error("Error reading int data, MIN_VALUE value returned.");
+		} catch (NumberFormatException exception) {
 			value = Integer.MIN_VALUE;
+			error("Error reading int data, MIN value returned.");
 		}
 		return value;
 	}
 
 	// -----------------------------------------------------------------
-	// Returns a long integer read from standard input.
+	// Returns a long integer read from stvalueandard input.
 	// -----------------------------------------------------------------
 	public static long readLong() {
 		String token = getNextToken();
@@ -228,8 +228,8 @@ public class Keyboard {
 		try {
 			value = Long.parseLong(token);
 		} catch (Exception exception) {
-			error("Error reading long data, MIN_VALUE value returned.");
 			value = Long.MIN_VALUE;
+			error("Error reading long data, MIN_VALUE value returned");
 		}
 		return value;
 	}
@@ -243,8 +243,8 @@ public class Keyboard {
 		try {
 			value = (new Float(token)).floatValue();
 		} catch (Exception exception) {
-			error("Error reading float data, NaN value returned.");
 			value = Float.NaN;
+			error("Error reading float data, NaN value returned");
 		}
 		return value;
 	}
@@ -258,9 +258,11 @@ public class Keyboard {
 		try {
 			value = (new Double(token)).doubleValue();
 		} catch (Exception exception) {
-			error("Error reading double data, NaN value returned.");
 			value = Double.NaN;
+			error("Error reading double data, NaN value returned");
 		}
 		return value;
 	}
+	
+	
 }
