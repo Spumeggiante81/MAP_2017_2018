@@ -229,7 +229,7 @@ public class Keyboard {
 			value = Long.parseLong(token);
 		} catch (NumberFormatException exception) {
 			value = Long.MIN_VALUE;
-			error("Error reading long data, MIN_VALUE value returned");
+			error("Error reading long data, MIN_VALUE value returned");	
 		}
 		return value;
 	}
