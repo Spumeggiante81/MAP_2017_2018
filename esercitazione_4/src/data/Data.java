@@ -40,6 +40,7 @@ public class Data {
 				result += e.toString();
 			});
 			*/
+			
 			result += example.stream()
 					.findAny();
 			return result;
