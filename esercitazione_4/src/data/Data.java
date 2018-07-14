@@ -21,7 +21,7 @@ public class Data {
 		}
 		
 		void add(Object o){
-			example.add(0,o);
+			example.add(o);
 		}
 		
 		Object get(int i){
@@ -56,7 +56,7 @@ public class Data {
 		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
 		explanatorySet.add(new DiscreteAttribute("Outlook", 0, outLookValues));
 		
-		String temperatureValues[] = {"Hot", "Mild", "Cold"};
+		String temperatureValues[] = {"Hot", "Mild", "Cool"};
 		explanatorySet.add(new DiscreteAttribute("Temperature", 1, temperatureValues));
 		
 		String humidityValues[] = {"High", "Normal"};
