@@ -17,7 +17,6 @@ public class MainTest {
 		System.out.println(data);
 		do{
 			try {
-				
 				int k;
 				System.out.println("Inserisci il numero di Cluster (k) da calcolare :");
 				//gestire con eccezione
@@ -32,8 +31,8 @@ public class MainTest {
 					System.out.println("Vuoi ripetere l'esecuzione? (y/n)");
 					answer = Keyboard.readString();
 					c = answer.charAt(0);
-				}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));
-			}
+					}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));
+				}
 			catch (Exception e){
 				System.err.println(e.getMessage());
 			}

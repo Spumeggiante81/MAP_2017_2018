@@ -13,7 +13,7 @@ public class MainTest {
 	
 		char c = 'y';
 		String answer;
-		Data data =new Data();
+		Data data = new Data();
 		System.out.println(data);
 		do{
 			
@@ -35,6 +35,9 @@ public class MainTest {
 								System.out.println("Valore immesso non valido. Scegli un valore fra (y,n)");
 							}
 					}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));	
+			} 
+			catch(OutOfRangeSampleSize e){
+				System.err.println(e.getMessage());
 			}
 			catch (Exception e){
 				System.err.println(e.getMessage());
