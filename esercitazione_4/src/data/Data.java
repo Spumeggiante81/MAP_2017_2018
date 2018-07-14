@@ -21,7 +21,7 @@ public class Data {
 		}
 		
 		void add(Object o){
-			example.add(1,o);
+			example.add(0,o);
 		}
 		
 		Object get(int i){
