@@ -22,6 +22,7 @@ public class MainTest {
 				int k;
 				System.out.println("Inserisci il numero di Cluster (k) da calcolare  (numero compreso tra 1 e "+data.getNumberOfExamples() + ") :");
 				k = Keyboard.readInt();
+				System.out.println("k: "+k);
 				KMeansMiner kmeans=new KMeansMiner(k); // KmeansMiner kmeans=new KmeansMiner(k); 
 				int numIter=kmeans.kmeans(data);
 				System.out.println("Numero di Iterazione:"+numIter);
