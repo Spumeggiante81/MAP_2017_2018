@@ -49,8 +49,16 @@ public class Tuple {
 		 * 		-1 : entrambe le tuple in analisi abbiano la stessa dimensione;
 		 * 		-2 : le posizioni degli attributi all'interno delle tuple corrispondano.
 		 */
+		//System.out.println(obj + " - " + getLength());
 		for (int i = 0; i < this.getLength(); i++){
-			distance += this.get(i).distance(obj.get(i));
+			//distance += this.get(i).distance(obj.get(i));			
+			Item item = this.get(i);
+			if (item != null){
+				if (item instanceof ContinuosItem)
+					distance += ((ContinuosItem)item).distance(obj.get(i));
+				else
+					distance += ((DiscreteItem)item).distance(obj.get(i));
+			}
 		}
 		return distance;
 	}

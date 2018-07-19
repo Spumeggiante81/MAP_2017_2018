@@ -53,8 +53,27 @@ class ContinuosAttribute extends Attribute
 	}
 
 
-	public int frequency(Data data, Set<Integer> idList, String attributeValue) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int frequency(Data data, Set<Integer> idList, double attributeValue) {
+		int count = 0;
+		/*
+		 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
+		 */
+		int j = this.getIndex();
+		/*
+		 * Ricavo l'arraySet, dove contiene tutti gli indici (righe) di interesse
+		 */
+		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
+		/*
+		 * Ciclo per la lunghezza dell'arraySet (dato l'indice delle righe di nostro interesse sono definite al suo interno)
+		 */
+		for (int i = 0; i < arraySet.length; i++){
+			/*
+			 * Ricavo l'indice della riga da cui poter poi ricavare il valore da confrontare con v
+			 */
+			int riga = arraySet[i];
+			double value = (double)data.getAttributeValue(riga, j);
+			if (value != attributeValue) count++;
+		}
+		return count;
 	}
 }

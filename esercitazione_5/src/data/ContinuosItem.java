@@ -8,14 +8,8 @@ public class ContinuosItem extends Item {
 	}
 
 	@Override
-	public double distance(Object a) {
-		// TODO Auto-generated method stub
-		double valore;
-		ContinuosAttribute valore2 = new ContinuosAttribute(null, 0, 3.2, 38.7);
-		
-		valore = Math.abs((double) this.getValue()-valore2.getScaledValue((double) a));
-	
-		return valore;
+	public double distance(Object a) {		
+		return Math.abs(((ContinuosAttribute)((ContinuosItem)a).getAttribute()).getScaledValue((double)this.getValue()));
 	}
 }
 		

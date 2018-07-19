@@ -9,8 +9,7 @@ public class MainTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {	
-	
+	public static void main(String[] args) {
 		char c = 'y';
 		String answer;
 		Data data = new Data();
@@ -38,10 +37,12 @@ public class MainTest {
 					}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));	
 			} 
 			catch(OutOfRangeSampleSize e){
-				System.err.println(e.getMessage());
+				//System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 			catch (Exception e){
-				System.err.println(e.getMessage());
+				//System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		} while(c == 'y');
 	}
