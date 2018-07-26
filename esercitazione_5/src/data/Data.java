@@ -58,9 +58,7 @@ public class Data {
 		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
 		explanatorySet.add(new DiscreteAttribute("Outlook", 0, outLookValues));
 		
-		String temperatureValues[] = {"Hot", "Mild", "Cool"};
-		//explanatorySet.add(new DiscreteAttribute("Temperature", 1, temperatureValues));
-		explanatorySet.add(new ContinuosAttribute("Temperature", 1, 3.2, 38.7)); //E' una inizializzazione all'oggetto?
+		explanatorySet.add(new ContinuosAttribute("Temperature", 1, 3.2, 38.7)); 
 		
 		String humidityValues[] = {"High", "Normal"};
 		explanatorySet.add(new DiscreteAttribute("Humidity", 2, humidityValues));
@@ -89,98 +87,84 @@ public class Data {
 		Example ex13 = new Example(); 
 		
         ex0.add( "Sunny");
-       // ex0.add( "Hot");
         ex0.add(new Double(37.5));
         ex0.add( "High");
         ex0.add( "Weak");
         ex0.add( "No");
         
         ex1.add( "Sunny");
-        //ex1.add( "Hot");
         ex1.add(new Double(38.7));
         ex1.add( "High");
         ex1.add( "Strong");
         ex1.add( "No");
         
         ex2.add( "Overcast");
-        //ex2.add( "Hot");
         ex2.add(new Double(37.5));
         ex2.add( "High");
         ex2.add( "Weak");
         ex2.add( "Yes");
         
         ex3.add( "Rain");
-        //ex3.add( "Mild");
         ex3.add(new Double(20.5));
         ex3.add( "High");
         ex3.add( "Weak");
         ex3.add( "Yes");
         
         ex4.add( "Rain");
-        //ex4.add( "Cool");
         ex4.add(new Double(38.7));
         ex4.add( "Normal");
         ex4.add( "Weak");
         ex4.add( "Yes");
         
         ex5.add( "Rain");
-        //ex5.add( "Cool");
         ex5.add(new Double(20.7));
         ex5.add( "Normal");
         ex5.add( "Strong");
         ex5.add( "No");
         
         ex6.add( "Overcast");
-        //ex6.add( "Cool");
         ex6.add(new Double(21.2));
         ex6.add( "Normal");
         ex6.add( "Strong");
         ex6.add( "Yes");
         
         ex7.add( "Sunny");
-        //ex7.add( "Mild");
         ex7.add(new Double(20.5));
         ex7.add( "High");
         ex7.add( "Weak");
         ex7.add( "No");
         
         ex8.add( "Sunny");
-        //ex8.add( "Cool");
         ex8.add(new Double(21.2));
         ex8.add( "Normal");
         ex8.add( "Weak");
         ex8.add( "Yes");
         
         ex9.add( "Rain");
-        //ex9.add( "Mild");
         ex9.add(new Double(19.8));
         ex9.add( "Normal");
         ex9.add( "Weak");
         ex9.add( "Yes");
         
         ex10.add( "Sunny");
-        //ex10.add( "Mild");
         ex10.add(new Double(3.5));
         ex10.add( "Normal");
         ex10.add( "Strong");
         ex10.add( "Yes");
         
         ex11.add( "Overcast");
-        //ex11.add( "Mild");
         ex11.add(new Double(3.6));
         ex11.add( "High");
         ex11.add( "Strong");
         ex11.add( "Yes");
         
         ex12.add( "Overcast");
-        //ex12.add( "Hot");
         ex12.add(new Double(3.5));
         ex12.add( "Normal");
         ex12.add( "Weak");
         ex12.add( "Yes");
         
         ex13.add( "Rain");
-        //ex13.add( "Mild");
         ex13.add(new Double(3.2));
         ex13.add( "High");
         ex13.add( "Strong");
@@ -346,13 +330,27 @@ public class Data {
 	}
 
 	public String computePrototype(Set<Integer> idList, DiscreteAttribute attribute){
+		/*
+		 * Ricavo il primo valore di "attribute" e la indico temporaneamente come "centroide"
+		 * Riporto la frequenza di tuple, indicate nel set di id, che contengono tae valore in "countFrequencyCentroid"
+		 */
 		Iterator<String> iter = attribute.iterator();
 		String attributeValue = (String)iter.next();
 		String moreFrequentCentroid = attributeValue;
-		int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attributeValue);;
+		int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attributeValue);
+		/*
+		 * ciclo finchè ci sono tuple della collezione
+		 */
 		while (iter.hasNext()){
+			/*
+			 * ricavo il successivo valore dell'attributo e ne ricavo la frequenza in funzione delle tuple definite nel Set
+			 */
 			attributeValue = (String)iter.next();
 			countFrequency = attribute.frequency(this, idList, attributeValue);
+			/*
+			 * Se il nuovo valore è più frequente di quello del centroide precedentemente rilevato
+			 * allora vuol dire che abbiamo trovato un nuovo centroide
+			 */
 			if (countFrequency > countFrequencyCentroid){
 				countFrequencyCentroid = countFrequency;
 				moreFrequentCentroid = attributeValue;

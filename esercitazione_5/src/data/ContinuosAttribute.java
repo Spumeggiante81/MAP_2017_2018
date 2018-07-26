@@ -41,12 +41,6 @@ class ContinuosAttribute extends Attribute
 		return equals(a) == true ? 0 : 1;
 	}
 
-	public double getScaledValue(ContinuosAttribute valore) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 	public Iterator iterator() {
 		// TODO Auto-generated method stub
 		return null;
