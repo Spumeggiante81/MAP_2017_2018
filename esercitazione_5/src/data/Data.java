@@ -366,8 +366,12 @@ public class Data {
 		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
 		
 		for(int i=0;i<arraySet.length;i++){
-			contatore+=contatore;
-			media+=attribute.getIndex();
+			
+			int riga = arraySet[i];
+			double value = (double)((Data) data).getAttributeValue(riga, j);
+			
+			media+=value;
+			contatore++;
 		}
 		return media/contatore;
 	}
