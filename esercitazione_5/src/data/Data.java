@@ -258,23 +258,7 @@ public class Data {
    			return string;
        }
        
-   	/**
-   	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
-   	 * la iesima riga in data
-   	 * @param index indice di riga
-   	 * @return
-   	 */
-       
-	public Tuple getItemSet(int index) {
-		Tuple tuple=new Tuple(getNumberOfExplanatoryAttributes());
-		for(int i=0;i<getNumberOfExplanatoryAttributes();i++)
-			if (getAttribute(i) instanceof DiscreteAttribute)
-				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i),(String) getAttributeValue(index, i)), i);
-			else
-				tuple.add(new ContinuosItem((ContinuosAttribute) getAttribute(i),(double) getAttributeValue(index, i)), i);
-		return tuple;
-	}
-	
+   	
 	
 	/**
 	 * 
@@ -363,26 +347,50 @@ public class Data {
 		return getAttributeValue(i, j);
 	}	
 
+	/**
+	 * 
+	 * @param idList
+	 * @param attribute
+	 * @return
+	 */
 	public double computePrototype(Set<Integer> idList, ContinuosAttribute attribute){		
-		Iterator  iter = attribute.iterator();
-		double attributeValue=0;
+		
 		double media = 0;
 		int contatore = 0;
 		
-		//int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attributeValue);
 		/*
-		 * ciclo finchè ci sono tuple della collezione
+		 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
 		 */
-	
-		while (iter.hasNext()){
-			/*
-			 * ricavo il successivo valore dell'attributo e ne ricavo la frequenza in funzione delle tuple definite nel Set
-			 */
-			attributeValue += (double)iter.next();
-			contatore++;
+		int j = attribute.index;
+		
+		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
+		
+		for(int i=0;i<arraySet.length;i++){
+			contatore+=contatore;
+			media+=attribute.getIndex();
 		}
-		return (attributeValue / contatore);
+		return media/contatore;
 	}
+	
+	
+	
+	/**
+   	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
+   	 * la iesima riga in data
+   	 * @param index indice di riga
+   	 * @return
+   	 */
+       
+	public Tuple getItemSet(int index) {
+		Tuple tuple=new Tuple(getNumberOfExplanatoryAttributes());
+		for(int i=0;i<getNumberOfExplanatoryAttributes();i++)
+			if (getAttribute(i) instanceof DiscreteAttribute)
+				tuple.add(new DiscreteItem((DiscreteAttribute) getAttribute(i),(String) getAttributeValue(index, i)), i);
+			else
+				tuple.add(new ContinuosItem((ContinuosAttribute) getAttribute(i),(double) getAttributeValue(index, i)), i);
+		return tuple;
+	}
+	
 	
 }
 
