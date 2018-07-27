@@ -38,7 +38,7 @@ public class Cluster {
 			centroid.get(i).update(data,clusteredData);
 		}
 	}
-
+ 
 	/**
 	 * Aggiunge una tupla associata al cluster
 	 * @param id indice su cui è riferito la tupla

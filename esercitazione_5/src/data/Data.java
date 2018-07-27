@@ -362,31 +362,27 @@ public class Data {
 	public Object getValue(int i, int j) {
 		return getAttributeValue(i, j);
 	}	
-	
-	/**VERIFICARE
-	 * 
-	 * Determina il valore prototipo come media dei valori osservati per attribute
-	 * nella transazione di data avente indice di rica idList
-	 * @param idList
-	 * @param attribute
-	 * @return
-	 */
-	public double computePrototype(Set<Integer> idList, ContinuosAttribute attribute) {
-		/*double attributeValue = iter.next();
-		double moreFrequentCentroid = attributeValue;
-		int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attributeValue);
-		while (iter.hasNext()){
-			attributeValue = (double)iter.next();
-			countFrequency = attribute.frequency(this, idList, attributeValue);
-			if (countFrequency > countFrequencyCentroid){
-				countFrequencyCentroid = countFrequency;
-				moreFrequentCentroid = attributeValue;
-			}
-		}
-		return moreFrequentCentroid;*/
-		return 0.5;
-	}
 
+	public double computePrototype(Set<Integer> idList, ContinuosAttribute attribute){		
+		Iterator  iter = attribute.iterator();
+		double attributeValue=0;
+		double media = 0;
+		int contatore = 0;
+		
+		//int countFrequency, countFrequencyCentroid = attribute.frequency(this, idList, attributeValue);
+		/*
+		 * ciclo finchè ci sono tuple della collezione
+		 */
+	
+		while (iter.hasNext()){
+			/*
+			 * ricavo il successivo valore dell'attributo e ne ricavo la frequenza in funzione delle tuple definite nel Set
+			 */
+			attributeValue += (double)iter.next();
+			contatore++;
+		}
+		return (attributeValue / contatore);
+	}
 	
 }
 
