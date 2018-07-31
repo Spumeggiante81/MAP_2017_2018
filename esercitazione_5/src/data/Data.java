@@ -313,7 +313,14 @@ public class Data {
 			return computePrototype(idList, (ContinuosAttribute) attribute);
 	}
 
-	public String computePrototype(Set<Integer> idList, DiscreteAttribute attribute){
+	/**
+	 * Ricava il valore prototipo come quello più frequente, presente tra i valori rappresentati dall'attributo passato in paramentro,
+	 * presenti nelle tuple indicate nel Set
+	 * @param idList
+	 * @param attribute
+	 * @return
+	 */
+	private String computePrototype(Set<Integer> idList, DiscreteAttribute attribute){
 		/*
 		 * Ricavo il primo valore di "attribute" e la indico temporaneamente come "centroide"
 		 * Riporto la frequenza di tuple, indicate nel set di id, che contengono tae valore in "countFrequencyCentroid"
@@ -342,38 +349,23 @@ public class Data {
 		}
 		return moreFrequentCentroid;
 	}
-	
-	public Object getValue(int i, int j) {
-		return getAttributeValue(i, j);
-	}	
 
 	/**
-	 * 
+	 * Determina il valore prototipo come media dei valori appartenenti all'attributo in parametro, presenti nelle tuple indicate nel Set
 	 * @param idList
 	 * @param attribute
 	 * @return
 	 */
-	public double computePrototype(Set<Integer> idList, ContinuosAttribute attribute){		
-		
-		double media = 0;
-		int contatore = 0;
-		
-		/*
-		 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
-		 */
+	private double computePrototype(Set<Integer> idList, ContinuosAttribute attribute){		
+		double tot = 0;
 		int j = attribute.index;
-		
 		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
-		
 		for(int i=0;i<arraySet.length;i++){
-			
 			int riga = arraySet[i];
-			double value = (double)((Data) data).getAttributeValue(riga, j);
-			
-			media+=value;
-			contatore++;
+			double value = (double)this.getAttributeValue(riga, j);
+			tot += value;
 		}
-		return media/contatore;
+		return tot/arraySet.length;
 	}
 	
 	

@@ -7,9 +7,15 @@ public class ContinuosItem extends Item {
 		super(attribute, value);
 	}
 
-	@Override
+	 /**
+	  * Ricava la distanza tra il valore scalare dell'item corrente con quello passato in parametro
+	  */
 	public double distance(Object a) {		
-		return Math.abs(((ContinuosAttribute)((ContinuosItem)a).getAttribute()).getScaledValue((double)this.getValue()));
+		//return Math.abs(((ContinuosAttribute)((ContinuosItem)a).getAttribute()).getScaledValue((double)this.getValue()));
+		double currentScaledValue = ((ContinuosAttribute)this.getAttribute()).getScaledValue((double)this.getValue());
+		ContinuosItem parameterItem = (ContinuosItem) a;
+		double parameterScaledValue = ((ContinuosAttribute)parameterItem.getAttribute()).getScaledValue((double)parameterItem.getValue());
+		return currentScaledValue - parameterScaledValue;
 	}
 	
     /**

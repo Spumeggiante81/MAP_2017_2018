@@ -31,43 +31,4 @@ class ContinuosAttribute extends Attribute
     double getScaledValue(double v) {
     	return(v-min)/(max-min);  
     }
-    
-    /**
-     * Implementazione della funzione distance per tipo continuo
-     * @param a
-     * @return
-     */
-	public double distance(Object a){
-		return equals(a) == true ? 0 : 1;
-	}
-
-	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public int frequency(Data data, Set<Integer> idList, double attributeValue) {
-		int count = 0;
-		/*
-		 * ricavo la colonna dove sono definiti i valori appartenenti all'attributo in analisi
-		 */
-		int j = this.getIndex();
-		/*
-		 * Ricavo l'arraySet, dove contiene tutti gli indici (righe) di interesse
-		 */
-		int arraySet [] = idList.stream().mapToInt(Integer::intValue).toArray();
-		/*
-		 * Ciclo per la lunghezza dell'arraySet (dato l'indice delle righe di nostro interesse sono definite al suo interno)
-		 */
-		for (int i = 0; i < arraySet.length; i++){
-			/*
-			 * Ricavo l'indice della riga da cui poter poi ricavare il valore da confrontare con v
-			 */
-			int riga = arraySet[i];
-			double value = (double)data.getAttributeValue(riga, j);
-			if (value != attributeValue) count++;
-		}
-		return count;
-	}
 }
