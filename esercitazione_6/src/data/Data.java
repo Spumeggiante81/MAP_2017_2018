@@ -224,7 +224,7 @@ public class Data {
         * @param attributeIndex indice dell'attributo quale definisce il valore desiderato
         * @return
         */
-       Object getAttributeValue(int exampleIndex, int attributeIndex) {
+       public Object getAttributeValue(int exampleIndex, int attributeIndex) {
 		Example example = data.get(exampleIndex);
 		return example.get(attributeIndex);
        }

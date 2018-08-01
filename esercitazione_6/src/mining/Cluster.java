@@ -83,7 +83,7 @@ public class Cluster {
 		for(int i=0;i<array.length;i++){
 			str+="[";
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)
-				str+=data.getValue(array[i], j)+" ";
+				str+=data.getAttributeValue(array[i], j)+" ";
 			str+="] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
 			
 		}
