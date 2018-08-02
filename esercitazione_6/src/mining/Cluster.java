@@ -1,5 +1,6 @@
 package mining;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +9,7 @@ import data.Data;
 import data.Tuple;
 
 //Classe definita dalla prof insieme ai suoi metodi
-public class Cluster {
+public class Cluster implements Serializable{
 	private Tuple centroid;
 
 	private Set<Integer> clusteredData = new HashSet<Integer>(); 

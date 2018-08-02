@@ -1,9 +1,10 @@
 package data;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Item {
+public abstract class Item implements Serializable{
 	Attribute attribute;//attributo coinvolto nell'item
 	Object value;//valore assegnato all'attributo
 	

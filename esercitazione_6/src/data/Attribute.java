@@ -1,6 +1,8 @@
 package data;
 
-public abstract class Attribute {	
+import java.io.Serializable;
+
+public abstract class Attribute implements Serializable{	
 	protected String name; //nome simbolico dell'attributo
 	protected int index;   //identificativo numerico dell'attributo
 	

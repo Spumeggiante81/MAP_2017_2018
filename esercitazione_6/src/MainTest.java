@@ -1,49 +1,108 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-
-import data.Data;
-import data.OutOfRangeSampleSize;
 import keyboardinput.Keyboard;
 import mining.KMeansMiner;
+import data.Data;
+import data.OutOfRangeSampleSize;
+
 
 public class MainTest {
+
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		char c = 'y';
-		String answer;
-		Data data = new Data();
-		System.out.println(data);
+	
+	private static int menu(){
+		int answer;
+		System.out.println("Scegli una opzione");
 		do{
-			
-			try {
-				
-				int k;
-				System.out.println("Inserisci il numero di Cluster (k) da calcolare  (numero compreso tra 1 e "+data.getNumberOfExamples() + ") :");
-				k = Keyboard.readInt();
-				System.out.println("k: "+k);
-				KMeansMiner kmeans=new KMeansMiner(k); // KmeansMiner kmeans=new KmeansMiner(k); 
-				int numIter=kmeans.kmeans(data);
-				System.out.println("Numero di Iterazione:"+numIter);
-				System.out.println(kmeans.getC().toString(data));
-				char [] answers = new char [] {'y', 'n'};
-				do{
-					System.out.println("Vuoi ripetere l'esecuzione (y/n)?  ");
-						answer = Keyboard.readString();
-							c = answer.charAt(0);
-							if (c != 'y' && c != 'n' ){
-								System.out.println("Valore immesso non valido. Scegli un valore fra (y,n)");
-							}
-					}while ((new String(answers).indexOf(c) == -1)||(answer.length() > 1));	
-			} 
-			catch(OutOfRangeSampleSize e){
-				//System.err.println(e.getMessage());
-				e.printStackTrace();
-			}
-			catch (Exception e){
-				//System.err.println(e.getMessage());
-				e.printStackTrace();
-			}
-		} while(c == 'y');
+			System.out.println("(1) Carica Cluster da File");
+			System.out.println("(2) Carica Dati");
+			System.out.print("Risposta:");
+			answer=Keyboard.readInt();
+		}
+		while(answer<=0 || answer>2);
+		return answer;
+		
 	}
-}
+	
+	static KMeansMiner learningFromFile() throws FileNotFoundException, IOException, ClassNotFoundException{
+		String fileName="";
+		System.out.print("Nome archivio:");
+		fileName=Keyboard.readString();
+		return new KMeansMiner(fileName+".dmp");
+		
+	}
+	public static void main(String[] args) {
+		
+		do{
+			int menuAnswer=menu();
+			switch(menuAnswer)
+			{
+				case 1:
+					try {
+						KMeansMiner kmeans=learningFromFile();
+						System.out.println(kmeans.getC().toString(new Data()));
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					Data data =new Data();
+					System.out.println(data);
+					char answer='y';
+					do{
+						int k=1;
+						System.out.print("Inserisci k:");
+						k=Keyboard.readInt();
+						KMeansMiner kmeans=new KMeansMiner(k);
+						try
+						{
+							int numIter=kmeans.kmeans(data);
+							System.out.println("Numero di Iterazione:"+numIter);
+							System.out.println(kmeans.getC().toString(data));
+							System.out.print("Nome file di backup:");
+							String fileName=Keyboard.readString()+".dmp";
+							System.out.println("Salvataggio in "+fileName);
+							try {
+								kmeans.salva(fileName);
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							System.out.println("Fine operazioni di salvataggio!");
+							
+							
+						}
+						catch(OutOfRangeSampleSize e)
+						{
+							System.out.println(e.getMessage());
+						}
+						System.out.print("Vuoi ripetere l'esecuzione?(y/n)");
+						answer=Keyboard.readChar();
+					}
+					while(answer=='y');
+					break;
+				default:
+					System.out.println("Opzione non valida!");
+		
+			}
+			
+			System.out.print("Vuoi scegliere una nuova operazione da menu?(y/n)");
+			if(Keyboard.readChar()!='y')
+				break;
+			}
+		while(true);
+		}
+	}
+
+
+

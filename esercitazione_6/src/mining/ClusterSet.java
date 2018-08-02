@@ -1,12 +1,13 @@
 package mining;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
 
-public class ClusterSet {
+public class ClusterSet implements Serializable {
 	//Attributi
 	private Cluster[] C;
 	private int i = 0; //indica la posizione per memorizzare un nuovo cluster in C
