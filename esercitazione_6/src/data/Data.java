@@ -1,6 +1,7 @@
 package data;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,11 +11,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
-import data.Data.Example;
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import database.Example;
+import database.TableData;
 
 
 public class Data {
-	
+	/*
 	class Example implements Comparable<Example>{
 		private List<Object> example;
 		
@@ -37,156 +41,40 @@ public class Data {
 		
 		public String toString(){
 			String result = "";
-			/*
-			example.forEach((e) -> {
-				result += e.toString();
-			});
-			*/
 			
 			result += example.stream()
 					.findAny();
 			return result;
 		}
 	}
+	*/
 	
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples; //numero di righe in data 
 	private List<Attribute> explanatorySet = new LinkedList<Attribute>();
 	
-	public Data(){
+	public Data(String table) throws DatabaseConnectionException, SQLException{
 		
-		String outLookValues[] = {"Sunny", "Overcast", "Rain"};
+		String outLookValues[] = {"sunny", "overcast", "rain"};
 		explanatorySet.add(new DiscreteAttribute("Outlook", 0, outLookValues));
 		
 		explanatorySet.add(new ContinuosAttribute("Temperature", 1, 3.2, 38.7)); 
 		
-		String humidityValues[] = {"High", "Normal"};
+		String humidityValues[] = {"high", "normal"};
 		explanatorySet.add(new DiscreteAttribute("Humidity", 2, humidityValues));
 		
-		String windValues[] = {"Weak", "Strong"};
+		String windValues[] = {"weak", "strong"};
 		explanatorySet.add(new DiscreteAttribute("Wind", 3, windValues));
 		
-		String playTennisValues[] = {"No", "Yes"};
+		String playTennisValues[] = {"no", "yes"};
 		explanatorySet.add(new DiscreteAttribute("PlayTennis", 4, playTennisValues));
-		
+        
 		TreeSet<Example> tempData = new TreeSet<Example>();
-		
-		Example ex0 = new Example();
-		Example ex1 = new Example();
-		Example ex2 = new Example();
-		Example ex3 = new Example();
-		Example ex4 = new Example();
-		Example ex5 = new Example();
-		Example ex6 = new Example();
-		Example ex7 = new Example();
-		Example ex8 = new Example();
-		Example ex9 = new Example();
-		Example ex10 = new Example();
-		Example ex11 = new Example();
-		Example ex12 = new Example();
-		Example ex13 = new Example(); 
-		
-        ex0.add( "Sunny");
-        ex0.add(new Double(37.5));
-        ex0.add( "High");
-        ex0.add( "Weak");
-        ex0.add( "No");
-        
-        ex1.add( "Sunny");
-        ex1.add(new Double(38.7));
-        ex1.add( "High");
-        ex1.add( "Strong");
-        ex1.add( "No");
-        
-        ex2.add( "Overcast");
-        ex2.add(new Double(37.5));
-        ex2.add( "High");
-        ex2.add( "Weak");
-        ex2.add( "Yes");
-        
-        ex3.add( "Rain");
-        ex3.add(new Double(20.5));
-        ex3.add( "High");
-        ex3.add( "Weak");
-        ex3.add( "Yes");
-        
-        ex4.add( "Rain");
-        ex4.add(new Double(38.7));
-        ex4.add( "Normal");
-        ex4.add( "Weak");
-        ex4.add( "Yes");
-        
-        ex5.add( "Rain");
-        ex5.add(new Double(20.7));
-        ex5.add( "Normal");
-        ex5.add( "Strong");
-        ex5.add( "No");
-        
-        ex6.add( "Overcast");
-        ex6.add(new Double(21.2));
-        ex6.add( "Normal");
-        ex6.add( "Strong");
-        ex6.add( "Yes");
-        
-        ex7.add( "Sunny");
-        ex7.add(new Double(20.5));
-        ex7.add( "High");
-        ex7.add( "Weak");
-        ex7.add( "No");
-        
-        ex8.add( "Sunny");
-        ex8.add(new Double(21.2));
-        ex8.add( "Normal");
-        ex8.add( "Weak");
-        ex8.add( "Yes");
-        
-        ex9.add( "Rain");
-        ex9.add(new Double(19.8));
-        ex9.add( "Normal");
-        ex9.add( "Weak");
-        ex9.add( "Yes");
-        
-        ex10.add( "Sunny");
-        ex10.add(new Double(3.5));
-        ex10.add( "Normal");
-        ex10.add( "Strong");
-        ex10.add( "Yes");
-        
-        ex11.add( "Overcast");
-        ex11.add(new Double(3.6));
-        ex11.add( "High");
-        ex11.add( "Strong");
-        ex11.add( "Yes");
-        
-        ex12.add( "Overcast");
-        ex12.add(new Double(3.5));
-        ex12.add( "Normal");
-        ex12.add( "Weak");
-        ex12.add( "Yes");
-        
-        ex13.add( "Rain");
-        ex13.add(new Double(3.2));
-        ex13.add( "High");
-        ex13.add( "Strong");
-        ex13.add( "No");
+        DbAccess db = new DbAccess();
+        TableData td = new TableData(db);
 
-        tempData.add(ex0);
-        tempData.add(ex1);
-        tempData.add(ex2);
-        tempData.add(ex3);
-        tempData.add(ex4);
-        tempData.add(ex5);
-        tempData.add(ex6);
-        tempData.add(ex7);
-        tempData.add(ex8);
-        tempData.add(ex9);
-        tempData.add(ex10);
-        tempData.add(ex11);
-        tempData.add(ex12);
-        tempData.add(ex13);
-        
-        data = new ArrayList<Example>(tempData);
-        
+        db.initConnection();
+        data = new ArrayList<Example>(td.getTransazioni(table));
         numberOfExamples = data.size();
 	}
 	/**

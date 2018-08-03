@@ -1,10 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import keyboardinput.Keyboard;
 import mining.KMeansMiner;
 import data.Data;
 import data.OutOfRangeSampleSize;
+import database.DatabaseConnectionException;
 
 
 public class MainTest {
@@ -43,17 +45,25 @@ public class MainTest {
 				case 1:
 					try {
 						KMeansMiner kmeans=learningFromFile();
-						System.out.println(kmeans.getC().toString(new Data()));
+						System.out.println(kmeans.getC().toString(new Data("playtennis")));
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
+					} catch (DatabaseConnectionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 					break;
 				case 2:
-					Data data =new Data();
+				Data data;
+				try {
+					data = new Data("playtennis");
 					System.out.println(data);
 					char answer='y';
 					do{
@@ -90,6 +100,13 @@ public class MainTest {
 						answer=Keyboard.readChar();
 					}
 					while(answer=='y');
+				} catch (DatabaseConnectionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 					break;
 				default:
 					System.out.println("Opzione non valida!");
