@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class TableSchema {
-	DbAccess db;
+	private DbAccess db;
 	public class Column{
 		private String name;
 		private String type;
