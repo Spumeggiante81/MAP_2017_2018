@@ -18,10 +18,16 @@ public class ClusterSet implements Serializable {
 	/**
 	 * Costruttore della classe
 	 * @param k
+	 * @throws OutOfRangeSampleSize 
 	 */
-	ClusterSet(int k){
-		C = new Cluster[k];
-		Arrays.fill(C, null);
+	ClusterSet(int k) throws OutOfRangeSampleSize{
+		try{
+			C = new Cluster[k];
+			Arrays.fill(C, null);
+		}
+		catch(NegativeArraySizeException e){
+			throw new OutOfRangeSampleSize ("k deve essere di tipo intero");
+		}
 	}
 	
 	/**
