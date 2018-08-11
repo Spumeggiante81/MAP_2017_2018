@@ -70,11 +70,19 @@ public class TableSchema {
 	    
 	    }
 	  
-	
+		/**
+		 * 
+		 * @return Restituisce la dimensione della ???tabella???
+		 */
 		public int getNumberOfAttributes(){
 			return tableSchema.size();
 		}
 		
+		/**
+		 * 
+		 * @param index
+		 * @return Il riferimento della colonna
+		 */
 		public Column getColumn(int index){
 			return tableSchema.get(index);
 		}

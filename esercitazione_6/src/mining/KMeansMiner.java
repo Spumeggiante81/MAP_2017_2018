@@ -32,6 +32,12 @@ public class KMeansMiner {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
         C = (ClusterSet) in.readObject();
         in.close();
+        
+        /**
+        FileInputStream inFile = new FileInputStream(fileName);
+        ObjectInputStream inStream = new ObjectInputStream(inFile);
+        C = (ClusterSet) in.readObject();
+        in.close();*/
     }
 	
 	/**
@@ -43,6 +49,13 @@ public class KMeansMiner {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
         out.writeObject(C);
         out.close();
+        
+        /** MIO
+        FileOutputStream outFile = new FileOutputStream(fileName);
+        ObjectOutputStream outStream = new ObjectOutputStream(outFile);
+        outStream.writeObject(C);
+        outFile.close();
+         */
     }
 	
 	/**
@@ -50,7 +63,7 @@ public class KMeansMiner {
 	 * @return
 	 */
 	public ClusterSet getC(){
-		return this.C;
+		return C;
 	}
 	
 	/**
