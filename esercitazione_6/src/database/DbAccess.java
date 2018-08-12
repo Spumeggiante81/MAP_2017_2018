@@ -29,8 +29,8 @@ public class DbAccess {
             stat = conn.createStatement();
         } /*catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }*/ catch (Exception e) {
-            //e.printStackTrace();
+        }*/ catch (SQLException e) {
+            e.printStackTrace();
             throw new DatabaseConnectionException(e.getMessage());
         }
 

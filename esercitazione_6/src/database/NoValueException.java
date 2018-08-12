@@ -2,6 +2,7 @@ package database;
 
 /**
  * Lanciato quando non viene trovato nessun valore
+ * @author Ciccariello Luciano, Palumbo Vito, Rosini Luigi
  */
 class NoValueException extends Exception {
 
