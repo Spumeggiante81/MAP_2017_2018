@@ -17,7 +17,7 @@ import database.TableSchema.Column;
 
 public class TableData 
 {
-	DbAccess db;
+	private DbAccess db;
 	
     /**
      * Inizializzazione

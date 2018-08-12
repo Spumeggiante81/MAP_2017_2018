@@ -7,12 +7,17 @@ package database;
 public class DatabaseConnectionException extends Exception {
     private String message;
 
+    /**
+     * Costruttore della classe DatabaseConnectionException
+     * Modella il fallimento della connessione al database
+     * @param message
+     */
     DatabaseConnectionException(String message) {
         this.message = message;
     }
 
     @Override
     public String getMessage() {
-        return this.message;
+        return message;
     }
 }

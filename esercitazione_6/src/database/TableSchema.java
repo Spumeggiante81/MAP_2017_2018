@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class TableSchema {
-	DbAccess db;
+	private DbAccess db;
 	public class Column{
 		private String name;
 		private String type;
@@ -70,11 +70,19 @@ public class TableSchema {
 	    
 	    }
 	  
-	
+		/**
+		 * 
+		 * @return Restituisce la dimensione della ???tabella???
+		 */
 		public int getNumberOfAttributes(){
 			return tableSchema.size();
 		}
 		
+		/**
+		 * 
+		 * @param index
+		 * @return Il riferimento della colonna
+		 */
 		public Column getColumn(int index){
 			return tableSchema.get(index);
 		}

@@ -1,5 +1,10 @@
 package database;
 
+/**
+ * 
+ * Modella la restituzione di un resultset vuoto
+ *
+ */
 public class EmptySetException extends Exception {
 	
 	private String message;

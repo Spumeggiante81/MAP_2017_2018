@@ -45,6 +45,7 @@ public class MainTest {
 				case 1:
 					try {
 						KMeansMiner kmeans=learningFromFile();
+						System.out.println("K: " + kmeans);
 						System.out.println(kmeans.getC().toString(new Data("playtennis")));
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
@@ -53,10 +54,8 @@ public class MainTest {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (DatabaseConnectionException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					break;
