@@ -85,12 +85,9 @@ public class TableData
 	 * @return valore aggregato
 	 * @throws SQLException
 	 * @throws NoValueException
-	 * 
-	 * TODO : sistemare il metodo. ad occhio PARE non faccia quanto richiesto nelle specifiche
 	 */
 	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException,NoValueException{
 		Statement statement;
-		TableSchema tSchema=new TableSchema(db,table);
 		Object value=null;
 		String aggregateOp="";
 		
@@ -130,7 +127,7 @@ public class TableData
     public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
         Set<Object> valueSet = new TreeSet<Object>();
         Statement statement;
-        TableSchema tSchema = new TableSchema(db, table);
+        //TableSchema tSchema = new TableSchema(db, table);
 
 
         String query = "select distinct ";
