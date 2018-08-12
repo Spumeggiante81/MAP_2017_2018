@@ -17,8 +17,9 @@ public class KMeansMiner {
 	/**
 	 * Costruttore della classe
 	 * @param k numero di Cluster da ricavare
+	 * @throws OutOfRangeSampleSize 
 	 */
-	public KMeansMiner (int k){ 
+	public KMeansMiner (int k) throws OutOfRangeSampleSize{ 
 		this.C = new ClusterSet (k);
 	}
 	

@@ -18,37 +18,7 @@ import database.TableData;
 
 
 public class Data {
-	/*
-	class Example implements Comparable<Example>{
-		private List<Object> example;
-		
-		Example() {
-			example = new ArrayList<Object>();
-		}
-		
-		void add(Object o){
-			example.add(o);
-		}
-		
-		Object get(int i){
-			return example.get(i);
-		}
 
-		@Override
-		public int compareTo(Example ex) {
-			return (example.equals(ex) == true) ? 0 : -1;
-		}
-		
-		public String toString(){
-			String result = "";
-			
-			result += example.stream()
-					.findAny();
-			return result;
-		}
-	}
-	*/
-	
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples; //numero di righe in data 
 	private List<Attribute> explanatorySet = new LinkedList<Attribute>();
@@ -69,11 +39,13 @@ public class Data {
 		String playTennisValues[] = {"no", "yes"};
 		explanatorySet.add(new DiscreteAttribute("PlayTennis", 4, playTennisValues));
         
-		TreeSet<Example> tempData = new TreeSet<Example>();
+		//definisco db per poter eseguire l'accesso al database, e la variabile td, quale consente di gestire una data tabella nel database selezionato
         DbAccess db = new DbAccess();
         TableData td = new TableData(db);
 
+        //effettuo la connessione col database
         db.initConnection();
+        //ricavo la lista delle tuple presenti nella tabella "table" all'interno del database
         data = new ArrayList<Example>(td.getTransazioni(table));
         numberOfExamples = data.size();
 	}

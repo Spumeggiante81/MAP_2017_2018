@@ -36,11 +36,12 @@ public class TableData
 	public List<Example> getTransazioni(String table) throws SQLException{
 		LinkedList<Example> transSet = new LinkedList<Example>();
 		Statement statement;
+		//ricavo la struttura della tabella desiderata
 		TableSchema tSchema=new TableSchema(db,table);
 		
 		
 		String query="select ";
-		
+		//per ogni attributo (colonna) della tabella, aggiungo il relativo nome alla query
 		for(int i=0;i<tSchema.getNumberOfAttributes();i++){
 			Column c=tSchema.getColumn(i);
 			if(i>0)
@@ -50,16 +51,20 @@ public class TableData
 		if(tSchema.getNumberOfAttributes()==0)
 			throw new SQLException();
 		query += (" FROM "+table);
-		
+		//accedo al db
 		statement = db.getConnection().createStatement();
+		//eseguo la query, e tramite il ResultSet (quale funge quasi da iteratore) scandisco i risultati ricavati dalla query
 		ResultSet rs = statement.executeQuery(query);
 		while (rs.next()) {
+			//definisco la variabile quale definirà una tupla, ottenuta come risultato della query
 			Example currentTuple=new Example();
+			//per ogni colonna, verifico se sia di tipo Stringa o numerica, così da ricavare il valore in esso definito
 			for(int i=0;i<tSchema.getNumberOfAttributes();i++)
 				if(tSchema.getColumn(i).isNumber())
 					currentTuple.add(rs.getDouble(i+1));
 				else
 					currentTuple.add(rs.getString(i+1));
+			//dopo aver ricavato i dati della tupla, quest'ultima viene depositata in una LinkedList, quale sarà l'output del metodo
 			transSet.add(currentTuple);
 		}
 		rs.close();
@@ -71,7 +76,18 @@ public class TableData
 
 	}
 
-	
+	/**
+	 * Formula ed esegue una interrogazione SQL per estrarre il valore aggregato (valore minimo o valore massimo) 
+	 * cercato nella colonna di nome column della tabella di nome table
+	 * @param table nome della tabella da analizzare
+	 * @param column nome della colonna 
+	 * @param aggregate tipo di aggregazione(min / max)
+	 * @return valore aggregato
+	 * @throws SQLException
+	 * @throws NoValueException
+	 * 
+	 * TODO : sistemare il metodo. ad occhio PARE non faccia quanto richiesto nelle specifiche
+	 */
 	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException,NoValueException{
 		Statement statement;
 		TableSchema tSchema=new TableSchema(db,table);

@@ -48,15 +48,17 @@ public class MainTest {
 						System.out.println("K: " + kmeans);
 						System.out.println(kmeans.getC().toString(new Data("playtennis")));
 					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
+						System.err.println(e1.getMessage());
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						System.err.println(e1.getMessage());
 					} catch (ClassNotFoundException e1) {
-						e1.printStackTrace();
+						System.err.println(e1.getMessage());
 					} catch (DatabaseConnectionException e) {
-						e.printStackTrace();
+						System.err.println(e.getMessage());
+						System.err.println("Termine esecuzione programma");
+						System.exit(0);
 					} catch (SQLException e) {
-						e.printStackTrace();
+						System.err.println(e.getMessage());
 					}
 					break;
 				case 2:
@@ -66,12 +68,12 @@ public class MainTest {
 					System.out.println(data);
 					char answer='y';
 					do{
-						int k=1;
-						System.out.print("Inserisci k:");
-						k=Keyboard.readInt();
-						KMeansMiner kmeans=new KMeansMiner(k);
 						try
 						{
+							int k=1;
+							System.out.print("Inserisci k:");
+							k=Keyboard.readInt();
+							KMeansMiner kmeans=new KMeansMiner(k);
 							int numIter=kmeans.kmeans(data);
 							System.out.println("Numero di Iterazione:"+numIter);
 							System.out.println(kmeans.getC().toString(data));
@@ -93,7 +95,7 @@ public class MainTest {
 						}
 						catch(OutOfRangeSampleSize e)
 						{
-							System.out.println(e.getMessage());
+							System.err.println(e.getMessage());
 						}
 						System.out.print("Vuoi ripetere l'esecuzione?(y/n)");
 						answer=Keyboard.readChar();
@@ -101,14 +103,16 @@ public class MainTest {
 					while(answer=='y');
 				} catch (DatabaseConnectionException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.err.println(e1.getMessage());
+					System.err.println("Termine esecuzione programma");
+					System.exit(0);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.err.println(e1.getMessage());
 				}
 					break;
 				default:
-					System.out.println("Opzione non valida!");
+					System.err.println("Opzione non valida!");
 		
 			}
 			
