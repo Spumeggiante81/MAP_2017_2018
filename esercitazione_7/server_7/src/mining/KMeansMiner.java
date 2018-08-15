@@ -41,7 +41,7 @@ public class KMeansMiner {
 	 * @throws IOException
 	 */
     public void salva(String fileName) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName+".dmp"));
         out.writeObject(C);
         out.close();
     }

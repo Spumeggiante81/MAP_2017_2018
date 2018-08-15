@@ -77,6 +77,9 @@ class ServerOneClient extends Thread {
                     case 2: // STORE IN FILE
                     	storeClusterInFile(socket);
                         break;
+                    case 3: //LEARNING FROM FILE
+                    	learningFromFile(socket);
+                    	break;
                     default:
                        	// Nel caso venga selezionata un'operazione non supportata, si esce
                         break;
@@ -160,6 +163,33 @@ class ServerOneClient extends Thread {
     	}
     	catch(IOException e){
     		writeObject(socket, e.getMessage());
+    	}
+    }
+    /**
+     * Ricava i cluster all'interno del file specificato dal client, e glieli rimanda
+     * @param socket
+     * @throws IOException
+     */
+    private void learningFromFile(Socket socket) throws IOException{
+		try{
+			String tableName = (String)readObject(socket);
+			String fileName = (String)readObject(socket);
+			data = new Data(tableName);
+			kmeans = new KMeansMiner(fileName + ".dmp");
+			writeObject(socket,"OK");
+			writeObject(socket,kmeans.getC().toString(data));
+		}
+    	catch(IOException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(ClassNotFoundException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(DatabaseConnectionException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(SQLException e){
+    		writeObject(socket,e.getMessage());
     	}
     }
 }
