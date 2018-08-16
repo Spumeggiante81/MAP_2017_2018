@@ -165,6 +165,7 @@ class ServerOneClient extends Thread {
     		writeObject(socket, e.getMessage());
     	}
     }
+    
     /**
      * Ricava i cluster all'interno del file specificato dal client, e glieli rimanda
      * @param socket

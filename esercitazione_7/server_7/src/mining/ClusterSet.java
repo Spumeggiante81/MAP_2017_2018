@@ -26,7 +26,7 @@ public class ClusterSet implements Serializable {
 			Arrays.fill(C, null);
 		}
 		catch(NegativeArraySizeException e){
-			throw new OutOfRangeSampleSize ("k deve essere di tipo intero");
+			throw new OutOfRangeSampleSize ("k deve essere un intero positivo");
 		}
 	}
 	

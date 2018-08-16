@@ -18,10 +18,6 @@ public class MainTest {
 	 */
 	private static String DEFAULT_HOST = "localhost";
 	private static int DEFAULT_PORT = 8080;
-	/*
-	private ObjectOutputStream out;
-	private ObjectInputStream in ;
-	*/
 	Socket socket;
 	
 	public MainTest(String ip, int port) throws IOException{
@@ -29,11 +25,6 @@ public class MainTest {
 		System.out.println("addr = " + addr);
 		socket = new Socket(addr, port); //Port
 		System.out.println(socket);
-		
-		/*
-		out = new ObjectOutputStream(socket.getOutputStream());
-		in = new ObjectInputStream(socket.getInputStream());
-		*/
 	}
 	
     /**
@@ -72,9 +63,17 @@ public class MainTest {
 		}
 		while(answer<=0 || answer>2);
 		return answer;
-		
 	}
 	
+	/**
+	 * Ricava i cluster all'interno di uno specifico file, definito dall'utente, indicando inoltre
+	 * la tabella da cui reperire la collezione di dati a cui è riferita.
+	 * @return stampa dei cluster presenti nel file
+	 * @throws SocketException
+	 * @throws ServerException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private String learningFromFile() throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,3);
 		System.out.print("Nome tabella:");
@@ -87,8 +86,15 @@ public class MainTest {
 		if(result.equals("OK"))
 			return (String)readObject(socket);
 		else throw new ServerException(result);
-		
 	}
+	
+	/**
+	 * Ricava la collezione di dati, su cui eseguire il calcolo dei cluster, tramite il db
+	 * @throws SocketException
+	 * @throws ServerException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void storeTableFromDb() throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,0);
 		System.out.print("Nome tabella:");
@@ -97,8 +103,16 @@ public class MainTest {
 		String result = (String)readObject(socket);
 		if(!result.equals("OK"))
 			throw new ServerException(result);
-		
 	}
+	
+	/**
+	 * Effettua il calcolo dei cluster sulla collezione di dati ricavata dal server
+	 * @return stampa dei cluster rilevati
+	 * @throws SocketException
+	 * @throws ServerException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private String learningFromDbTable() throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,1);
 		System.out.print("Numero di cluster:");
@@ -110,10 +124,15 @@ public class MainTest {
 			return (String)readObject(socket);
 		}
 		else throw new ServerException(result);
-		
-		
 	}
 	
+	/**
+	 * Deposita il cluster all'interno di un file. Tale file sarà depositato su lato Server
+	 * @throws SocketException
+	 * @throws ServerException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void storeClusterInFile() throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,2);
 		System.out.println("Nome File in cui salvare i cluster ricavati:");
@@ -122,15 +141,23 @@ public class MainTest {
 		String result = (String)readObject(socket);
 		if(!result.equals("OK"))
 			 throw new ServerException(result);
-		
 	}
-	public static void main(String[] args) {
-		/*
-		String ip=args[0];
-		int port=new Integer(args[1]).intValue();
-		*/
-		String ip = DEFAULT_HOST;
-		int port = DEFAULT_PORT;
+	
+	public static void main(String[] args){
+		String ip;
+		int port;
+		System.out.println("Impostare manualmente indirizzo / porta comunicazione?(y/n)");
+		char answer = Keyboard.readChar();
+		if (answer == 'y'){
+			System.out.println("Inserire indirizzo:");
+			ip = Keyboard.readString();
+			System.out.println("Inserire porta:");
+			port = Keyboard.readInt();
+		}
+		else{
+			ip = DEFAULT_HOST;
+			port = DEFAULT_PORT;
+		}
 		MainTest main=null;
 		try{
 			main=new MainTest(ip,port);
@@ -141,8 +168,7 @@ public class MainTest {
 		}
 		do{
 			int menuAnswer=main.menu();
-			switch(menuAnswer)
-			{
+			switch(menuAnswer){
 				case 1:
 					try {
 						String kmeans=main.learningFromFile();
@@ -168,6 +194,7 @@ public class MainTest {
 					break;
 				case 2: // learning from db
 				
+					answer='y';//itera per learning al variare di k
 					while(true){
 						try{
 							main.storeTableFromDb();
@@ -178,11 +205,7 @@ public class MainTest {
 							System.err.println(e);
 							return;
 						}
-						catch (FileNotFoundException e) {
-							System.err.println(e);
-							return;
-							
-						} catch (IOException e) {
+						catch (IOException e) {
 							System.err.println(e);
 							return;
 						} catch (ClassNotFoundException e) {
@@ -191,13 +214,13 @@ public class MainTest {
 						}
 						catch (ServerException e) {
 							System.err.println(e.getMessage());
+							answer = 'n';
+							break;
 						}
 					} //end while [viene fuori dal while con un db (in alternativa il programma termina)
 						
-					char answer='y';//itera per learning al variare di k
-					do{
-						try
-						{
+					while(answer == 'y'){
+						try{
 							String clusterSet=main.learningFromDbTable();
 							System.out.println(clusterSet);
 							
@@ -225,7 +248,6 @@ public class MainTest {
 						System.out.print("Vuoi ripetere l'esecuzione?(y/n)");
 						answer=Keyboard.readChar();
 					}
-					while(answer=='y');
 					break; //fine case 2
 					default:
 					System.out.println("Opzione non valida!");

@@ -35,7 +35,7 @@ public class DbAccess {
             e.printStackTrace();
         }*/ catch (Exception e) {
             //e.printStackTrace();
-            throw new DatabaseConnectionException(e.getMessage());
+            throw new DatabaseConnectionException("Impossibile connettersi con il database:\n"+e.getMessage());
         }
 
     }

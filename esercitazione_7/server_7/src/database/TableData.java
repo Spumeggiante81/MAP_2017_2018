@@ -49,7 +49,7 @@ public class TableData
 			query += c.getColumnName();
 		}
 		if(tSchema.getNumberOfAttributes()==0)
-			throw new SQLException();
+			throw new SQLException("Tabella vuota o non presente del database");
 		query += (" FROM "+table);
 		//accedo al db
 		statement = db.getConnection().createStatement();
