@@ -22,104 +22,104 @@ public class Data {
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples; //numero di righe in data 
 	private List<Attribute> explanatorySet = new LinkedList<Attribute>();
-	
+
 	public Data(String table) throws DatabaseConnectionException, SQLException{
-		
+
 		String outLookValues[] = {"sunny", "overcast", "rain"};
 		explanatorySet.add(new DiscreteAttribute("Outlook", 0, outLookValues));
-		
+
 		explanatorySet.add(new ContinuosAttribute("Temperature", 1, 3.2, 38.7)); 
-		
+
 		String humidityValues[] = {"high", "normal"};
 		explanatorySet.add(new DiscreteAttribute("Humidity", 2, humidityValues));
-		
+
 		String windValues[] = {"weak", "strong"};
 		explanatorySet.add(new DiscreteAttribute("Wind", 3, windValues));
-		
+
 		String playTennisValues[] = {"no", "yes"};
 		explanatorySet.add(new DiscreteAttribute("PlayTennis", 4, playTennisValues));
-        
-		//definisco db per poter eseguire l'accesso al database, e la variabile td, quale consente di gestire una data tabella nel database selezionato
-        DbAccess db = new DbAccess();
-        TableData td = new TableData(db);
 
-        //effettuo la connessione col database
-        db.initConnection();
-        //ricavo la lista delle tuple presenti nella tabella "table" all'interno del database
-        data = new ArrayList<Example>(td.getTransazioni(table));
-        numberOfExamples = data.size();
+		//definisco db per poter eseguire l'accesso al database, e la variabile td, quale consente di gestire una data tabella nel database selezionato
+		DbAccess db = new DbAccess();
+		TableData td = new TableData(db);
+
+		//effettuo la connessione col database
+		db.initConnection();
+		//ricavo la lista delle tuple presenti nella tabella "table" all'interno del database
+		data = new ArrayList<Example>(td.getTransazioni(table));
+		numberOfExamples = data.size();
 	}
 	/**
 	 * Indica il numero di transazioni (tuple) presenti nella collezione in analisi
 	 * @return numero di transazioni (tuple)
 	 */
-      public int getNumberOfExamples() {
-    	  return numberOfExamples; 
-       }
-       
-       /**
-        * restutuisce il numero di attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
-        * @return numero di attributi 
-        */
-      public int getNumberOfExplanatoryAttributes() {
-    	  return explanatorySet.size();
-    	   
-       }
-       
-       Attribute getAttribute(int index){
-    	   return explanatorySet.get(index);
-       }
+	public int getNumberOfExamples() {
+		return numberOfExamples; 
+	}
 
-       /**
-        * Restituisce lo schema degli attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
-        * @return schema degli attributi
-        */
-       Attribute[] getAttributeSchema(){
-    	   return (Attribute[]) explanatorySet.toArray();
-       }
-       /**
-        * Ritorna il valore riportato nella transazione in posizione "exampleIndex" e riportato all'interno dell'attributo con indice "attributeIndex" presente
-        * nella collezione in analisi
-        * @param exampleIndex posizione della transazione (tupla) all'interno di cui si vuole ricavare il valore desiderato
-        * @param attributeIndex indice dell'attributo quale definisce il valore desiderato
-        * @return
-        */
-       public Object getAttributeValue(int exampleIndex, int attributeIndex) {
+	/**
+	 * restutuisce il numero di attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
+	 * @return numero di attributi 
+	 */
+	public int getNumberOfExplanatoryAttributes() {
+		return explanatorySet.size();
+
+	}
+
+	Attribute getAttribute(int index){
+		return explanatorySet.get(index);
+	}
+
+	/**
+	 * Restituisce lo schema degli attributi quali definiscono le transazioni (tuple) presenti nella collezione in analisi
+	 * @return schema degli attributi
+	 */
+	Attribute[] getAttributeSchema(){
+		return (Attribute[]) explanatorySet.toArray();
+	}
+	/**
+	 * Ritorna il valore riportato nella transazione in posizione "exampleIndex" e riportato all'interno dell'attributo con indice "attributeIndex" presente
+	 * nella collezione in analisi
+	 * @param exampleIndex posizione della transazione (tupla) all'interno di cui si vuole ricavare il valore desiderato
+	 * @param attributeIndex indice dell'attributo quale definisce il valore desiderato
+	 * @return
+	 */
+	public Object getAttributeValue(int exampleIndex, int attributeIndex) {
 		Example example = data.get(exampleIndex);
 		return example.get(attributeIndex);
-       }
-       
-       /**
-        * Ritorna in formato String tutti dati presenti all'interno della collezione in analisi
-        */
-       public String toString() {
-    	   //incomincio definendo una stringa "vuota" ( qualora la collezione sia vuota)
-    	   String string = "";
-   			//inizio a ciclare per ogni tupla presente all'interno della collezione
-   			for (int i = 0; i < numberOfExamples; i++){
-   				//riporto la posizione della tupla nella collezione
-   				string += (i+1) +":";
-   				//inizio a ciclare per ogni attributo quali descrivono la tupla
-   				//for (int j = 0; j < this.getNumberOfExplanatoryAttributes(); j++){ this inutile
-   				for (int j = 0; j < getNumberOfExplanatoryAttributes(); j++){
-   					//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
-   					//e lo concateno a tutti gli altri presenti nella stessa tupla
-   					//CONCATENAZIONE SEPARATA PER NON STAMPARE LA VIRGOLA A FINE RIGA
-   					//string += this.getAttributeValue(i,j).toString(); this inutile
-   					string += getAttributeValue(i,j).toString();
-   					//if(j<this.getNumberOfExplanatoryAttributes()-1) this inutile
-   					if(j<getNumberOfExplanatoryAttributes()-1)
-   					  string +=  ",";
-   				}
-   				//terminati gli attributi, termino la riga quale definisce la tupla in posizione i-esima e passo alla tupla successiva, qualora ce ne siano altre,
-   				//altrimenti la funzione restituisce la stringa ricavata
-   				string += "\n";
-   			}
-   			return string;
-       }
-       
-   	
-	
+	}
+
+	/**
+	 * Ritorna in formato String tutti dati presenti all'interno della collezione in analisi
+	 */
+	public String toString() {
+		//incomincio definendo una stringa "vuota" ( qualora la collezione sia vuota)
+		String string = "";
+		//inizio a ciclare per ogni tupla presente all'interno della collezione
+		for (int i = 0; i < numberOfExamples; i++){
+			//riporto la posizione della tupla nella collezione
+			string += (i+1) +":";
+			//inizio a ciclare per ogni attributo quali descrivono la tupla
+			//for (int j = 0; j < this.getNumberOfExplanatoryAttributes(); j++){ this inutile
+			for (int j = 0; j < getNumberOfExplanatoryAttributes(); j++){
+				//per ogni attributo con indice "j", ricavo il valore assocciato presente nella tupla in posizione "i-esima", 
+				//e lo concateno a tutti gli altri presenti nella stessa tupla
+				//CONCATENAZIONE SEPARATA PER NON STAMPARE LA VIRGOLA A FINE RIGA
+				//string += this.getAttributeValue(i,j).toString(); this inutile
+				string += getAttributeValue(i,j).toString();
+				//if(j<this.getNumberOfExplanatoryAttributes()-1) this inutile
+				if(j<getNumberOfExplanatoryAttributes()-1)
+					string +=  ",";
+			}
+			//terminati gli attributi, termino la riga quale definisce la tupla in posizione i-esima e passo alla tupla successiva, qualora ce ne siano altre,
+			//altrimenti la funzione restituisce la stringa ricavata
+			string += "\n";
+		}
+		return string;
+	}
+
+
+
 	/**
 	 * 
 	 * @param k numero di cluster da generare
@@ -155,7 +155,7 @@ public class Data {
 		}
 		return centroidIndexes;
 	}
-	
+
 	/**
 	 * 
 	 * @param i indice di riga dell'insieme Data
@@ -163,9 +163,9 @@ public class Data {
 	 * @return restituisce vero se le due righe di data contengono gli stessi valori, falso altrimenti
 	 */
 	private boolean compare(int i, int j)  {  
-		 return (this.getItemSet(i).getDistance(this.getItemSet(j)) == 0); 
+		return (this.getItemSet(i).getDistance(this.getItemSet(j)) == 0); 
 	}  
-	
+
 	public Object computePrototype(Set<Integer> idList, Attribute attribute) {
 		if (attribute instanceof DiscreteAttribute)
 			return computePrototype(idList, (DiscreteAttribute) attribute);
@@ -227,16 +227,16 @@ public class Data {
 		}
 		return tot/arraySet.length;
 	}
-	
-	
-	
+
+
+
 	/**
-   	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
-   	 * la iesima riga in data
-   	 * @param index indice di riga
-   	 * @return
-   	 */
-       
+	 * Crea e restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore 
+	 * la iesima riga in data
+	 * @param index indice di riga
+	 * @return
+	 */
+
 	public Tuple getItemSet(int index) {
 		Tuple tuple=new Tuple(getNumberOfExplanatoryAttributes());
 		for(int i=0;i<getNumberOfExplanatoryAttributes();i++)
@@ -246,7 +246,7 @@ public class Data {
 				tuple.add(new ContinuosItem((ContinuosAttribute) getAttribute(i),(double) getAttributeValue(index, i)), i);
 		return tuple;
 	}
-	
-	
+
+
 }
 

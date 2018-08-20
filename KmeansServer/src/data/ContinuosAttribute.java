@@ -7,8 +7,8 @@ class ContinuosAttribute extends Attribute
 {
 	private double max; 
 	private double min;  
-	 
-	
+
+
 	/**
 	 * Costruttore della classe; Oltre a definirne il nome e l'indice, esso conterrà un intervallo [min,max] quale definisce
 	 * il dominio dei valori quali rappresentano tale attributo continuo (ergo, i valori accettabili)
@@ -28,7 +28,7 @@ class ContinuosAttribute extends Attribute
 	 * rappresentano gli estremi dell'intervallo di valori che l'attributo può realmente assumere
 	 * @return valore normalizzato 
 	 */
-    double getScaledValue(double v) {
-    	return(v-min)/(max-min);  
-    }
+	double getScaledValue(double v) {
+		return(v-min)/(max-min);  
+	}
 }

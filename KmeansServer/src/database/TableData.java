@@ -18,28 +18,28 @@ import database.TableSchema.Column;
 public class TableData 
 {
 	private DbAccess db;
-	
-    /**
-     * Inizializzazione
-     * @param db specifica un databsae
-     */
-    public TableData(DbAccess db) {
-        this.db = db;
-    }
-	
-    /**
-     * Restituisce una lista di Tuple (o esempi) presenti nella tabella specificata come parametro
-     * @param table nome della tabella da cui ricavare gli esempi
-     * @return lista di tuple (o esempi)
-     * @throws SQLException
-     */
+
+	/**
+	 * Inizializzazione
+	 * @param db specifica un databsae
+	 */
+	public TableData(DbAccess db) {
+		this.db = db;
+	}
+
+	/**
+	 * Restituisce una lista di Tuple (o esempi) presenti nella tabella specificata come parametro
+	 * @param table nome della tabella da cui ricavare gli esempi
+	 * @return lista di tuple (o esempi)
+	 * @throws SQLException
+	 */
 	public List<Example> getTransazioni(String table) throws SQLException{
 		LinkedList<Example> transSet = new LinkedList<Example>();
 		Statement statement;
 		//ricavo la struttura della tabella desiderata
 		TableSchema tSchema=new TableSchema(db,table);
-		
-		
+
+
 		String query="select ";
 		//per ogni attributo (colonna) della tabella, aggiungo il relativo nome alla query
 		for(int i=0;i<tSchema.getNumberOfAttributes();i++){
@@ -70,8 +70,8 @@ public class TableData
 		rs.close();
 		statement.close();
 
-		
-		
+
+
 		return transSet;
 
 	}
@@ -90,67 +90,67 @@ public class TableData
 		Statement statement;
 		Object value=null;
 		String aggregateOp="";
-		
+
 		String query="select ";
 		if(aggregate==QUERY_TYPE.MAX)
 			aggregateOp+="max";
 		else
 			aggregateOp+="min";
 		query+=aggregateOp+"("+column.getColumnName()+ ") FROM "+table;
-		
-		
+
+
 		statement = db.getConnection().createStatement();
 		ResultSet rs = statement.executeQuery(query);
 		if (rs.next()) {
-				if(column.isNumber())
-					value=rs.getDouble(1);
-				else
-					value=rs.getString(1);
-			
+			if(column.isNumber())
+				value=rs.getDouble(1);
+			else
+				value=rs.getString(1);
+
 		}
 		rs.close();
 		statement.close();
 		if(value==null)
 			throw new NoValueException("No " + aggregateOp+ " on "+ column.getColumnName());
-			
+
 		return value;
 
 	}
-	
-	 /**
-     * Ottiene un insieme di oggetti rappresentanti le colonne
-     * @param table tabella la quale estrarre le informazioni
-     * @param column colonna da specificare
-     * @return insieme di oggetti
-     * @throws SQLException se la connessione col database fallisce
-     */
-    public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
-        Set<Object> valueSet = new TreeSet<Object>();
-        Statement statement;
-        //TableSchema tSchema = new TableSchema(db, table);
+
+	/**
+	 * Ottiene un insieme di oggetti rappresentanti le colonne
+	 * @param table tabella la quale estrarre le informazioni
+	 * @param column colonna da specificare
+	 * @return insieme di oggetti
+	 * @throws SQLException se la connessione col database fallisce
+	 */
+	public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
+		Set<Object> valueSet = new TreeSet<Object>();
+		Statement statement;
+		//TableSchema tSchema = new TableSchema(db, table);
 
 
-        String query = "select distinct ";
+		String query = "select distinct ";
 
-        query += column.getColumnName();
+		query += column.getColumnName();
 
-        query += (" FROM " + table);
+		query += (" FROM " + table);
 
-        query += (" ORDER BY " + column.getColumnName());
+		query += (" ORDER BY " + column.getColumnName());
 
 
-        statement = db.getConnection().createStatement();
-        ResultSet rs = statement.executeQuery(query);
-        while (rs.next()) {
-            if (column.isNumber())
-                valueSet.add(rs.getDouble(1));
-            else
-                valueSet.add(rs.getString(1));
+		statement = db.getConnection().createStatement();
+		ResultSet rs = statement.executeQuery(query);
+		while (rs.next()) {
+			if (column.isNumber())
+				valueSet.add(rs.getDouble(1));
+			else
+				valueSet.add(rs.getString(1));
 
-        }
-        rs.close();
-        statement.close();
+		}
+		rs.close();
+		statement.close();
 
-        return valueSet;
-    }
+		return valueSet;
+	}
 }

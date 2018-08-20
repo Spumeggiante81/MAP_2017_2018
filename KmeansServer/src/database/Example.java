@@ -16,7 +16,7 @@ public class Example implements Comparable<Example>{
 	public void add(Object o){
 		example.add(o);
 	}
-	
+
 	/**
 	 * 
 	 * @param i
@@ -25,9 +25,9 @@ public class Example implements Comparable<Example>{
 	public Object get(int i){
 		return example.get(i);
 	}
-	
+
 	public int compareTo(Example ex) {
-		
+
 		int i=0;
 		for(Object o:ex.example){
 			if(!o.equals(this.example.get(i)))
@@ -36,7 +36,7 @@ public class Example implements Comparable<Example>{
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Restituisce una stringa
 	 */
@@ -46,5 +46,5 @@ public class Example implements Comparable<Example>{
 			str+=o.toString()+ " ";
 		return str;
 	}
-	
+
 }

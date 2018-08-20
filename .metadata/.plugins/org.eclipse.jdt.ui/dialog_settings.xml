@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\server_7\bin\server" key="org.eclipse.jdt.ui.last.external.project"/>
+	<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\server_7" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\server_7" key="org.eclipse.jdt.ui.last.external.project"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -12,6 +13,9 @@
 	</section>
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

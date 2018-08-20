@@ -2,7 +2,7 @@ package data;
 
 public class DiscreteAttribute extends Attribute {
 	String values[]; //array di oggetti String uno per ciascun valore del dominio discreto
-	
+
 	/**
 	 * Costruttore della classe; Oltre a definirne il nome e l'indice, esso conterrà una serie di valori "discreti" quali definiscono
 	 * il dominio di tale attributo discreto (ergo, i valori accettabili)
@@ -22,7 +22,7 @@ public class DiscreteAttribute extends Attribute {
 	int getNumberOfDistinctValues() {
 		return values.length;
 	}
-	
+
 	/**
 	 * restituisce un valore nella i-esima posizione
 	 * @param i posizione del valore discreto contenuto all'interno dell'attributo in analisi

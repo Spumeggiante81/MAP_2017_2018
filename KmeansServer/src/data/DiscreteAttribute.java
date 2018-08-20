@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	private Set<String> values;
-	
+
 	/**
 	 * Costruttore della classe; Oltre a definirne il nome e l'indice, esso conterrà una serie di valori "discreti" quali definiscono
 	 * il dominio di tale attributo discreto (ergo, i valori accettabili)
@@ -30,7 +30,7 @@ public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	int getNumberOfDistinctValues() {
 		return values.size();
 	}
-	
+
 	/**
 	 * Calcola la frequenza di un dato valore (v) con quelli presenti nelle tuple definite nel set di id (idList). 
 	 * In particolare, viene confrontato con i valori associati allo stesso attributo in analisi.
@@ -69,5 +69,5 @@ public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	public Iterator<String> iterator() {
 		return values.iterator();
 	}
-	
+
 }

@@ -5,13 +5,13 @@ package database;
  */
 class NoValueException extends Exception {
 
-    private String message;
+	private String message;
 
-    NoValueException(String message) {
-        this.message = message;
-    }
+	NoValueException(String message) {
+		this.message = message;
+	}
 
-    public String getMessage() {
-        return this.message;
-    }
+	public String getMessage() {
+		return this.message;
+	}
 }

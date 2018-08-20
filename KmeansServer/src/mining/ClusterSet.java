@@ -12,9 +12,9 @@ public class ClusterSet implements Serializable {
 	private Cluster[] C;
 	private int i = 0; //indica la posizione per memorizzare un nuovo cluster in C
 	//private ArraySet a;
-	
+
 	//Metodi
-	
+
 	/**
 	 * Costruttore della classe
 	 * @throws OutOfRangeSampleSize 
@@ -29,17 +29,17 @@ public class ClusterSet implements Serializable {
 			throw new OutOfRangeSampleSize ("k deve essere un intero positivo");
 		}
 	}
-	
+
 	/**
 	 * Asseggna c a C[i]
 	 * Incrementa i
 	 * @param c
 	 */
 	void add(Cluster c){
-			C[i]=c;
-			i++;
-		} 
-	
+		C[i]=c;
+		i++;
+	} 
+
 	/**
 	 * Restituisce C[i]
 	 * @param i
@@ -48,7 +48,7 @@ public class ClusterSet implements Serializable {
 	Cluster get(int i){
 		return C[i];
 	}
-	
+
 	/**
 	 * Sceglie i centroidi, crea un cluster per ogni centroide e lo memorizza in C(ClusterSet)
 	 * @param data
@@ -61,7 +61,7 @@ public class ClusterSet implements Serializable {
 			this.add(new Cluster(centroidI));//memorizza il centroide
 		}
 	}
-	
+
 	/**
 	 * Logica usata
 	 * volevo associare a distanza un valore massimo in modo ciclando si sarebbe aggiornato con il valore minimo
@@ -93,11 +93,11 @@ public class ClusterSet implements Serializable {
 				C = this.get(i);
 				nearestDistance = distance;
 			}
-				
+
 		}
 		return C;
 	}
-	
+
 	/**
 	 * Identifica e restituisce il cluster a cui la tupla rappresentante l'esempio identificato da id
 	 * Restituisce null se la tupla non è inclusa in nessun cluster
@@ -105,14 +105,14 @@ public class ClusterSet implements Serializable {
 	 * @return
 	 */
 	public Cluster currentCluster(int id){
-	    for(int i=0;i<this.i;i++) 
-	    {
-	    	if(C[i].contain(id)) 
-	    		//C[i] è il riferimento del mio vettore di cluster
-	    		//contain della classe Cluster verifica se la transazione è presente
-	    		//restituisce il cluster [i] corrispondente
-	    		return C[i];
-	    }
+		for(int i=0;i<this.i;i++) 
+		{
+			if(C[i].contain(id)) 
+				//C[i] è il riferimento del mio vettore di cluster
+				//contain della classe Cluster verifica se la transazione è presente
+				//restituisce il cluster [i] corrispondente
+				return C[i];
+		}
 		return null;//restituisce null
 	}
 
@@ -133,7 +133,7 @@ public class ClusterSet implements Serializable {
 	 */
 	public String toString(Data data) {
 		String str="";
-		
+
 		for(int i=0;i<C.length;i++){
 			if(C[i]!=null){
 				str+=i+":"+C[i].toString(data)+"\n";

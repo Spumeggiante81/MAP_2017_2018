@@ -22,30 +22,30 @@ public class KMeansMiner {
 	public KMeansMiner (int k) throws OutOfRangeSampleSize{ 
 		this.C = new ClusterSet (k);
 	}
-	
-    /**
-     * Carica il ClusterSet depositato sul file indicato come parametro
-     * @param fileName nome del file riferito al dato ClusterSet
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
+
+	/**
+	 * Carica il ClusterSet depositato sul file indicato come parametro
+	 * @param fileName nome del file riferito al dato ClusterSet
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public KMeansMiner (String fileName) throws IOException, ClassNotFoundException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
-        C = (ClusterSet) in.readObject();
-        in.close();
-    }
-	
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
+		C = (ClusterSet) in.readObject();
+		in.close();
+	}
+
 	/**
 	 * Salva il contenuto del ClusterSet in un file .dmp
 	 * @param fileName nome del file riferito al dato Cluster
 	 * @throws IOException
 	 */
-    public void salva(String fileName) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName+".dmp"));
-        out.writeObject(C);
-        out.close();
-    }
-	
+	public void salva(String fileName) throws IOException {
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName+".dmp"));
+		out.writeObject(C);
+		out.close();
+	}
+
 	/**
 	 * Ritorna il set di Cluster
 	 * @return
@@ -53,7 +53,7 @@ public class KMeansMiner {
 	public ClusterSet getC(){
 		return C;
 	}
-	
+
 	/**
 	 * esegue il calcolo dei Cluster, tramite l'algoritmo k-means
 	 * @param data Collezione di dati da cui ricavare le tuple
@@ -82,7 +82,7 @@ public class KMeansMiner {
 			}
 			//STEP 3
 			C.updateCentroids(data);
-				
+
 		}
 		while(changedCluster);
 		return numberOfIterations;

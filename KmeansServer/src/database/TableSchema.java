@@ -32,7 +32,7 @@ public class TableSchema {
 		}
 	}
 	List<Column> tableSchema=new ArrayList<Column>();
-	
+
 	public TableSchema(DbAccess db, String tableName) throws SQLException{
 		this.db=db;
 		HashMap<String,String> mapSQL_JAVATypes=new HashMap<String, String>();
@@ -46,50 +46,50 @@ public class TableSchema {
 		mapSQL_JAVATypes.put("LONG","number");
 		mapSQL_JAVATypes.put("FLOAT","number");
 		mapSQL_JAVATypes.put("DOUBLE","number");
-		
-		
-	
-		 Connection con=db.getConnection();
-		 DatabaseMetaData meta = con.getMetaData();
-	     ResultSet res = meta.getColumns(null, null, tableName, null);
-		   
-	     while (res.next()) {
-	         
-	         if(mapSQL_JAVATypes.containsKey(res.getString("TYPE_NAME")))
-	        		 tableSchema.add(new Column(
-	        				 res.getString("COLUMN_NAME"),
-	        				 mapSQL_JAVATypes.get(res.getString("TYPE_NAME")))
-	        				 );
-	
-	         
-	         
-	      }
-	      res.close();
-	
-	
-	    
-	    }
-	  
-		/**
-		 * 
-		 * @return Restituisce la dimensione della ???tabella???
-		 */
-		public int getNumberOfAttributes(){
-			return tableSchema.size();
-		}
-		
-		/**
-		 * 
-		 * @param index
-		 * @return Il riferimento della colonna
-		 */
-		public Column getColumn(int index){
-			return tableSchema.get(index);
-		}
 
-		
+
+
+		Connection con=db.getConnection();
+		DatabaseMetaData meta = con.getMetaData();
+		ResultSet res = meta.getColumns(null, null, tableName, null);
+
+		while (res.next()) {
+
+			if(mapSQL_JAVATypes.containsKey(res.getString("TYPE_NAME")))
+				tableSchema.add(new Column(
+						res.getString("COLUMN_NAME"),
+						mapSQL_JAVATypes.get(res.getString("TYPE_NAME")))
+						);
+
+
+
+		}
+		res.close();
+
+
+
 	}
 
-		     
+	/**
+	 * 
+	 * @return Restituisce la dimensione della ???tabella???
+	 */
+	public int getNumberOfAttributes(){
+		return tableSchema.size();
+	}
+
+	/**
+	 * 
+	 * @param index
+	 * @return Il riferimento della colonna
+	 */
+	public Column getColumn(int index){
+		return tableSchema.get(index);
+	}
+
+
+}
+
+
 
 

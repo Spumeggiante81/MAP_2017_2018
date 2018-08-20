@@ -7,7 +7,7 @@ import java.util.Set;
 public abstract class Item implements Serializable{
 	Attribute attribute;//attributo coinvolto nell'item
 	Object value;//valore assegnato all'attributo
-	
+
 	/**
 	 *Inizializza i valori dei membri attributo
 	 * 
@@ -19,7 +19,7 @@ public abstract class Item implements Serializable{
 		this.attribute=attribute;
 		this.value=value;
 	}
-	
+
 	/**
 	 * 
 	 * @return Restituisce attribute
@@ -28,7 +28,7 @@ public abstract class Item implements Serializable{
 	{
 		return attribute;
 	}
-	
+
 	/**
 	 * 
 	 * @return Restituisce value
@@ -37,7 +37,7 @@ public abstract class Item implements Serializable{
 	{
 		return value;
 	}
-	
+
 	/**
 	 * Overriding del metodo toString
 	 */
@@ -45,7 +45,7 @@ public abstract class Item implements Serializable{
 	{
 		return value.toString();
 	}
-	
+
 	public abstract double distance(Object a);
 
 	/**
@@ -57,8 +57,8 @@ public abstract class Item implements Serializable{
 		value = data.computePrototype(clusteredData, attribute);
 	}
 }	
-	
-	
-	
-	
+
+
+
+
 

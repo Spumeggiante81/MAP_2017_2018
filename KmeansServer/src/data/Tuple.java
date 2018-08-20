@@ -9,25 +9,25 @@ import java.io.Serializable;
  */
 public class Tuple implements Serializable{
 	private Item[] tuple;
-	
+
 	/**
 	 * Costruttore della classe tuple che ne definisce la dimensione
 	 * @param size numero di elementi che definiscono la tupla
 	 */
 	Tuple(int size){
 		tuple=new Item[size];
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @return restituisce il numero di tuple
 	 */
 	public int getLength(){
 		return tuple.length;
-		
+
 	}
-	
+
 	/**
 	 * Restituisce l'elemento Item nella i-esima posizione
 	 * @param i indice dell'elemento Item
@@ -36,8 +36,8 @@ public class Tuple implements Serializable{
 	public Item get(int i){
 		return  tuple[i];
 	}
-	
-	
+
+
 	/**
 	 * Determina la distanza fra la tupla riferita da obj e quella riferita da this
 	 * @param obj Tupla da confrontare con quello in analisi
@@ -64,7 +64,7 @@ public class Tuple implements Serializable{
 		}
 		return distance;
 	}
-	
+
 	/** 
 	 * Calcola la media delle distanze di tutte le tuple passati nel parametro
 	 * @param data collezione di dati da cui ricavare le tuple
@@ -74,7 +74,7 @@ public class Tuple implements Serializable{
 
 	public double avgDistance(Data data,int clusteredData[]){
 		double p=0.0, sumD=0.0;
-		
+
 		for(int i=0;i<clusteredData.length;i++)
 		{
 			double d=getDistance(data.getItemSet(clusteredData[i]));
@@ -91,8 +91,8 @@ public class Tuple implements Serializable{
 	 */
 	public void add(Item c, int i) {
 		tuple[i]=c;
-		
+
 	}
-	
+
 
 }

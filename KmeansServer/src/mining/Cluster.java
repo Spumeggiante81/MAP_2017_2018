@@ -13,7 +13,7 @@ public class Cluster implements Serializable{
 	private Tuple centroid;
 
 	private Set<Integer> clusteredData = new HashSet<Integer>(); 
-	
+
 	/**
 	 * Costruttore di classe
 	 * @param centroid
@@ -21,7 +21,7 @@ public class Cluster implements Serializable{
 	Cluster(Tuple centroid){
 		this.centroid=centroid;
 	}
-	
+
 	/**
 	 * Ricava il centroide del Cluster in analisi
 	 * @return
@@ -29,7 +29,7 @@ public class Cluster implements Serializable{
 	Tuple getCentroid(){
 		return centroid;
 	}
-	
+
 	/**
 	 * Modifica il centroide in base alle tuple ad esso associate
 	 * @param data Collezione di dati da cui ricavare le tuple
@@ -39,7 +39,7 @@ public class Cluster implements Serializable{
 			centroid.get(i).update(data,clusteredData);
 		}
 	}
- 
+
 	/**
 	 * Aggiunge una tupla associata al cluster
 	 * @param id indice su cui è riferito la tupla
@@ -48,7 +48,7 @@ public class Cluster implements Serializable{
 	boolean addData(int id){
 		return clusteredData.add(id);	
 	}
-	
+
 	/**
 	 * Verifica se una tupla è associata o meno al cluster in analisi
 	 * @param id indice su cui è riferito la tupla
@@ -57,7 +57,7 @@ public class Cluster implements Serializable{
 	boolean contain(int id){
 		return clusteredData.contains(id);
 	}
-	
+
 	/**
 	 * Rimuove l'associazione della data tupla con il cluster
 	 * @param id indice su cui è riferito la tupla
@@ -65,16 +65,16 @@ public class Cluster implements Serializable{
 	void removeTuple(int id){
 		clusteredData.remove(id);
 	}
-	
+
 	public String toString(){
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)
 			str+=centroid.get(i);
 		str+=")";
 		return str;
-		
+
 	}
-	
+
 	public String toString(Data data){
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)
@@ -86,10 +86,10 @@ public class Cluster implements Serializable{
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)
 				str+=data.getAttributeValue(array[i], j)+" ";
 			str+="] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
-			
+
 		}
 		str+="\nAvgDistance="+getCentroid().avgDistance(data, array);
 		return str;
-		
+
 	}
 }

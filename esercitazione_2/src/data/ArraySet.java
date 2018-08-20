@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  */
 public class ArraySet {
-	
+
 	private boolean set[];
 	private int size=0;
 	ArraySet (){
@@ -18,7 +18,7 @@ public class ArraySet {
 		for(int i=0;i<set.length;i++)
 			set[i]=false;
 	}
-	
+
 	/**
 	 * @param i
 	 * @return ritorna vero se modifica il dataset
@@ -39,7 +39,7 @@ public class ArraySet {
 			size=i+1;
 		return !added;	
 	}
-	
+
 	/**
 	 * 
 	 * @param i
@@ -55,14 +55,14 @@ public class ArraySet {
 				//update size
 				int j;
 				for(j=size-1;j>=0 && !set[j];j--);
-		
+
 				size=j+1;
 			}	
-		return deleted;
+			return deleted;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @param i
 	 * @return Restituisce il valore di set[i]
@@ -70,7 +70,7 @@ public class ArraySet {
 	boolean get(int i){
 		return set[i];
 	}
-	
+
 	/**
 	 * ritorna l'array degli indici di interesse presenti nell'arraySet
 	 * @return array di interi
