@@ -58,10 +58,11 @@ public class MainTest {
 		do{
 			System.out.println("(1) Carica Cluster da File");
 			System.out.println("(2) Carica Dati");
+			System.out.println("(0) Termina Applicazione");
 			System.out.print("Risposta:");
 			answer=Keyboard.readInt();
 		}
-		while(answer<=0 || answer>2);
+		while(answer<0 || answer>2);
 		return answer;
 	}
 
@@ -141,6 +142,10 @@ public class MainTest {
 		String result = (String)readObject(socket);
 		if(!result.equals("OK"))
 			throw new ServerException(result);
+	}
+	
+	private void closeSocket() throws IOException{
+		writeObject(socket,4);
 	}
 
 	public static void main(String[] args){
@@ -249,6 +254,14 @@ public class MainTest {
 					answer=Keyboard.readChar();
 				}
 				break; //fine case 2
+			case 0:
+				try {
+					main.closeSocket();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return;
 			default:
 				System.out.println("Opzione non valida!");
 			}

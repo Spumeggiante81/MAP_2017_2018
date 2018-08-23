@@ -56,14 +56,14 @@ class ServerOneClient extends Thread {
 	private static void writeObject(Socket socket, Object o) throws IOException {
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		out.writeObject(o);
-		out.flush();//COSA E'?????? PERCHE'????
+		out.flush();
 	}
 
 	/**
 	 * Riscrive il metodo run della superclasse Thread al fine di gestire le
 	 * richieste del client
 	 */
-	public void run() {//non poteamo mettere in un throws per gestire le eccezioni?
+	public void run(){//non poteamo mettere in un throws per gestire le eccezioni?
 		while (socket.isConnected()) {
 			try {
 				int choice = (int)readObject(socket);
@@ -80,6 +80,9 @@ class ServerOneClient extends Thread {
 				case 3: //LEARNING FROM FILE
 					learningFromFile(socket);
 					break;
+				case 4:
+					socket.close();
+					break;
 				default:
 					// Nel caso venga selezionata un'operazione non supportata, si esce
 					System.out.println("Scelta errata " + choice + " scelta corretta da 1 a 3");
@@ -89,6 +92,11 @@ class ServerOneClient extends Thread {
 			} 
 			catch (IOException | ClassNotFoundException e) {
 				System.out.println(e.getMessage());
+				try {
+					socket.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				break;
 			}
 		}

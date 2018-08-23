@@ -9,7 +9,7 @@ import java.io.*;
  */
 public class MultiServer {
 	private static int PORT = 8080;
-	private ServerSocket serverSocket;
+	private static ServerSocket serverSocket;
 
 	public static void main(String[] args) {
 		int port = PORT;
@@ -18,10 +18,14 @@ public class MultiServer {
 			try {
 				port = Integer.parseInt(args[1]);
 			} catch (NumberFormatException e) {
-				// nessun bisogno di gestire questa eccezione
 			}
 		}
-		//new MultiServer(port).run();
+		new MultiServer(port).run();
+		try {
+			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -36,7 +40,7 @@ public class MultiServer {
 			System.out.println("Current machine address: " + addr.toString());
 			serverSocket = new ServerSocket(port);
 		}
-		catch (UnknownHostException e)//di che tipo di eccezione si tratta??
+		catch (UnknownHostException e)
 		{
 			System.out.println(e.getMessage());
 		}
@@ -44,11 +48,9 @@ public class MultiServer {
 		{
 			System.out.println(e.getMessage());
 		}
-		new MultiServer(port).run();
 	}
 
 	
-	//NON L'HO CAPITA
 	/**
 	 * Istanzia un oggetto ServerSocket che pone in attesa di richiesta
 	 * connessioni da parte del client. Ad ogni nuova richiesta di
@@ -65,14 +67,16 @@ public class MultiServer {
 				System.out.println("Client connected!" + s.toString());
 				new ServerOneClient(s).start();
 			}
-			catch (UnknownHostException e)//a che serve???
+			catch (UnknownHostException e)
 			{
 				System.out.println(e.getMessage());
+				break;
 			}
 			catch (IOException e)
 			{
 				System.out.println(e.getMessage());
 			}
+	
 		}
 	}
 }
