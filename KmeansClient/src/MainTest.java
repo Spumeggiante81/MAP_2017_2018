@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+import java.awt.Color;
 
 
 public class MainTest extends JApplet {
@@ -30,7 +31,7 @@ public class MainTest extends JApplet {
 	private static String DEFAULT_HOST = "localhost";
 	private static int DEFAULT_PORT = 8080;
 	Socket socket;
-	private JTextField textField;
+	private JTextField tableNameTxt;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -279,20 +280,23 @@ public class MainTest extends JApplet {
 	 * Create the applet.
 	 */
 	public MainTest() {
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		getContentPane().setLayout(null);
 		
 		JTabbedPane JTabbedPane = new JTabbedPane();
+		JTabbedPane.setBackground(Color.LIGHT_GRAY);
 		JTabbedPane.setBounds(10, 11, 430, 278);
 		getContentPane().add(JTabbedPane);
 		
 		JPanel DBPanel = new JPanel();
+		DBPanel.setBackground(Color.LIGHT_GRAY);
 		JTabbedPane.addTab("DB", null, DBPanel, null);
 		DBPanel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(81, 11, 86, 20);
-		DBPanel.add(textField);
-		textField.setColumns(10);
+		tableNameTxt = new JTextField();
+		tableNameTxt.setBounds(81, 11, 86, 20);
+		DBPanel.add(tableNameTxt);
+		tableNameTxt.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(254, 11, 86, 20);
@@ -316,6 +320,7 @@ public class MainTest extends JApplet {
 		DBPanel.add(btnMine);
 		
 		JPanel FilePanel = new JPanel();
+		FilePanel.setBackground(Color.LIGHT_GRAY);
 		FilePanel.setLayout(null);
 		JTabbedPane.addTab("FILE", null, FilePanel, null);
 		
