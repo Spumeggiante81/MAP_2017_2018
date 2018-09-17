@@ -319,6 +319,14 @@ public class MainTest extends JApplet {
 		btnMine.setBounds(155, 219, 89, 23);
 		DBPanel.add(btnMine);
 		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(125, 72, -78, 14);
+		DBPanel.add(tabbedPane);
+		
+		JButton button = new JButton("");
+		button.setBounds(10, 72, 89, 23);
+		DBPanel.add(button);
+		
 		JPanel FilePanel = new JPanel();
 		FilePanel.setBackground(Color.LIGHT_GRAY);
 		FilePanel.setLayout(null);
