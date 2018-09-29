@@ -407,3 +407,264 @@ Caused by: java.net.SocketTimeoutException
 	at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:337)
 	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
 	... 17 more
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-17 18:43:36.728
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+!SESSION 2018-09-19 17:47:34.070 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-19 17:48:17.728
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-19 17:49:50.041
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+!SESSION 2018-09-20 16:05:13.532 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-20 16:05:38.690
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2018-09-20 16:11:06.219 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-20 16:11:26.794
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-20 16:51:43.962
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+!SESSION 2018-09-24 15:26:41.586 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-24 15:27:08.862
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2018-09-24 15:27:40.536 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-24 15:27:59.740
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-24 15:57:18.470
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2018-09-24 15:58:32.492
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201406120758/mwe2lang/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:395)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository.addChild(CompositeMetadataRepository.java:166)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository.<init>(CompositeMetadataRepository.java:106)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepositoryFactory.load(CompositeMetadataRepositoryFactory.java:122)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at sun.reflect.GeneratedMethodAccessor51.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:409)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:201)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository.addChild(CompositeMetadataRepository.java:166)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository.<init>(CompositeMetadataRepository.java:106)
+	at org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepositoryFactory.load(CompositeMetadataRepositoryFactory.java:122)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at sun.reflect.GeneratedMethodAccessor51.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:409)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:201)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.getAvailableRepositories(UpdateChecker.java:152)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.checkForUpdates(UpdateChecker.java:130)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:74)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-24 15:58:32.554
+!MESSAGE No repository found at http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201406120758/mwe2lang/.
+
+!ENTRY org.eclipse.jdt.core 4 4 2018-09-24 16:43:49.059
+!MESSAGE JavaBuilder handling ImageBuilderInternalException while building: esercitazione_5
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not write file: C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5\bin\data.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:49)
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:44)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.checkTargetIsNotWritable(LocalFile.java:95)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.mkdir(LocalFile.java:309)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.write(FileSystemResourceManager.java:1194)
+	at org.eclipse.core.internal.resources.Folder.internalCreate(Folder.java:172)
+	at org.eclipse.core.internal.resources.Folder.create(Folder.java:105)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.createFolder(AbstractImageBuilder.java:473)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder$1.visit(AbstractImageBuilder.java:257)
+	at org.eclipse.core.internal.resources.Resource$1.visitElement(Resource.java:84)
+	at org.eclipse.core.internal.watson.ElementTreeIterator.doIteration(ElementTreeIterator.java:82)
+	at org.eclipse.core.internal.watson.ElementTreeIterator.doIteration(ElementTreeIterator.java:87)
+	at org.eclipse.core.internal.watson.ElementTreeIterator.iterate(ElementTreeIterator.java:129)
+	at org.eclipse.core.internal.resources.Resource.accept(Resource.java:94)
+	at org.eclipse.core.internal.resources.Resource.accept(Resource.java:52)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.addAllSourceFiles(AbstractImageBuilder.java:222)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:52)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.core.filesystem 4 272 2018-09-24 16:43:49.059
+!MESSAGE Could not write file: C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5\bin\data.
+!SESSION 2018-09-25 18:01:36.503 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-25 18:02:17.586
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-25 18:14:58.415
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+!SESSION 2018-09-25 20:27:46.695 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-25 20:28:27.250
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-09-25 20:39:04.202
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
+!SESSION 2018-09-28 15:59:14.636 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-09-28 15:59:44.370
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-28 16:01:24.120
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1200 2018-09-28 16:01:53.650
+!MESSAGE Artifact not found: http://download.eclipse.org/windowbuilder/WB/release/4.6/content.xml.xz.
+!STACK 0
+java.io.FileNotFoundException: http://download.eclipse.org/windowbuilder/WB/release/4.6/content.xml.xz
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryStatusHelper.checkFileNotFound(RepositoryStatusHelper.java:297)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.checkException(FileReader.java:480)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.sendRetrieveRequest(FileReader.java:437)
+	at org.eclipse.equinox.internal.p2.transport.ecf.FileReader.readInto(FileReader.java:360)
+	at org.eclipse.equinox.internal.p2.transport.ecf.RepositoryTransport.download(RepositoryTransport.java:101)
+	at org.eclipse.oomph.p2.internal.core.CachingTransport.download(CachingTransport.java:135)
+	at org.eclipse.oomph.p2.internal.core.CachingTransport.download(CachingTransport.java:255)
+	at org.eclipse.equinox.internal.p2.repository.CacheManager.updateCache(CacheManager.java:402)
+	at org.eclipse.equinox.internal.p2.repository.CacheManager.createCacheFromFile(CacheManager.java:132)
+	at org.eclipse.equinox.internal.p2.metadata.repository.XZedSimpleMetadataRepositoryFactory.getLocalFile(XZedSimpleMetadataRepositoryFactory.java:56)
+	at org.eclipse.equinox.internal.p2.metadata.repository.XZedSimpleMetadataRepositoryFactory.load(XZedSimpleMetadataRepositoryFactory.java:78)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.getAvailableRepositories(UpdateChecker.java:152)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.checkForUpdates(UpdateChecker.java:130)
+	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:74)
+!SESSION 2018-09-28 17:16:41.600 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.dsl.product -product org.eclipse.epp.package.dsl.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.dsl.product -data file:/C:/Users/Dany/Desktop/MAP_2017_2018/ -product org.eclipse.epp.package.dsl.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-09-28 17:18:18.575
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Dany'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.ui 2 2 2018-09-28 17:18:29.785
+!MESSAGE Invalid preference category path: org.eclipse.birt.chart.reportitem.ui.ChartPreferencePage (bundle: org.eclipse.birt.chart.ui.extension, page: org.eclipse.birt.chart.ui.swt.fieldassist.preferences.FieldAssistPreferencePage)
