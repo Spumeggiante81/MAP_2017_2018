@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+<fullyQualifiedTypeName name="org.jfree.chart.renderer.xy.ClusteredXYBarRenderer"/>
+<fullyQualifiedTypeName name="mining.KMeansMiner"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="mining.ClusterSet"/>
 </qualifiedTypeNameHistroy>

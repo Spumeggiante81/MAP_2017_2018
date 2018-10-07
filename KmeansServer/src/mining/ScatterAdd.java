@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -16,6 +14,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.ClusteredXYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -31,14 +30,14 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class ScatterAdd extends JFrame {
 
 	private static final String title = "Kmeans";
-	int [] asseX;
-	int [] asseY;
-	/*int [][] asseXY ;*/
+	/*int [] asseX;
+	int [] asseY;*/
+	XYDataItem asseXY ;
+	double numMaxY=0,numMaxX=0;
 
-	public ScatterAdd(String s,int [] asseX, int [] asseY) {
+	public ScatterAdd(String s,XYDataItem asseXY ) {
 		super(s);
-		this.asseX = asseX;
-		this.asseY = asseY;
+		this.asseXY = asseXY;
 		final ChartPanel chartPanel = createDemoPanel();
 		this.add(chartPanel, BorderLayout.CENTER);
 		JPanel control = new JPanel();
@@ -65,21 +64,20 @@ public class ScatterAdd extends JFrame {
 		renderer.setSeriesPaint(0, Color.blue);
 		NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
 		domain.setRange(0.00, 3.5);
-		int maxX = 0;
-		for (int i = 0; i < asseX.length; i++){ 
-			if (asseX[i] >= maxX)
-				maxX = asseX[i];
+		
+		for (int i = 0; i < asseXY.length; i++){ 
+			if (asseXY[i][0] >= numMaxX)
+				numMaxX = asseXY[i][0];
 		}
-		domain.setRange(0.00, maxX + 0.5);
+		domain.setRange(0.00, numMaxX + 0.5);
 		domain.setTickUnit(new NumberTickUnit(0.5));
 		domain.setVerticalTickLabels(true);
 		NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
 		int maxY = 0;
-		for (int i = 0; i < asseY.length; i++){
-			if (asseY[i] >= maxY)
-				maxY = asseY[i];
-		}
-		range.setRange(0.0, maxY + 0.5);
+		for(int i=0;i<=asseXY.length-1;i++)
+			if (asseXY[i][1]>numMaxY)
+				numMaxY =   asseXY[i][1];
+		range.setRange(0.0, numMaxY + 0.5);
 		range.setTickUnit(new NumberTickUnit(1));
 		return new ChartPanel(jfreechart);
 	}
@@ -87,9 +85,9 @@ public class ScatterAdd extends JFrame {
 	private XYDataset createSampleData() {
 		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		XYSeries series = new XYSeries("Tuple");
-		if (asseX.length == asseY.length){
-			for (int i = 0; i < asseX.length; i++)
-				series.add(asseX[i], asseY[i]);
+		for(int i=0; i<=asseXY.length-1;i++)
+			for (int j = 0; j < asseXY[i].length-1; j++)
+				series.add(asseXY[i][j]);
 		}
 		//deve prendere i valori che gli passa serveroneclient
 		/*
@@ -121,9 +119,9 @@ public class ScatterAdd extends JFrame {
 			@Override
 			public void run() {
 
-				int [] asseX= {1, 2, 3, 4,8};
-				int [] asseY = {2, 3, 5, 1,6};
-				ScatterAdd demo = new ScatterAdd(title, asseX, asseY);
+				double [][] asseXY= {{1,0.17},{2,0.24},{5,2.5}};
+				//int [] asseY = {2, 3, 5, 1,6};
+				ScatterAdd demo = new ScatterAdd(title, asseXY[][]);
 				demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				demo.pack();
 				demo.setLocationRelativeTo(null);

@@ -30,6 +30,10 @@ public class ClusterSet implements Serializable {
 		}
 	}
 
+	public ClusterSet() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Asseggna c a C[i]
 	 * Incrementa i
