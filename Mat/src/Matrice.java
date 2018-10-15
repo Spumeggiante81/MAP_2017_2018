@@ -7,7 +7,8 @@ public class Matrice {
 		matrice = new double [x][y];
 	}
 	
-	public void inserisciMatrice(){
+	
+	public void scriviMatrice(){
 		for(int i=0;i<=matrice.length-1;i++)
 			for(int j=0;j<=matrice[i].length-1;j++)
 				matrice[i][j] = Keyboard.readInt();
