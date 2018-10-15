@@ -1,35 +1,77 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
 public class Main_matrice {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
 		//Matrice mat = new Matrice(13,2);
-		int righe = 0,colonne = 0;
-		Matrice mat = new Matrice(righe,colonne); 
+		final int RIGHE = 3;
+		final int COLONNE = 2;
+		Matrice mat = null; 
 	
 		
 		
-		
+		System.out.print("Inserire la scelta: ");
 		int scelta = Keyboard.readInt();
 		while(scelta != 0)
-			switch (scelta){
-				case 1 : {
-					System.out.println("inserisci numero righe: ");
-					righe = Keyboard.readInt();
-					System.out.println("inserisci numero colonne: ");
-					colonne = Keyboard.readInt();
-					mat = new Matrice(righe,colonne); 
-					System.out.println("Righe: " + righe + "  colonne "+colonne  );
+		{
+			switch (scelta)
+			{
+				case 1 : 
+					//System.out.print("inserisci numero righe: ");
+					//righe = Keyboard.readInt();
+					//System.out.print("inserisci numero colonne: ");
+					//colonne = Keyboard.readInt();
+					mat = new Matrice(RIGHE,COLONNE); 
+					System.out.println("Righe: " + RIGHE + "  colonne "+COLONNE );
 					break;
+				case 2 :try
+					{ 
+						mat.scriviMatrice();
+				 		break;
+					}catch(NullPointerException e){
+						System.err.println("e");
+						break;
 					}
-				case 2 : mat.scriviMatrice();//avendo già creato oggetto non ho passato la dimensione
-				case 3 : mat.stampaMatrice();//avendo già creato oggetto non ho passato la dimensione
-				default: System.out.println("Scelta inesistenze!");
+				case 3 :try
+					{ 
+						mat.stampaMatrice();//avendo già creato oggetto non ho passato la dimensione
+						break;
+					}catch(NullPointerException e){
+							System.err.println("eccezione");
+							break;
+					}
+				case 4: 
+					try
+					{ 
+						System.out.println("il numero massimo nelle righe: "+ mat.maxRighe());
+						break;
+					}catch(NullPointerException e){
+				System.err.println("eccezione");
+							break;
+					}
+					
+				case 5: 
+					try
+					{ 
+						System.out.println("il numero massimo nelle colonne: "+ mat.maxColonne());
+						break;
+					}catch(NullPointerException e){
+							System.err.println("eccezione");
+							break;
+					}
+				default: 
+					System.out.println("Scelta inesistente!");
+					break;
 			}
-				System.out.println("Seleziona nuova operazione " + "(" + 0 + ")" + "per uscire");
+				System.out.print("Seleziona nuova operazione " + "(" + 0 + ") " + "per uscire: ");
 				scelta = Keyboard.readInt();
-
 		}
+
+	}
 			
-	}	
+}	
 
 

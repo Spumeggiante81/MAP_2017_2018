@@ -1482,3 +1482,6 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.ui 2 2 2018-10-15 15:42:07.099
 !MESSAGE Invalid preference category path: org.eclipse.birt.chart.reportitem.ui.ChartPreferencePage (bundle: org.eclipse.birt.chart.ui.extension, page: org.eclipse.birt.chart.ui.swt.fieldassist.preferences.FieldAssistPreferencePage)
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2018-10-15 16:20:47.635
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/release/4.6/.
