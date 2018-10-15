@@ -121,7 +121,7 @@ public class ScatterAdd extends JFrame {
 			@Override
 			public void run() {
 
-				int [] asseX= {1, 2, 3, 4,8};
+				int [] asseX= {1, 2, 3, 4,6};
 				int [] asseY = {2, 3, 5, 1,6};
 				ScatterAdd demo = new ScatterAdd(title, asseX, asseY);
 				demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

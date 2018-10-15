@@ -32,12 +32,12 @@ public class ScatterAdd extends JFrame {
 	private static final String title = "Kmeans";
 	/*int [] asseX;
 	int [] asseY;*/
-	XYDataItem asseXY ;
+	double asseXY[][] ;
 	double numMaxY=0,numMaxX=0;
 
-	public ScatterAdd(String s,XYDataItem asseXY ) {
+	public ScatterAdd(String s,Class<mining.asseXY[][]> class1 ) {
 		super(s);
-		this.asseXY = asseXY;
+		this.asseXY = class1;
 		final ChartPanel chartPanel = createDemoPanel();
 		this.add(chartPanel, BorderLayout.CENTER);
 		JPanel control = new JPanel();

@@ -1,5 +1,40 @@
 
 public class Matrice {
+	double [][] matrice;
+	double elemento;
+	
+	Matrice(int x, int y){
+		matrice = new double [x][y];
+	}
+	
+	public void inserisciMatrice(){
+		for(int i=0;i<=matrice.length-1;i++)
+			for(int j=0;j<=matrice[i].length-1;j++)
+				matrice[i][j] = Keyboard.readInt();
+	}
+	
+	
+	public int stampaNumRighe(){
+		System.out.println("righe "+ matrice.length);
+		System.out.println();
+		return 0;
+	}
+	
+	public int stampaNumColonne(){
+		System.out.println("colonne "+ matrice[0].length);
+		System.out.println();
+		return 0;
+	}
+	
+	public void stampaMatrice(){
+		for(int i=0;i<=matrice.length-1;i++){
+			for(int j=0;j<=matrice[i].length-1;j++)
+				System.out.print( matrice[i][j] + " ");
+			System.out.println();
+		}
+	}
+/*	
+	//TODO : add(int x, int y, double value), e le altre funzioni
 	public static void main (String [] args) {
 
 		double [][] a = {
@@ -23,7 +58,7 @@ public class Matrice {
 		System.out.println();
 		System.out.println("Somma "+somma);
 */
-		for (int i=0; i<=a.length-1; i++)
+	/*	for (int i=0; i<=a.length-1; i++)
 			if (a[i][0]>numMaxX)
 				numMaxX =  (int) a[i][0];
 		
@@ -40,13 +75,14 @@ public class Matrice {
 		System.out.println("NumMaxX: "+ numMaxX);	
 		System.out.println();
 		
+		
 		//stampa la matrice
 		for(int i=0;i<=a.length-1;i++){
 			for(int j=0;j<=a[i].length-1;j++)
 				System.out.print( a[i][j] + " ");
 			System.out.println();
 		}
-	}
+	}*/
 
 }
 
