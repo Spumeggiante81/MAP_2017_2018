@@ -25,19 +25,13 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class ScatterAdd extends JFrame {
 
-	double [] asseX;
-	double [] asseY;
-	
 	private static final String title = "Kmeans";
    
-    public ScatterAdd(String s, double[] asseX, double[] asseY) {
+    public ScatterAdd(String s) {
         super(s);
-        this.asseX = asseX;
-        this.asseY = asseY;
        final ChartPanel chartPanel = createDemoPanel();
         this.add(chartPanel, BorderLayout.CENTER);
         JPanel control = new JPanel();
-        	
 /*        control.add(new JButton(new AbstractAction("Add") {
 
             @Override
@@ -50,13 +44,9 @@ public class ScatterAdd extends JFrame {
         this.add(control, BorderLayout.SOUTH);
     }
 
-    public ScatterAdd(String title2, int[] asseX2, int[] asseY2) {
-		// TODO Auto-generated constructor stub
-	}
-
-	private ChartPanel createDemoPanel() {
+    private ChartPanel createDemoPanel() {
         JFreeChart jfreechart = ChartFactory.createScatterPlot(
-            title, "Cluster", "Distanze", createSampleData(asseX,asseY),
+            title, "Cluster", "Distanze", createSampleData(),
             PlotOrientation.VERTICAL, true, true, false);
         XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
         xyPlot.setDomainCrosshairVisible(true);
@@ -73,20 +63,11 @@ public class ScatterAdd extends JFrame {
         return new ChartPanel(jfreechart);
     }
 
-    private XYDataset createSampleData(double [] asseX2, double []asseY) {
+    private XYDataset createSampleData() {
         XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
         XYSeries series = new XYSeries("Tuple");
-        int i,j;
-        
-        for( i=0;i<asseX2.length;i++)
-        	for( j=0;j<asseY.length;j++)
-        		double asseX2 = asseX2[i];
-        		double asseY = asseY[j];
-        		
-        		series.add(asseX2,asseY);
-        	
-        xySeriesCollection.addSeries(series);
-/*
+       
+       
         	series.add(0.17, 1);
             series.add(0.24,2);
             series.add(0.24, 3);
@@ -100,29 +81,25 @@ public class ScatterAdd extends JFrame {
             series.add(1.33, 3);
             series.add(1.98, 3);
             series.add(1.98, 3);
-            series.add(2.24, 2);*/
+            series.add(2.24, 2);
             
-      
-            xySeriesCollection.addSeries(series);
+       
+        xySeriesCollection.addSeries(series);
+     
+        return xySeriesCollection;
+    }
 
-    		return xySeriesCollection;
-    	}
+    public static void main(String args[]) {
+        EventQueue.invokeLater(new Runnable() {
 
-    	public static void main(String args[]) {
-    		EventQueue.invokeLater(new Runnable() {
-
-    			@Override
-    			public void run() {
-
-    				double [] asseX= {1, 2, 3, 4,8};
-    				double [] asseY = {2, 3, 5, 1,6};
-    					ScatterAdd demo = new ScatterAdd(title, asseX,asseY);
-    				demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    				demo.pack();
-    				demo.setLocationRelativeTo(null);
-    				demo.setVisible(true);
-    				}
-    			
-    		});
-    	}
+            @Override
+            public void run() {
+                ScatterAdd demo = new ScatterAdd(title);
+                demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                demo.pack();
+                demo.setLocationRelativeTo(null);
+                demo.setVisible(true);
+            }
+        });
+    }
 }

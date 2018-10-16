@@ -35,9 +35,9 @@ public class Grafico extends JFrame {
 	int[][] asseXY;
 	/*int [][] asseXY ;*/
 	double[] asseX;
-	double asseY;
+	double []asseY;
 
-	public Grafico(String s,double [] asseX, double asseY) {
+	public Grafico(String s,double [] asseX, double []asseY) {
 		super(s);
 		this.asseX = asseX;
 		this.asseY =asseY;
@@ -76,7 +76,7 @@ public class Grafico extends JFrame {
 		domain.setTickUnit(new NumberTickUnit(0.5));
 		domain.setVerticalTickLabels(true);
 		NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
-		int maxY = 0;
+		double maxY = 0;
 		for (int i = 0; i < asseY.length; i++){
 			if (asseY[i] >= maxY)
 				maxY = asseY[i];
@@ -123,9 +123,9 @@ public class Grafico extends JFrame {
 			@Override
 			public void run() {
 
-				int [] asseX= {1, 2, 3, 4,6};
-				int [] asseY = {2, 3, 5, 1,6};
-				ScatterAdd demo = new ScatterAdd(title, asseX, asseY);
+				double [] asseX= {2, 4, 6, 8,10};
+				double [] asseY = {2, 3, 4, 5,6};
+				Grafico demo = new Grafico(title, asseX, asseY);
 				demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				demo.pack();
 				demo.setLocationRelativeTo(null);
@@ -133,3 +133,4 @@ public class Grafico extends JFrame {
 			}
 		});
 	}
+}
