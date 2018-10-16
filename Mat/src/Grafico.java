@@ -34,12 +34,13 @@ public class Grafico extends JFrame {
 	final int colonne = 2;
 	int[][] asseXY;
 	/*int [][] asseXY ;*/
-	int [] asseX;
-	int [] asseY;
+	double[] asseX;
+	double asseY;
 
-	public Grafico(String s,int [][] asseXY) {
+	public Grafico(String s,double [] asseX, double asseY) {
 		super(s);
-		this.asseXY = asseXY;
+		this.asseX = asseX;
+		this.asseY =asseY;
 		final ChartPanel chartPanel = createDemoPanel();
 		this.add(chartPanel, BorderLayout.CENTER);
 		JPanel control = new JPanel();
@@ -66,8 +67,8 @@ public class Grafico extends JFrame {
 		renderer.setSeriesPaint(0, Color.blue);
 		NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
 		domain.setRange(0.00, 3.5);
-		int maxX = 0;
-		for (int i = 0; i < asseXY.length; i++){ 
+		double maxX = 0;
+		for (int i = 0; i < asseX.length; i++){ 
 			if (asseX[i] >= maxX)
 				maxX = asseX[i];
 		}
