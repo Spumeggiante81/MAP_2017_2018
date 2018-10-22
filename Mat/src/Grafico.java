@@ -20,7 +20,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 
-
 /**
  * @see http://stackoverflow.com/questions/7231824
  * @see http://stackoverflow.com/questions/7205742
@@ -28,31 +27,30 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @see http://stackoverflow.com/questions/7071057
  */
 public class Grafico extends JFrame {
-
 	private static final String title = "Kmeans";
-	final int  RIGHE = 13;
-	final int colonne = 2;
-	int[][] asseXY;
-	/*int [][] asseXY ;*/
-	double[] asseX;
-	double []asseY;
+	
+	double[][] asseXY;
+	
+	public Grafico(double[][] matrice) {
 
-	public Grafico(String s,double [] asseX, double []asseY) {
+		double [][] asseXY = matrice;
+		
+		
+		Grafico demo = new Grafico(title, asseXY);
+		demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		demo.pack();
+		demo.setLocationRelativeTo(null);
+		demo.setVisible(true);
+	}
+
+	
+	public Grafico(String s,double [][] asseXY) {
 		super(s);
-		this.asseX = asseX;
-		this.asseY =asseY;
+		this.asseXY = asseXY;
 		final ChartPanel chartPanel = createDemoPanel();
 		this.add(chartPanel, BorderLayout.CENTER);
 		JPanel control = new JPanel();
-		/*control.add(new JButton(new AbstractAction("Add") {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < N; i++) {
-                    added.add(rand.nextDouble(), rand.nextDouble());
-                }
-            }
-        }));*/
+		
 		this.add(control, BorderLayout.SOUTH);
 	}
 
@@ -68,18 +66,18 @@ public class Grafico extends JFrame {
 		NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
 		domain.setRange(0.00, 3.5);
 		double maxX = 0;
-		for (int i = 0; i < asseX.length; i++){ 
-			if (asseX[i] >= maxX)
-				maxX = asseX[i];
+		for (int i = 0; i < asseXY.length; i++){ 
+			if (asseXY[i][0] >= maxX)
+				maxX = asseXY[i][0];
 		}
 		domain.setRange(0.00, maxX + 0.5);
 		domain.setTickUnit(new NumberTickUnit(0.5));
 		domain.setVerticalTickLabels(true);
 		NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
 		double maxY = 0;
-		for (int i = 0; i < asseY.length; i++){
-			if (asseY[i] >= maxY)
-				maxY = asseY[i];
+		for (int i = 0; i < asseXY.length; i++){
+			if (asseXY[i][1] >= maxY)
+				maxY = asseXY[i][1];
 		}
 		range.setRange(0.0, maxY + 0.5);
 		range.setTickUnit(new NumberTickUnit(1));
@@ -89,48 +87,15 @@ public class Grafico extends JFrame {
 	private XYDataset createSampleData() {
 		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		XYSeries series = new XYSeries("Tuple");
-		if (asseX.length == asseY.length){
-			for (int i = 0; i < asseX.length; i++)
-				series.add(asseX[i], asseY[i]);
+		
+		
+		for (int i = 0; i < asseXY.length; i++)
+		{
+			series.add(asseXY[i][0], asseXY[i][1]);
 		}
-		//deve prendere i valori che gli passa serveroneclient
-		/*
-        	series.add(0.17, 1);
-            series.add(0.24,2);
-            series.add(0.24, 3);
-            series.add(0.24,2 );
-            series.add(0.48,3 );
-            series.add(0.75,2 );
-            series.add(1,3);
-            series.add(1.17, 1);
-            series.add(1.33,3 );
-            series.add(1.33, 3);
-            series.add(1.33, 3);
-            series.add(1.98, 3);
-            series.add(1.98, 3);
-            series.add(2.24, 2);
-
-		 */
 
 		xySeriesCollection.addSeries(series);
 
 		return xySeriesCollection;
 	}
-
-	public static void main(String args[]) {
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-
-				double [] asseX= {2, 4, 6, 8,10};
-				double [] asseY = {2, 3, 4, 5,6};
-				Grafico demo = new Grafico(title, asseX, asseY);
-				demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				demo.pack();
-				demo.setLocationRelativeTo(null);
-				demo.setVisible(true);
-			}
-		});
-	}
-}
+}			

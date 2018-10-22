@@ -7,9 +7,9 @@ public class Main_matrice {
 	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
 		//Matrice mat = new Matrice(13,2);
-		final int RIGHE = 3;
-		final int COLONNE = 2;
+		
 		Matrice mat = null; 
+		Grafico kMeans; 
 	
 		
 		
@@ -20,12 +20,12 @@ public class Main_matrice {
 			switch (scelta)
 			{
 				case 1 : 
-					//System.out.print("inserisci numero righe: ");
-					//righe = Keyboard.readInt();
-					//System.out.print("inserisci numero colonne: ");
-					//colonne = Keyboard.readInt();
-					mat = new Matrice(RIGHE,COLONNE); 
-					System.out.println("Righe: " + RIGHE + "  colonne "+COLONNE );
+					System.out.print("inserisci numero righe: ");
+					int righe = Keyboard.readInt();
+					System.out.print("inserisci numero colonne: ");
+					int colonne = Keyboard.readInt();
+					mat= new Matrice(righe,colonne); 
+					System.out.println("Righe: " + righe + "  colonne "+colonne );
 					break;
 				case 2 :try
 					{ 
@@ -38,6 +38,7 @@ public class Main_matrice {
 				case 3 :try
 					{ 
 						mat.stampaMatrice();//avendo già creato oggetto non ho passato la dimensione
+						 kMeans = new Grafico(mat.matrice);
 						break;
 					}catch(NullPointerException e){
 							System.err.println("eccezione");

@@ -22,6 +22,7 @@ import java.io.*;
 class ServerOneClient extends Thread {
 	private Socket socket;
 	private KMeansMiner kmeans;
+	private double [][] matTuple;
 	private Data data;
 
 
@@ -137,6 +138,8 @@ class ServerOneClient extends Thread {
 			if (!data.equals(null)){
 				int k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
+				//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
+				//recuperarli da ciò che abbiamo
 				int numIter = kmeans.kmeans(data);
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
