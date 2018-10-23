@@ -24,7 +24,7 @@ class ServerOneClient extends Thread {
 	private KMeansMiner kmeans;
 	private double [][] matTuple;
 	private Data data;
-
+	public int numeroRighe = 0;//aggiunto 22/10
 
 	/**
 	 * Inizializza gli attributi socket, in ed out. Avvia il thread.
@@ -138,9 +138,12 @@ class ServerOneClient extends Thread {
 			if (!data.equals(null)){
 				int k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
+				numeroRighe = data.getNumberOfExamples(); //aggiunto 22/10
+				System.out.println("Righe "+numeroRighe);//aggiunto 22/10
 				//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
 				//recuperarli da ciò che abbiamo
 				int numIter = kmeans.kmeans(data);
+				System.out.println("numIter" + numIter);
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
 				writeObject(socket,kmeans.getC().toString(data));

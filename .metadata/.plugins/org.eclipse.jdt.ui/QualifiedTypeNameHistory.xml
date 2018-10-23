@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="org.jfree.chart.renderer.xy.ClusteredXYBarRenderer"/>
-<fullyQualifiedTypeName name="mining.KMeansMiner"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="mining.ClusterSet"/>
 <fullyQualifiedTypeName name="mysql.Sign_up"/>
@@ -22,4 +21,6 @@
 <fullyQualifiedTypeName name="org.jfree.chart.ChartPanel"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="org.jfree.chart.JFreeChart"/>
+<fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
+<fullyQualifiedTypeName name="mining.KMeansMiner"/>
 </qualifiedTypeNameHistroy>
