@@ -64,7 +64,7 @@ class ServerOneClient extends Thread {
 	 * Riscrive il metodo run della superclasse Thread al fine di gestire le
 	 * richieste del client
 	 */
-	public void run(){//non poteamo mettere in un throws per gestire le eccezioni?
+	public void run(){//non potremmo mettere in un throws per gestire le eccezioni?
 		while (socket.isConnected()) {
 			try {
 				int choice = (int)readObject(socket);

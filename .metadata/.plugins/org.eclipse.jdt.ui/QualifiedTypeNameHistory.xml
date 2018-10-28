@@ -23,4 +23,5 @@
 <fullyQualifiedTypeName name="org.jfree.chart.JFreeChart"/>
 <fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
 <fullyQualifiedTypeName name="mining.KMeansMiner"/>
+<fullyQualifiedTypeName name="MainTest"/>
 </qualifiedTypeNameHistroy>

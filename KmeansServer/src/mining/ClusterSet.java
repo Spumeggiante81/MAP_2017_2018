@@ -23,6 +23,7 @@ public class ClusterSet implements Serializable {
 	ClusterSet(int k) throws OutOfRangeSampleSize{
 		try{
 			C = new Cluster[k];
+			System.out.println("NUMERO CLUSTER: " + C.length);//AGGIUNTO 28/10
 			Arrays.fill(C, null);
 		}
 		catch(NegativeArraySizeException e){

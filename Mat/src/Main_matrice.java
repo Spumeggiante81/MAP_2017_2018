@@ -1,7 +1,8 @@
+
+
 import java.awt.EventQueue;
-
-
 import javax.swing.JFrame;
+
 
 public class Main_matrice {
 
@@ -26,7 +27,6 @@ public class Main_matrice {
 					System.out.print("inserisci numero colonne: ");
 					int colonne = Keyboard.readInt();
 					mat= new Matrice(righe,colonne); 
-					serverOneClient server = 
 					System.out.println("Righe: " + righe + "  colonne "+colonne );
 					break;
 				case 2 :try
