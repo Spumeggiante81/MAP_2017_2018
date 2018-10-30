@@ -22,10 +22,7 @@ public class Data {
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples; //numero di righe in data 
 	private List<Attribute> explanatorySet = new LinkedList<Attribute>();
-	
-	public Data(){
-		
-	}
+
 	
 	public Data(String table) throws DatabaseConnectionException, SQLException{
 

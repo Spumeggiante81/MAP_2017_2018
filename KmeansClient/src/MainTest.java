@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
-import KmeansServer*.*;
+
 
 public class MainTest extends JApplet {
 
@@ -35,10 +35,6 @@ public class MainTest extends JApplet {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	double [][] matrice;
-	int righe,colonne = 0;
-	ClusterSet numeroCluster = new ClusterSet();
-	
 	
 	public MainTest(String ip, int port) throws IOException{
 		InetAddress addr = InetAddress.getByName(ip); //ip

@@ -4,7 +4,9 @@ import data.Attribute;
 import data.Data;
 import data.DiscreteAttribute;
 import data.OutOfRangeSampleSize;
+import data.Tuple;
 import database.DatabaseConnectionException;
+import mining.ClusterSet;
 import mining.KMeansMiner;
 
 import java.net.*;
@@ -22,9 +24,12 @@ import java.io.*;
 class ServerOneClient extends Thread {
 	private Socket socket;
 	private KMeansMiner kmeans;
-	private double [][] matTuple;
+	private Tuple [][] matTuple;
 	private Data data;
-	public int numeroRighe = 0;//aggiunto 22/10
+	private int numeroRighe = 0;
+	final int NUMEROCOLONNE = 2;
+	private Tuple tupla;
+	private ClusterSet cluster;
 
 	/**
 	 * Inizializza gli attributi socket, in ed out. Avvia il thread.
@@ -64,7 +69,7 @@ class ServerOneClient extends Thread {
 	 * Riscrive il metodo run della superclasse Thread al fine di gestire le
 	 * richieste del client
 	 */
-	public void run(){//non potremmo mettere in un throws per gestire le eccezioni?
+	public void run(){//non poteamo mettere in un throws per gestire le eccezioni?
 		while (socket.isConnected()) {
 			try {
 				int choice = (int)readObject(socket);
@@ -133,17 +138,23 @@ class ServerOneClient extends Thread {
 	 * @param socket
 	 * @throws IOException
 	 */
-	private void learningFromDbTable (Socket socket) throws IOException {
+	private void learningFromDbTable (Socket socket, Tuple obj) throws IOException {
 		try{
 			if (!data.equals(null)){
 				int k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
-				numeroRighe = data.getNumberOfExamples(); //aggiunto 22/10
-				System.out.println("Righe "+numeroRighe);//aggiunto 22/10
 				//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
 				//recuperarli da ciò che abbiamo
+				
+				numeroRighe = data.getNumberOfExamples();
+				for(int  i=0;i<=matTuple.length-1;i++){
+						matTuple[i][0] = data.getItemSet(i);
+						matTuple[i][1] = tupla.getDistance(obj);
+					}
+				
+			
+				
 				int numIter = kmeans.kmeans(data);
-				System.out.println("numIter" + numIter);
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
 				writeObject(socket,kmeans.getC().toString(data));

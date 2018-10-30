@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="org.jfree.chart.renderer.xy.ClusteredXYBarRenderer"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="mining.ClusterSet"/>
 <fullyQualifiedTypeName name="mysql.Sign_up"/>
 <fullyQualifiedTypeName name="Matrice"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.InputStream"/>
@@ -24,4 +23,6 @@
 <fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
 <fullyQualifiedTypeName name="mining.KMeansMiner"/>
 <fullyQualifiedTypeName name="MainTest"/>
+<fullyQualifiedTypeName name="data.Tuple"/>
+<fullyQualifiedTypeName name="mining.ClusterSet"/>
 </qualifiedTypeNameHistroy>
