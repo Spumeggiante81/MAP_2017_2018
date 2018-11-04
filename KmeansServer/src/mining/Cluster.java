@@ -26,7 +26,7 @@ public class Cluster implements Serializable{
 	 * Ricava il centroide del Cluster in analisi
 	 * @return
 	 */
-	Tuple getCentroid(){
+	public Tuple getCentroid(){
 		return centroid;
 	}
 

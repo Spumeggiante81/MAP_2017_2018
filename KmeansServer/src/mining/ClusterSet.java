@@ -78,7 +78,7 @@ public class ClusterSet implements Serializable {
 	 * @param tuple
 	 * @return restituisce il Cluster più vicino sulla base della distanza calcolata da getDistance della classe Tuple
 	 */
-	Cluster nearestCluster(Tuple tuple)
+	public Cluster nearestCluster(Tuple tuple)
 	{
 		/*
 		 * Dato che la "distanza" massima ricavabile dal confronto dei centroidi con la tupla, corrisponderà al numero di elementi presenti nella tupla 

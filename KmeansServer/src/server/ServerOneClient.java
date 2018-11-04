@@ -6,6 +6,7 @@ import data.DiscreteAttribute;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
 import database.DatabaseConnectionException;
+import mining.Cluster;
 import mining.ClusterSet;
 import mining.KMeansMiner;
 
@@ -24,12 +25,13 @@ import java.io.*;
 class ServerOneClient extends Thread {
 	private Socket socket;
 	private KMeansMiner kmeans;
-	private Tuple [][] matTuple;
+	Object [][] matTuple = null;
 	private Data data;
 	private int numeroRighe = 0;
 	final int NUMEROCOLONNE = 2;
 	private Tuple tupla;
-	private ClusterSet cluster;
+	Cluster cluster;
+	ClusterSet clusterset;
 
 	/**
 	 * Inizializza gli attributi socket, in ed out. Avvia il thread.
@@ -136,9 +138,11 @@ class ServerOneClient extends Thread {
 	/**
 	 * Rileva i cluster della collezione di dati
 	 * @param socket
+	 * @param matTuple 
 	 * @throws IOException
 	 */
-	private void learningFromDbTable (Socket socket, Tuple obj) throws IOException {
+	//private void learningFromDbTable (Socket socket, Tuple obj) throws IOException {
+	private void learningFromDbTable (Socket socket) throws IOException {
 		try{
 			if (!data.equals(null)){
 				int k = (int)readObject(socket);
@@ -147,12 +151,29 @@ class ServerOneClient extends Thread {
 				//recuperarli da ciò che abbiamo
 				
 				numeroRighe = data.getNumberOfExamples();
-				for(int  i=0;i<=matTuple.length-1;i++){
-						matTuple[i][0] = data.getItemSet(i);
-						matTuple[i][1] = tupla.getDistance(obj);
-					}
+				System.out.println("Righe "+ numeroRighe);
+				for(int  i=0;i<=numeroRighe;i++){
+					//System.out.println(matTuple[i][0] + " " + matTuple[i][1]);
+					System.out.println(matTuple[i][0]);
+				}
 				
-			
+				for(int  i=0;i<=numeroRighe;i++){
+					
+					Tuple t = data.getItemSet(i);
+				    
+					cluster= clusterset.nearestCluster(t); //modificata la visibilità a public di nearestCluster
+					Tuple centroid = cluster.getCentroid(); //modificata la visibilità a public di getcentroid
+		
+					
+						matTuple[i][0] = cluster;		
+						matTuple[i][1] = t.getDistance(centroid);
+					}
+				//Aggiunto per verifica stampa matrice
+				for(int i=0;i<=numeroRighe;i++){
+					for(int j=0;j<=1;j++)
+						System.out.print( matTuple[i][j] + " ");
+					System.out.println();
+				}
 				
 				int numIter = kmeans.kmeans(data);
 				writeObject(socket,"OK");
@@ -206,17 +227,17 @@ class ServerOneClient extends Thread {
 			writeObject(socket,"OK");
 			writeObject(socket,kmeans.getC().toString(data));
 		}
-		catch(IOException e){ //NON SI PUç EVITARE ESSENDOCI IL  THROWS IOException
-			writeObject(socket,e.getMessage());
-		}
-		catch(ClassNotFoundException e){
-			writeObject(socket,e.getMessage());
-		}
-		catch(DatabaseConnectionException e){
-			writeObject(socket,e.getMessage());
-		}
-		catch(SQLException e){
-			writeObject(socket,e.getMessage());
-		}
-	}
+    	catch(IOException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(ClassNotFoundException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(DatabaseConnectionException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    	catch(SQLException e){
+    		writeObject(socket,e.getMessage());
+    	}
+    }
 }

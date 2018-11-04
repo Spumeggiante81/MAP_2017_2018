@@ -25,4 +25,5 @@
 <fullyQualifiedTypeName name="MainTest"/>
 <fullyQualifiedTypeName name="data.Tuple"/>
 <fullyQualifiedTypeName name="mining.ClusterSet"/>
+<fullyQualifiedTypeName name="mining.Cluster"/>
 </qualifiedTypeNameHistroy>
