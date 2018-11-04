@@ -1,5 +1,17 @@
+
+import javax.swing.BoxLayout;
 import javax.swing.JApplet;
-import java.io.FileNotFoundException;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,29 +19,32 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
-
-import keyboardinput.Keyboard;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
+<<<<<<< HEAD
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
 
+=======
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+>>>>>>> 2af9d8fcc1cd302668fb3a5fe7f73f04da467ebe
+
+import keyboardinput.Keyboard;
+
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 
 public class MainTest extends JApplet {
-
-
-	/**
-	 * @param args
-	 */
+	
 	private static String DEFAULT_HOST = "localhost";
 	private static int DEFAULT_PORT = 8080;
+<<<<<<< HEAD
 	Socket socket;
 	private JTextField tableNameTxt;
 	private JTextField textField_1;
@@ -51,57 +66,24 @@ public class MainTest extends JApplet {
 	 * @throws IOException nel caso si verifichi un errore in fase di lettura
      */
 	private static Object readObject(Socket socket) throws ClassNotFoundException, IOException {
+=======
+	private static IAsyncResponsive ResponsiveInterface;
+
+	private Socket socket = null;
+
+	protected static Object readObject(Socket socket) throws ClassNotFoundException, IOException
+	{
+>>>>>>> 2af9d8fcc1cd302668fb3a5fe7f73f04da467ebe
 		Object o;
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 		o = in.readObject();
 		return o;
 	}
-	/**
-     * Si occupa dell'invio sicuro di un oggetto via socket
-     * @param socket la quale riceverà l'oggetto
-	 * @param o oggetto da inviare
-	 * @throws IOException nel caso si verifichi un errore in fase di scrittura
-	 */
-	private static void writeObject(Socket socket, Object o) throws IOException {
+	protected static void writeObject(Socket socket, Object o) throws IOException
+	{
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		out.writeObject(o);
 		out.flush();
-	}
-	
-	private int menu(){
-		int answer;
-		System.out.println("Scegli una opzione");
-		do{
-			System.out.println("(1) Carica Cluster da File");
-			System.out.println("(2) Carica Dati");
-			System.out.print("Risposta:");
-			answer=Keyboard.readInt();
-		}
-		while(answer<=0 || answer>2);
-		return answer;
-	}
-	
-	/**
-	 * Ricava i cluster all'interno di uno specifico file, definito dall'utente, indicando inoltre
-	 * la tabella da cui reperire la collezione di dati a cui è riferita.
-	 * @return stampa dei cluster presenti nel file
-	 * @throws SocketException
-	 * @throws ServerException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	private String learningFromFile() throws SocketException,ServerException,IOException,ClassNotFoundException{
-		writeObject(socket,3);
-		System.out.print("Nome tabella:");
-		String tabName=Keyboard.readString();
-		writeObject(socket,tabName);
-		System.out.print("Nome file:");
-		String fileName=Keyboard.readString();
-		writeObject(socket,fileName);
-		String result = (String)readObject(socket);
-		if(result.equals("OK"))
-			return (String)readObject(socket);
-		else throw new ServerException(result);
 	}
 	
 	/**
@@ -111,15 +93,31 @@ public class MainTest extends JApplet {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	private void storeTableFromDb() throws SocketException,ServerException,IOException,ClassNotFoundException{
+	private void storeTableFromDb(String table) throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,0);
-		System.out.print("Nome tabella:");
-		String tabName=Keyboard.readString();
-		writeObject(socket,tabName);
+		writeObject(socket,table);
 		String result = (String)readObject(socket);
 		if(!result.equals("OK"))
 			throw new ServerException(result);
 	}
+	
+	
+	/**
+	 * Deposita il cluster all'interno di un file. Tale file sarà depositato su lato Server
+	 * @throws SocketException
+	 * @throws ServerException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private String storeClusterInFile(String fileName) throws SocketException,ServerException,IOException,ClassNotFoundException{
+		writeObject(socket,2);
+		writeObject(socket,fileName);
+		String result = (String)readObject(socket);
+		if(!result.equals("OK"))
+			 throw new ServerException(result);
+		return "Cluster stored into file '" + fileName + "'";
+	}
+	
 	
 	/**
 	 * Effettua il calcolo dei cluster sulla collezione di dati ricavata dal server
@@ -129,234 +127,386 @@ public class MainTest extends JApplet {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	private String learningFromDbTable() throws SocketException,ServerException,IOException,ClassNotFoundException{
+	private String learningFromDbTable(int k) throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,1);
-		System.out.print("Numero di cluster:");
-		int k=Keyboard.readInt();
 		writeObject(socket,k);
 		String result = (String)readObject(socket);
 		if(result.equals("OK")){
-			System.out.println("Clustering output:"+readObject(socket));
-			return (String)readObject(socket);
+			return ("Clustering output:"+readObject(socket)+"\n") + (String)readObject(socket);
 		}
 		else throw new ServerException(result);
 	}
 	
-	/**
-	 * Deposita il cluster all'interno di un file. Tale file sarà depositato su lato Server
-	 * @throws SocketException
-	 * @throws ServerException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	private void storeClusterInFile() throws SocketException,ServerException,IOException,ClassNotFoundException{
-		writeObject(socket,2);
-		System.out.println("Nome File in cui salvare i cluster ricavati:");
-		String fileName = Keyboard.readString();
-		writeObject(socket,fileName);
-		String result = (String)readObject(socket);
-		if(!result.equals("OK"))
-			 throw new ServerException(result);
+	private class AsyncLearningFromDatabaseRequest extends AsyncClass {
+		Socket socket;
+		private String table;
+		private int k;
+		
+		public AsyncLearningFromDatabaseRequest(IAsyncResponsive responsive, Socket socket, String tableName, int k) {
+			super(responsive);
+			this.socket = socket;
+			this.table = tableName;
+			this.k = k;
+		}
+		@Override public Object runasync() {
+			try
+			{
+				storeTableFromDb(table);
+				return learningFromDbTable(k);
+				
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ServerException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			return "Error";
+		}
 	}
 	
-	public static void main(String[] args){
-		String ip;
-		int port;
-		System.out.println("Impostare manualmente indirizzo / porta comunicazione?(y/n)");
-		char answer = Keyboard.readChar();
-		if (answer == 'y'){
-			System.out.println("Inserire indirizzo:");
-			ip = Keyboard.readString();
-			System.out.println("Inserire porta:");
-			port = Keyboard.readInt();
-		}
-		else{
-			ip = DEFAULT_HOST;
-			port = DEFAULT_PORT;
-		}
-		MainTest main=null;
-		try{
-			main=new MainTest(ip,port);
-		}
-		catch (IOException e){
-			System.err.println(e);
-			return;
-		}
-		do{
-			int menuAnswer=main.menu();
-			switch(menuAnswer){
-				case 1:
-					try {
-						String kmeans=main.learningFromFile();
-						System.out.println(kmeans);
-					}
-					catch (SocketException e) {
-						System.err.println(e);
-						return;
-					}
-					catch (FileNotFoundException e) {
-						System.err.println(e);
-						return ;
-					} catch (IOException e) {
-						System.err.println(e);
-						return;
-					} catch (ClassNotFoundException e) {
-						System.err.println(e);
-						return;
-					}
-					catch (ServerException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case 2: // learning from db
-				
-					answer='y';//itera per learning al variare di k
-					while(true){
-						try{
-							main.storeTableFromDb();
-							break; //esce fuori dal while
-						}
-						
-						catch (SocketException e) {
-							System.err.println(e);
-							return;
-						}
-						catch (IOException e) {
-							System.err.println(e);
-							return;
-						} catch (ClassNotFoundException e) {
-							System.err.println(e);
-							return;
-						}
-						catch (ServerException e) {
-							System.err.println(e.getMessage());
-							answer = 'n';
-							break;
-						}
-					} //end while [viene fuori dal while con un db (in alternativa il programma termina)
-						
-					while(answer == 'y'){
-						try{
-							String clusterSet=main.learningFromDbTable();
-							System.out.println(clusterSet);
-							
-							main.storeClusterInFile();
-									
-						}
-						catch (SocketException e) {
-							System.err.println(e);
-							return;
-						}
-						catch (FileNotFoundException e) {
-							System.err.println(e);
-							return;
-						} 
-						catch (ClassNotFoundException e) {
-							System.err.println(e);
-							return;
-						}catch (IOException e) {
-							System.err.println(e);
-							return;
-						}
-						catch (ServerException e) {
-							System.err.println(e.getMessage());
-						}
-						System.out.print("Vuoi ripetere l'esecuzione?(y/n)");
-						answer=Keyboard.readChar();
-					}
-					break; //fine case 2
-					default:
-					System.out.println("Opzione non valida!");
-			}
-			
-			System.out.print("Vuoi scegliere una nuova operazione da menu?(y/n)");
-			if(Keyboard.readChar()!='y')
-				break;
-			}
-		while(true);
+	private class AsyncLearningFromFileRequest extends AsyncClass {
+		Socket socket;
+		private String table;
+		private double k;
+		
+		public AsyncLearningFromFileRequest(IAsyncResponsive responsive, Socket socket, String tableName, double k) {
+			super(responsive);
+			this.socket = socket;
+			this.table = tableName;
+			this.k = k;
 		}
 
-	/**
-	 * Create the applet.
-	 */
-	public MainTest() {
-		getContentPane().setBackground(Color.LIGHT_GRAY);
-		getContentPane().setLayout(null);
+		@Override
+		protected Object runasync() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	
+	private class AsyncStoreInFileRequest extends AsyncClass {
+		Socket socket;
+		private String fileName;
 		
-		JTabbedPane JTabbedPane = new JTabbedPane();
-		JTabbedPane.setBackground(Color.LIGHT_GRAY);
-		JTabbedPane.setBounds(10, 11, 430, 278);
-		getContentPane().add(JTabbedPane);
+		public AsyncStoreInFileRequest(IAsyncResponsive responsive, Socket socket, String fileName){
+			super(responsive);
+			this.socket = socket;
+			this.fileName = fileName;
+		}
 		
-		JPanel DBPanel = new JPanel();
-		DBPanel.setBackground(Color.LIGHT_GRAY);
-		JTabbedPane.addTab("DB", null, DBPanel, null);
-		DBPanel.setLayout(null);
+ 		protected Object runasync() {
+			try {
+				return storeClusterInFile(fileName);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ServerException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			return "Error";
+		}
 		
-		tableNameTxt = new JTextField();
-		tableNameTxt.setBounds(81, 11, 86, 20);
-		DBPanel.add(tableNameTxt);
-		tableNameTxt.setColumns(10);
+	}
+	
+	private class TabbedPane extends JPanel implements IAsyncResponsive {
+		private JPanelCluster panelDB;
+		private JPanelCluster panelFile;
+		//private JPanelCluster panelEsempio;
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(254, 11, 86, 20);
-		DBPanel.add(textField_1);
-		textField_1.setColumns(10);
+		private class JPanelCluster extends JPanel {
+			private JTextField tableText;
+			private JTextField kText;
+			private TextArea clusterOutput;
+			private JDialogFileManager windowFile;
+			private JButton excecuteButton;
+			private JButton fileButton;
+			
+			JPanelCluster(String buttonName, ActionListener ae1, String fileButtonName, ActionListener ae2) {
+				setLayout(null);
+				
+				JPanel upPanel = new JPanel();
+				upPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Input Boxes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				upPanel.setBounds(10, 11, 405, 50);
+				add(upPanel);
+				upPanel.setLayout(null);
+				
+				JLabel tableLabel = new JLabel("Table");
+				tableLabel.setBounds(10, 25, 32, 14);
+				upPanel.add(tableLabel);
+				
+				tableText = new JTextField();
+				tableText.setBounds(52, 22, 86, 20);
+				upPanel.add(tableText);
+				tableText.setColumns(10);
+				
+				JLabel kLabel = new JLabel("k");
+				kLabel.setBounds(203, 25, 24, 14);
+				upPanel.add(kLabel);
+				
+				kText = new JTextField();
+				kText.setBounds(213, 22, 86, 20);
+				upPanel.add(kText);
+				kText.setColumns(10);
+				
+				JPanel centralPanel = new JPanel();
+				centralPanel.setBorder(new TitledBorder(null, "Clusters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				centralPanel.setBounds(10, 65, 405, 130);
+				add(centralPanel);
+				centralPanel.setLayout(null);
+				
+				clusterOutput = new TextArea();
+				clusterOutput.setEditable(false);
+				clusterOutput.setBounds(10, 21, 380, 99);
+				centralPanel.add(clusterOutput);
+				
+				JPanel downPanel = new JPanel();
+				downPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				downPanel.setBounds(10, 200, 405, 39);
+				add(downPanel);
+				downPanel.setLayout(null);
+				
+				excecuteButton = new JButton(buttonName);
+				excecuteButton.addActionListener(ae1);
+				excecuteButton.setBounds(10, 11, 89, 23);
+				downPanel.add(excecuteButton);
+				
+				fileButton = new JButton (fileButtonName);
+				fileButton.addActionListener((ae) -> {
+					windowFile = new JDialogFileManager ("Save", ae2);
+					windowFile.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					windowFile.setVisible(true);
+				});
+				fileButton.setBounds(306, 11, 89, 23);
+				downPanel.add(fileButton);
+				
+				/*
+				setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+				
+				//upPanel
+				JPanel upPanel = new JPanel();
+				add(upPanel);
+				JLabel tableLabel = new JLabel("table");
+				upPanel.add(tableLabel);
+				upPanel.add(tableText);
+				JLabel kLabel = new JLabel("k");
+				upPanel.add(kLabel);
+				upPanel.add(kText);
+				
+				//centralPanel
+				JPanel centralPanel = new JPanel();
+				add(centralPanel);
+				centralPanel.add(clusterOutput);
+				
+				//downPanel
+				JPanel downPanel = new JPanel();
+				add(downPanel);
+				excecuteButton = new JButton(buttonName);
+				excecuteButton.addActionListener(ae1);
+				fileButton = new JButton (fileButtonName);
+				fileButton.addActionListener((ae) -> {
+					windowFile = new JDialogFileManager ("Save", ae2);
+					windowFile.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					windowFile.setVisible(true);
+				});
+				downPanel.add(excecuteButton);
+				downPanel.add(fileButton);
+				*/
+			}
+		}
 		
-		JLabel lblTable = new JLabel("Table:");
-		lblTable.setBounds(22, 14, 46, 14);
-		DBPanel.add(lblTable);
+		private class JDialogFileManager extends JDialog implements WindowListener {
+			private JPanel contentPanel = new JPanel();
+			private JTextField fileNameText;
+			
+			JDialogFileManager (String buttonName, ActionListener ae){
+				setBounds(100, 100, 220, 120);
+				getContentPane().setLayout(new BorderLayout());
+				contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+				getContentPane().add(contentPanel, BorderLayout.CENTER);
+				contentPanel.setLayout(null);
+				{
+					JLabel fileNaleLabel = new JLabel("File name");
+					fileNaleLabel.setBounds(10, 11, 45, 14);
+					contentPanel.add(fileNaleLabel);
+				}
+				
+				fileNameText = new JTextField();
+				fileNameText.setBounds(65, 8, 129, 20);
+				contentPanel.add(fileNameText);
+				fileNameText.setColumns(10);
+				{
+					JPanel buttonPane = new JPanel();
+					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+					getContentPane().add(buttonPane, BorderLayout.SOUTH);
+					{
+						JButton okButton = new JButton("OK");
+						okButton.setActionCommand("OK");
+						okButton.addActionListener(ae);
+						buttonPane.add(okButton);
+						getRootPane().setDefaultButton(okButton);
+					}
+					{
+						JButton cancelButton = new JButton("Cancel");
+						cancelButton.setActionCommand("Cancel");
+						buttonPane.add(cancelButton);
+					}
+				}
+			}
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				//this.getParent().setEnabled(true);
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		}
 		
-		JLabel lblK = new JLabel("k:");
-		lblK.setBounds(226, 14, 18, 14);
-		DBPanel.add(lblK);
+		TabbedPane() {
+			super(new GridLayout(1, 1)); 
+			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			tabbedPane.setBounds(10, 11, 430, 278);
+			panelDB = new JPanelCluster("MINE", (ae1) -> {
+				String table = panelDB.tableText.getText();
+				int k;
+				try {
+					//k = new Double(panelDB.kText.getText()).doubleValue();
+					k = new Integer((panelDB.kText.getText())).intValue();
+				} catch (NumberFormatException ex) {
+					k = 0;
+				}
+				String result = (String) new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).runasync();
+				panelDB.clusterOutput.setText(result);
+			}, "Save Clusters on File", (ae2) -> {
+				String fileName = panelDB.windowFile.fileNameText.getText();
+				String result = (String) new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).runasync();
+				JOptionPane.showMessageDialog(null, result, "Information", JOptionPane.INFORMATION_MESSAGE);
+				panelDB.windowFile.setEnabled(false);
+			});
+			tabbedPane.addTab("DB", null, panelDB, null);
+			panelFile = new JPanelCluster("STORE FROM FILE", null, "Save Clusters on File",null);
+			tabbedPane.addTab("File", null, panelFile, null);
+			//panelEsempio = new JPanelCluster();
+			//tabbedPane.addTab("Esempio", null, panelEsempio, null);
+			add(tabbedPane);
+			tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		}
+
+		@Override
+		public void asyncStart(AsyncClass o) {
+			TextArea textArea;
+			if (o instanceof AsyncLearningFromDatabaseRequest)
+				textArea = panelDB.clusterOutput;
+			else if (o instanceof AsyncLearningFromFileRequest)
+				textArea = panelFile.clusterOutput;
+			else
+				return;
+			textArea.setText("Processing the server...");
+		}
+
+		@Override
+		public void asyncEnd(AsyncClass o, Object result) {
+			TextArea textArea;
+
+			if (o instanceof AsyncLearningFromDatabaseRequest){
+				textArea = panelDB.clusterOutput;
+			}
+			else if (o instanceof AsyncLearningFromFileRequest) {
+				textArea = panelFile.clusterOutput;
+			}
+			else
+				return;
+			textArea.setText((String)result);
+			
+		}
+	}
+	
+	private TabbedPane tab;
+	
+	public void init() {
+		String strHost = getParameter("ServerIP");
+		String strPort = getParameter("Port");
+		int port;
+
+		if (strHost == null) { // se non ï¿½ specificato alcun indirizzo IP
+			strHost = DEFAULT_HOST; // allora ne imposta uno di default
+		}
+
+		if (strPort == null) { // se non ï¿½ specificata la porta
+			port = DEFAULT_PORT; // allora imposta la porta di default
+		}
+		else
+		{
+			// altrimenti la processa dal parametro
+			try {
+				port = Integer.parseInt(strPort);
+			} catch (NumberFormatException e) {
+				// se il parametro ï¿½ un formato differente da un numero
+				// allora imposta la porta come da default
+				port = DEFAULT_PORT;
+			}
+		}
+
+		try {
+			InetAddress addr = InetAddress.getByName(strHost); // ottiene l'indirizzo dell'host specificato
+			System.out.println("Connecting to " + addr + "...");
+			socket = new Socket(addr, port); // prova a connetters
+			System.out.println("Success! Connected to " + socket);
+
+			tab = new TabbedPane();
+			tab.setBounds(0, 0, 450, 300);
+			getContentPane().add(tab);
+			tab.setLayout(null);
+			
+			/*
+			tab = new TabbedPane();
+			getContentPane().setLayout(new GridLayout(1, 1));
+			getContentPane().add(tab);
+			ResponsiveInterface = tab;
+			*/
+
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Unable to connect to " + strHost + ":" + port + ".\n" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			this.destroy();
+			System.exit(0);
+		}
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(10, 117, 405, 91);
-		DBPanel.add(textPane);
-		
-		JButton btnMine = new JButton("MINE");
-		btnMine.setBounds(155, 219, 89, 23);
-		DBPanel.add(btnMine);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(125, 72, -78, 14);
-		DBPanel.add(tabbedPane);
-		
-		JButton button = new JButton("");
-		button.setBounds(10, 72, 89, 23);
-		DBPanel.add(button);
-		
-		JPanel FilePanel = new JPanel();
-		FilePanel.setBackground(Color.LIGHT_GRAY);
-		FilePanel.setLayout(null);
-		JTabbedPane.addTab("FILE", null, FilePanel, null);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(81, 11, 86, 20);
-		FilePanel.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(254, 11, 86, 20);
-		FilePanel.add(textField_3);
-		
-		JLabel label = new JLabel("Table:");
-		label.setBounds(22, 14, 46, 14);
-		FilePanel.add(label);
-		
-		JLabel label_1 = new JLabel("k:");
-		label_1.setBounds(226, 14, 18, 14);
-		FilePanel.add(label_1);
-		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(10, 117, 405, 91);
-		FilePanel.add(textPane_1);
-		
-		JButton btnStoreFromFile = new JButton("STORE FROM FILE");
-		btnStoreFromFile.setBounds(155, 219, 121, 23);
-		FilePanel.add(btnStoreFromFile);
 
 	}
 }
