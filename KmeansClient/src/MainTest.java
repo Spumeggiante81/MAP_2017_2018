@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 <<<<<<< HEAD
@@ -22,6 +23,8 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 >>>>>>> 2af9d8fcc1cd302668fb3a5fe7f73f04da467ebe
+=======
+>>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
 =======
 >>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
 
@@ -40,6 +43,7 @@ import java.awt.Color;
 import KmeansServer*.*;
 
 public class MainTest extends JApplet {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	private static String DEFAULT_HOST = "localhost";
@@ -77,6 +81,10 @@ public class MainTest extends JApplet {
 	{
 >>>>>>> 2af9d8fcc1cd302668fb3a5fe7f73f04da467ebe
 =======
+=======
+
+
+>>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
 	/**
 	 * @param args
 	 */
@@ -107,6 +115,9 @@ public class MainTest extends JApplet {
 	 * @throws IOException nel caso si verifichi un errore in fase di lettura
      */
 	private static Object readObject(Socket socket) throws ClassNotFoundException, IOException {
+<<<<<<< HEAD
+>>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
+=======
 >>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
 		Object o;
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -226,6 +237,7 @@ public class MainTest extends JApplet {
 			ip = Keyboard.readString();
 			System.out.println("Inserire porta:");
 			port = Keyboard.readInt();
+<<<<<<< HEAD
 		}
 		else{
 			ip = DEFAULT_HOST;
@@ -239,6 +251,21 @@ public class MainTest extends JApplet {
 			System.err.println(e);
 			return;
 		}
+=======
+		}
+		else{
+			ip = DEFAULT_HOST;
+			port = DEFAULT_PORT;
+		}
+		MainTest main=null;
+		try{
+			main=new MainTest(ip,port);
+		}
+		catch (IOException e){
+			System.err.println(e);
+			return;
+		}
+>>>>>>> parent of 2af9d8f... JApplet (panelDB funzionante)
 		do{
 			int menuAnswer=main.menu();
 			switch(menuAnswer){
