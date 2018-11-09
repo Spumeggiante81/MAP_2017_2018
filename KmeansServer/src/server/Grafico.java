@@ -57,7 +57,7 @@ public class Grafico extends JFrame {
 
 	private ChartPanel createDemoPanel() {
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
-				title, "Cluster", "Distanze", createSampleData(),
+				title, "Distanze", "Cluster", createSampleData(),
 				PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
 		xyPlot.setDomainCrosshairVisible(true);
@@ -72,7 +72,7 @@ public class Grafico extends JFrame {
 				maxX = asseXY[i][0];
 		}
 		domain.setRange(0.00, maxX + 0.2);
-		domain.setTickUnit(new NumberTickUnit(1));
+		domain.setTickUnit(new NumberTickUnit(0.5));
 		domain.setVerticalTickLabels(true);
 		NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
 		double maxY = 0;
@@ -81,7 +81,7 @@ public class Grafico extends JFrame {
 				maxY = asseXY[i][1];
 		}
 		range.setRange(0.0, maxY + 0.5);
-		range.setTickUnit(new NumberTickUnit(0.5));
+		range.setTickUnit(new NumberTickUnit(1));
 		return new ChartPanel(jfreechart);
 	}
 
