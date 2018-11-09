@@ -12,6 +12,7 @@ import mining.KMeansMiner;
 
 import java.net.*;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,14 +26,9 @@ import java.io.*;
 class ServerOneClient extends Thread {
 	private Socket socket;
 	private KMeansMiner kmeans;
-	//Object [][] matTuple = null;
+
 	private Data data;
-	//non serve definire queste variabili come attributi di classe
-	//private int numeroRighe = 0;
-	//final int NUMEROCOLONNE = 2;
-	//private Tuple tupla;
-	//Cluster cluster;
-	//ClusterSet clusterset;
+	private Grafico grafico;
 
 	/**
 	 * Inizializza gli attributi socket, in ed out. Avvia il thread.
@@ -142,52 +138,80 @@ class ServerOneClient extends Thread {
 	 * @param matTuple 
 	 * @throws IOException
 	 */
-	//private void learningFromDbTable (Socket socket, Tuple obj) throws IOException {
 	private void learningFromDbTable (Socket socket) throws IOException {
+		
+		int numeroRighe,k,numIter;
+		double [][] matTuple = null;
+		ClusterSet clusterSet;
+		Tuple t, centroid;
+		Cluster cluster, clusterVet;
+		double distanza,idCluster;
+		DecimalFormat distanza1 = new DecimalFormat("0.00");
+		
+		
 		try{
 			if (!data.equals(null)){
-				int k = (int)readObject(socket);
+				k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
-				// da questa condizione, potrai testare tranquillamente il tuo operato, garantendo in ogni caso 
-				// il funzionamento base del programma.
-				// se true = esegue la porzione di codice contenuto al suo interno
-				// altrimenti false
-				// tutte le prove che devi svolgere, falle all'interno del blocco di codice contenuto nell'IF
-				if /*(true)*/(false){
-				//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
-				//recuperarli da ciò che abbiamo
+				numIter = kmeans.kmeans(data);
 				
-				//a cosa serve stampare una matrice vuota?!
-				//ricordo che tale matrice deve essere di tipo double, vedi riga 171
-				Object [][] matTuple = null;
-				int numeroRighe = data.getNumberOfExamples();
-				System.out.println("Righe "+ numeroRighe);
-				for(int  i=0;i<=numeroRighe;i++){
-					System.out.println(matTuple[i][0]);
-				}
+				if /*(false)*/ (true){
+					//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
+					//recuperarli da ciò che abbiamo
+					//ricordo che tale matrice deve essere di tipo double, vedi riga 171
 
-				for(int  i=0;i<=numeroRighe;i++){
-					Tuple t = data.getItemSet(i);
-					ClusterSet clusterSet = this.kmeans.getC();
-				    //clusterSet da dove lo ricavi?!
-					Cluster cluster= clusterSet.nearestCluster(t); //modificata la visibilità a public di nearestCluster
-					Tuple centroid = cluster.getCentroid(); //modificata la visibilità a public di getcentroid
-		
+					//Ricava il numero di tuple in data tramite il metodo getNumberOfExample e 
+					//lo conserva nella variabile numeroRighe 
+					numeroRighe = data.getNumberOfExamples();
+					//Matrice di supporto alla stampa del grafico
+					//il numero di righe rappresenta le tuple in data
+					matTuple = new double[numeroRighe][2];
+					System.out.println("Righe "+ numeroRighe);
+
+					for(int  i=0;i<numeroRighe;i++){
+						//Restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore
+						t = data.getItemSet(i);
+						clusterSet = this.kmeans.getC();
+						//clusterSet da dove lo ricavi?!
+						cluster= clusterSet.nearestCluster(t); //modificata la visibilità a public di nearestCluster
+						System.out.println("CLUSTER "+cluster.toString());
+						centroid = cluster.getCentroid(); //modificata la visibilità a public di getcentroid
 						//Se alla matrice non passi dei valori di tipo Double, non sarà in grado di creare il grafico.
 						//e dato che cluster è di tipo, guardacaso, Cluster, non riuscirà nell'intento ora come ora.
 						//Pertanto conviene definire un identificatore di tipo double per ciascuno di questi cluster
-						matTuple[i][0] = cluster;		
-						matTuple[i][1] = t.getDistance(centroid);
+						distanza = t.getDistance(centroid);
+						idCluster = 0;
+
+						for (int j=0; j<k;j++){
+							//Restituisce il Cluster in posizione i
+							clusterVet  = clusterSet.get(j);
+							//Confronta il clustervet, cluster del vettore di Cluster, 
+							//con il cluster più vicino alla tupla sulla base della distanza calcolata
+							if(clusterVet.equals(cluster)){
+								idCluster = j;
+								break;
+							}
+						}
+						//Assegna alla matrice la distanza ed il Cluster associato a tale distanza
+						matTuple[i][1] = distanza;
+						matTuple[i][0] = idCluster;
+
+						grafico = new Grafico("Tuple",matTuple);
 					}
-				//Aggiunto per verifica stampa matrice
-				for(int i=0;i<=numeroRighe;i++){
-					for(int j=0;j<=1;j++)
-						System.out.print( matTuple[i][j] + " ");
-					System.out.println();
-				}
+					grafico = new Grafico("Tuple",matTuple);
+					//Aggiunto per verifica stampa matrice
+
+					for(int i=0;i<numeroRighe;i++){
+						for(int j=0;j<2;j++)
+							System.out.print( matTuple[i][j] + " ");
+						System.out.println();
+					}
+					grafico = new Grafico("Tuple",matTuple);
+					grafico.setSize(400,400);
+					grafico.setVisible(true);
 				}//<<<
+				
 				// inserire la porzione di codice per la generazione del grafico fino all'interno della parentesi graffa riportato qui sopra
-				int numIter = kmeans.kmeans(data);
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
 				writeObject(socket,kmeans.getC().toString(data));
@@ -239,17 +263,17 @@ class ServerOneClient extends Thread {
 			writeObject(socket,"OK");
 			writeObject(socket,kmeans.getC().toString(data));
 		}
-    	catch(IOException e){
-    		writeObject(socket,e.getMessage());
-    	}
-    	catch(ClassNotFoundException e){
-    		writeObject(socket,e.getMessage());
-    	}
-    	catch(DatabaseConnectionException e){
-    		writeObject(socket,e.getMessage());
-    	}
-    	catch(SQLException e){
-    		writeObject(socket,e.getMessage());
-    	}
-    }
+		catch(IOException e){
+			writeObject(socket,e.getMessage());
+		}
+		catch(ClassNotFoundException e){
+			writeObject(socket,e.getMessage());
+		}
+		catch(DatabaseConnectionException e){
+			writeObject(socket,e.getMessage());
+		}
+		catch(SQLException e){
+			writeObject(socket,e.getMessage());
+		}
+	}
 }

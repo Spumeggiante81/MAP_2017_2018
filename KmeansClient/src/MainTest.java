@@ -231,7 +231,7 @@ public class MainTest extends JApplet {
 				
 				JPanel downPanel = new JPanel();
 				downPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				downPanel.setBounds(10, 200, 405, 39);
+				downPanel.setBounds(100, 200, 405, 39);
 				add(downPanel);
 				downPanel.setLayout(null);
 				

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer"/>
+		<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansClient"/>
+	</list>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\grafico"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\Mat"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_6"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_4"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_3"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_2"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_1"/>
 			<item value="C:\Users\Dany\Desktop\sig\sig"/>
 			<item value="C:\Users\Dany\Desktop\registro (1)"/>
 			<item value="C:\Users\Dany\Desktop\login\login"/>

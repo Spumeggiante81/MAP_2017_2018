@@ -26,4 +26,5 @@
 <fullyQualifiedTypeName name="data.Tuple"/>
 <fullyQualifiedTypeName name="mining.ClusterSet"/>
 <fullyQualifiedTypeName name="mining.Cluster"/>
+<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
 </qualifiedTypeNameHistroy>

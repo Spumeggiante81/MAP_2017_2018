@@ -2,6 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Windows 7/Documents/GitHub/MAP_2017_2018/esercitazione_7/server_7/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dany/Desktop/Grafico Java/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dany/Desktop/Grafico Java/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dany/Desktop/mysql-connector-java-8.0.12 (3)/mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -50,7 +50,7 @@ public class ClusterSet implements Serializable {
 	 * @param i
 	 * @return
 	 */
-	Cluster get(int i){
+	public Cluster get(int i){
 		return C[i];
 	}
 
