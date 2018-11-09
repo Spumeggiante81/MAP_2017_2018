@@ -162,7 +162,7 @@ class ServerOneClient extends Thread {
 
 					//Ricava il numero di tuple in data tramite il metodo getNumberOfExample e 
 					//lo conserva nella variabile numeroRighe 
-					numeroRighe = data.getNumberOfExamples();
+					 numeroRighe = data.getNumberOfExamples();
 					//Matrice di supporto alla stampa del grafico
 					//il numero di righe rappresenta le tuple in data
 					matTuple = new double[numeroRighe][2];
@@ -198,7 +198,7 @@ class ServerOneClient extends Thread {
 
 						grafico = new Grafico("Tuple",matTuple);
 					}
-					grafico = new Grafico("Tuple",matTuple);
+					//grafico = new Grafico("Tuple",matTuple);
 					//Aggiunto per verifica stampa matrice
 
 					for(int i=0;i<numeroRighe;i++){
@@ -206,7 +206,7 @@ class ServerOneClient extends Thread {
 							System.out.print( matTuple[i][j] + " ");
 						System.out.println();
 					}
-					grafico = new Grafico("Tuple",matTuple);
+					//grafico = new Grafico("Tuple",matTuple);
 					grafico.setSize(400,400);
 					grafico.setVisible(true);
 				}//<<<

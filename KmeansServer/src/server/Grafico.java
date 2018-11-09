@@ -30,11 +30,11 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class Grafico extends JFrame {
 	private static final String title = "Kmeans";
 	
-	double[][] asseXY;
+	double[][] asseXY = new double[14][2];; 
 	
 	public Grafico(double[][] matrice) {
 
-		double [][] asseXY = matrice;
+		//double [][] asseXY = matrice;
 		
 		
 		Grafico demo = new Grafico(title, asseXY);
@@ -57,7 +57,7 @@ public class Grafico extends JFrame {
 
 	private ChartPanel createDemoPanel() {
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
-				title, "Distanze", "Cluster", createSampleData(),
+				title, "Cluster", "Distanze", createSampleData(),
 				PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
 		xyPlot.setDomainCrosshairVisible(true);
@@ -68,20 +68,20 @@ public class Grafico extends JFrame {
 		domain.setRange(0.00, 3.5);
 		double maxX = 0;
 		for (int i = 0; i < asseXY.length; i++){ 
-			if (asseXY[i][0] >= maxX)
-				maxX = asseXY[i][0];
+			if (asseXY[i][1] >= maxX)
+				maxX = asseXY[i][1];
 		}
-		domain.setRange(0.00, maxX + 0.2);
-		domain.setTickUnit(new NumberTickUnit(0.5));
+		domain.setRange(0.00, maxX + 0.5);
+		domain.setTickUnit(new NumberTickUnit(1));
 		domain.setVerticalTickLabels(true);
 		NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
 		double maxY = 0;
 		for (int i = 0; i < asseXY.length; i++){
-			if (asseXY[i][1] >= maxY)
-				maxY = asseXY[i][1];
+			if (asseXY[i][0] >= maxY)
+				maxY = asseXY[i][0];
 		}
 		range.setRange(0.0, maxY + 0.5);
-		range.setTickUnit(new NumberTickUnit(1));
+		range.setTickUnit(new NumberTickUnit(0.5));
 		return new ChartPanel(jfreechart);
 	}
 
