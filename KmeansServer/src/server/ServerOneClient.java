@@ -1,6 +1,7 @@
 package server;
 
 import data.Attribute;
+
 import data.Data;
 import data.DiscreteAttribute;
 import data.OutOfRangeSampleSize;
@@ -18,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 import java.io.*;
+import java.math.BigDecimal;
 
 
 /**
@@ -166,46 +168,52 @@ class ServerOneClient extends Thread {
 					//Matrice di supporto alla stampa del grafico
 					//il numero di righe rappresenta le tuple in data
 					matTuple = new double[numeroRighe][2];
-					System.out.println("Righe "+ numeroRighe);
-
-					for(int  i=0;i<numeroRighe;i++){
+           
+					for(int  i=0;i<numeroRighe;i++)
+					{
 						//Restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore
 						t = data.getItemSet(i);
 						clusterSet = this.kmeans.getC();
 						//clusterSet da dove lo ricavi?!
-						cluster= clusterSet.nearestCluster(t); //modificata la visibilità a public di nearestCluster
+						cluster= clusterSet.nearestCluster(t); 
 						System.out.println("CLUSTER "+cluster.toString());
-						centroid = cluster.getCentroid(); //modificata la visibilità a public di getcentroid
+						centroid = cluster.getCentroid(); 
+						System.out.println("Centroide "+centroid);
 						//Se alla matrice non passi dei valori di tipo Double, non sarà in grado di creare il grafico.
 						//e dato che cluster è di tipo, guardacaso, Cluster, non riuscirà nell'intento ora come ora.
 						//Pertanto conviene definire un identificatore di tipo double per ciascuno di questi cluster
-						distanza = t.getDistance(centroid);
-						idCluster = 0;
+					    distanza =Math.abs(t.getDistance(centroid));
+						System.out.println("Distanza " + distanza);
+						System.out.format("Troncamento: " + "%.2f%n", distanza);
+						idCluster = 0;  
 
-						for (int j=0; j<k;j++){
+						for (int j=0; j<k;j++)
+						{
 							//Restituisce il Cluster in posizione i
 							clusterVet  = clusterSet.get(j);
 							//Confronta il clustervet, cluster del vettore di Cluster, 
 							//con il cluster più vicino alla tupla sulla base della distanza calcolata
-							if(clusterVet.equals(cluster)){
+							if(clusterVet.equals(cluster))
+							{
 								idCluster = j;
 								break;
 							}
 						}
 						//Assegna alla matrice la distanza ed il Cluster associato a tale distanza
-						matTuple[i][1] = distanza;
 						matTuple[i][0] = idCluster;
+						matTuple[i][1] = distanza;
+						
 
-						grafico = new Grafico("Tuple",matTuple);
+						//grafico = new Grafico("Tuple",matTuple);
 					}
-					//grafico = new Grafico("Tuple",matTuple);
+					grafico = new Grafico("Tuple",matTuple);
+					int numT = 1;
 					//Aggiunto per verifica stampa matrice
-
-					for(int i=0;i<numeroRighe;i++){
-						for(int j=0;j<2;j++)
-							System.out.print( matTuple[i][j] + " ");
+					for(int i = 0;i < numeroRighe;i++){
+							System.out.print( "Tupla " + numT +" Riga " + i +"  Colonna " + 0+ "  Cluster "+ matTuple[i][0] + "  " + "Distanza "+ matTuple[i][1]);	
+						numT+=1;
 						System.out.println();
-					}
+				}
 					//grafico = new Grafico("Tuple",matTuple);
 					grafico.setSize(400,400);
 					grafico.setVisible(true);

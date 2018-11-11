@@ -41,6 +41,8 @@ public class MainTest extends JApplet {
 
 	private Socket socket = null;
 
+	
+	
 	protected static Object readObject(Socket socket) throws ClassNotFoundException, IOException
 	{
 		Object o;
@@ -200,6 +202,8 @@ public class MainTest extends JApplet {
 				add(upPanel);
 				upPanel.setLayout(null);
 				
+				
+				
 				JLabel tableLabel = new JLabel("Table");
 				tableLabel.setBounds(10, 25, 32, 14);
 				upPanel.add(tableLabel);
@@ -231,9 +235,11 @@ public class MainTest extends JApplet {
 				
 				JPanel downPanel = new JPanel();
 				downPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				downPanel.setBounds(100, 200, 405, 39);
+				downPanel.setBounds(10, 200, 400, 39);
 				add(downPanel);
 				downPanel.setLayout(null);
+				
+				
 				
 				excecuteButton = new JButton(buttonName);
 				excecuteButton.addActionListener(ae1);
@@ -432,6 +438,7 @@ public class MainTest extends JApplet {
 		String strPort = getParameter("Port");
 		int port;
 
+		this.getSize(getMaximumSize());
 		if (strHost == null) { // se non � specificato alcun indirizzo IP
 			strHost = DEFAULT_HOST; // allora ne imposta uno di default
 		}

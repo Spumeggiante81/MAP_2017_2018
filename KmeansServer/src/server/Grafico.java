@@ -89,10 +89,12 @@ public class Grafico extends JFrame {
 		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		XYSeries series = new XYSeries("Tuple");
 		
-		
+		System.out.println("Lunghezza matrice: "+ asseXY.length);
 		for (int i = 0; i < asseXY.length; i++)
 		{
 			series.add(asseXY[i][0], asseXY[i][1]);
+			System.out.println("Asse X: " + asseXY[i][0] +  " " + "Asse Y: "+asseXY[i][1] );
+			
 		}
 
 		xySeriesCollection.addSeries(series);
