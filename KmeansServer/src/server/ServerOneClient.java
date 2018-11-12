@@ -173,18 +173,20 @@ class ServerOneClient extends Thread {
 					{
 						//Restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore
 						t = data.getItemSet(i);
+						//System.out.println("Tuple "+t.toString()+"di i: " +i);
 						clusterSet = this.kmeans.getC();
+						//System.out.println("Clusterset  "+clusterSet.toString());
 						//clusterSet da dove lo ricavi?!
 						cluster= clusterSet.nearestCluster(t); 
-						System.out.println("CLUSTER "+cluster.toString());
+						//System.out.println("CLUSTER "+cluster.toString());
 						centroid = cluster.getCentroid(); 
-						System.out.println("Centroide "+centroid);
+						//System.out.println("Centroide "+centroid.toString());
 						//Se alla matrice non passi dei valori di tipo Double, non sarà in grado di creare il grafico.
 						//e dato che cluster è di tipo, guardacaso, Cluster, non riuscirà nell'intento ora come ora.
 						//Pertanto conviene definire un identificatore di tipo double per ciascuno di questi cluster
 					    distanza =Math.abs(t.getDistance(centroid));
-						System.out.println("Distanza " + distanza);
-						System.out.format("Troncamento: " + "%.2f%n", distanza);
+						//System.out.println("Distanza " + distanza);
+						System.out.format("%.2f%n", distanza);
 						idCluster = 0;  
 
 						for (int j=0; j<k;j++)
@@ -200,13 +202,13 @@ class ServerOneClient extends Thread {
 							}
 						}
 						//Assegna alla matrice la distanza ed il Cluster associato a tale distanza
-						matTuple[i][0] = idCluster;
-						matTuple[i][1] = distanza;
+						matTuple[i][0] = distanza;
+						matTuple[i][1] = idCluster;
 						
 
 						//grafico = new Grafico("Tuple",matTuple);
 					}
-					grafico = new Grafico("Tuple",matTuple);
+					//grafico = new Grafico("Tuple",matTuple);
 					int numT = 1;
 					//Aggiunto per verifica stampa matrice
 					for(int i = 0;i < numeroRighe;i++){
@@ -214,7 +216,7 @@ class ServerOneClient extends Thread {
 						numT+=1;
 						System.out.println();
 				}
-					//grafico = new Grafico("Tuple",matTuple);
+					grafico = new Grafico("Tuple",matTuple);
 					grafico.setSize(400,400);
 					grafico.setVisible(true);
 				}//<<<
