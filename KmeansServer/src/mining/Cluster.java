@@ -81,12 +81,16 @@ public class Cluster implements Serializable{
 			str+=centroid.get(i)+ " ";
 		str+=")\nExamples:\n";
 		int array [] = clusteredData.stream().mapToInt(Integer::intValue).toArray();
+		System.out.println("Array lunghezza "+array.length);
 		for(int i=0;i<array.length;i++){
 			str+="[";
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)
 				str+=data.getAttributeValue(array[i], j)+" ";
+			//str+="] \n";
 			str+="] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
 
+			
+			
 		}
 		str+="\nAvgDistance="+getCentroid().avgDistance(data, array);
 		return str;

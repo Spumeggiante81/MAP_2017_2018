@@ -70,7 +70,7 @@ class ServerOneClient extends Thread {
 	 * Riscrive il metodo run della superclasse Thread al fine di gestire le
 	 * richieste del client
 	 */
-	public void run(){//non poteamo mettere in un throws per gestire le eccezioni?
+	public void run(){//
 		while (socket.isConnected()) {
 			try {
 				int choice = (int)readObject(socket);
@@ -141,7 +141,7 @@ class ServerOneClient extends Thread {
 	 * @throws IOException
 	 */
 	private void learningFromDbTable (Socket socket) throws IOException {
-		
+
 		int numeroRighe,k,numIter;
 		double [][] matTuple = null;
 		ClusterSet clusterSet;
@@ -149,14 +149,14 @@ class ServerOneClient extends Thread {
 		Cluster cluster, clusterVet;
 		double distanza,idCluster;
 		DecimalFormat distanza1 = new DecimalFormat("0.00");
-		
-		
+
+
 		try{
 			if (!data.equals(null)){
 				k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
 				numIter = kmeans.kmeans(data);
-				
+
 				if /*(false)*/ (true){
 					//TODO : ricavare la matrice di coppie "idCluster - distanza", per ciascuna tupla
 					//recuperarli da ciò che abbiamo
@@ -164,17 +164,18 @@ class ServerOneClient extends Thread {
 
 					//Ricava il numero di tuple in data tramite il metodo getNumberOfExample e 
 					//lo conserva nella variabile numeroRighe 
-					 numeroRighe = data.getNumberOfExamples();
+					numeroRighe = data.getNumberOfExamples();
 					//Matrice di supporto alla stampa del grafico
 					//il numero di righe rappresenta le tuple in data
 					matTuple = new double[numeroRighe][2];
-           
+
 					for(int  i=0;i<numeroRighe;i++)
 					{
 						//Restituisce un oggetto di tuple che modella come sequenza di coppie Attributo-valore
 						t = data.getItemSet(i);
-						//System.out.println("Tuple "+t.toString()+"di i: " +i);
-						clusterSet = this.kmeans.getC();
+						
+						//clusterSet = this.kmeans.getC();
+						clusterSet = kmeans.getC();
 						//System.out.println("Clusterset  "+clusterSet.toString());
 						//clusterSet da dove lo ricavi?!
 						cluster= clusterSet.nearestCluster(t); 
@@ -184,7 +185,9 @@ class ServerOneClient extends Thread {
 						//Se alla matrice non passi dei valori di tipo Double, non sarà in grado di creare il grafico.
 						//e dato che cluster è di tipo, guardacaso, Cluster, non riuscirà nell'intento ora come ora.
 						//Pertanto conviene definire un identificatore di tipo double per ciascuno di questi cluster
-					    distanza =Math.abs(t.getDistance(centroid));
+						
+						distanza =Math.abs(t.getDistance(centroid));
+						//distanza =Math.abs(centroid.getCentroid().getDistance(data.getItemSet(array[i])));
 						//System.out.println("Distanza " + distanza);
 						System.out.format("%.2f%n", distanza);
 						idCluster = 0;  
@@ -204,24 +207,22 @@ class ServerOneClient extends Thread {
 						//Assegna alla matrice la distanza ed il Cluster associato a tale distanza
 						matTuple[i][0] = distanza;
 						matTuple[i][1] = idCluster;
-						
 
-						//grafico = new Grafico("Tuple",matTuple);
+
 					}
-					//grafico = new Grafico("Tuple",matTuple);
 					int numT = 1;
 					//Aggiunto per verifica stampa matrice
 					for(int i = 0;i < numeroRighe;i++){
-							System.out.print( "Tupla " + numT +" Riga " + i +"  Colonna " + 0+ "  Cluster "+ matTuple[i][0] + "  " + "Distanza "+ matTuple[i][1]);	
+						System.out.print( "Tupla " + numT +" Riga " + i +"  Colonna " + 0+ "  Cluster "+ matTuple[i][1] + "  " + "Distanza "+ matTuple[i][0]);	
 						numT+=1;
 						System.out.println();
-				}
+					}
 					grafico = new Grafico("Tuple",matTuple);
 					grafico.setSize(400,400);
 					grafico.setVisible(true);
-				}//<<<
-				
-				// inserire la porzione di codice per la generazione del grafico fino all'interno della parentesi graffa riportato qui sopra
+				}
+
+
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
 				writeObject(socket,kmeans.getC().toString(data));

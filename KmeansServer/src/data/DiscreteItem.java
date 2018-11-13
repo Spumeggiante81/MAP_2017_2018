@@ -26,7 +26,6 @@ public class DiscreteItem extends Item{
 		return equals(a) == true ? 0 : 1;
 		/*
 		invoca il metodo equals  sull'oggetto su cui è invocato distance passando a 
-		this superfluo perchè stai invocando il metodo equals sull'oggetto corrente
 		 */ 
 	}
 
