@@ -1,4 +1,4 @@
-package server;
+package grafic;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,13 +33,7 @@ public class Grafico extends JFrame {
 	double[][] asseXY = new double[14][2];; 
 	
 	public Grafico(double[][] matrice) {
-
-		//double [][] asseXY = matrice;
-		
-		
 		Grafico demo = new Grafico(title, asseXY);
-		for(int i = 0;i<14;i++)
-			System.out.println("Distanza: " + asseXY[i][0]);
 		demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		demo.pack();
 		demo.setLocationRelativeTo(null);
@@ -49,15 +43,10 @@ public class Grafico extends JFrame {
 	
 	public Grafico(String s,double [][] asseXY) {
 		super(s);
-		
 		this.asseXY = asseXY;
 		final ChartPanel chartPanel = createDemoPanel();
 		this.add(chartPanel, BorderLayout.CENTER);
 		JPanel control = new JPanel();
-		
-		for(int i = 0;i<14;i++)
-			System.out.println("Distanza " + asseXY[i][0]);
-		
 		this.add(control, BorderLayout.SOUTH);
 	}
 
@@ -94,15 +83,8 @@ public class Grafico extends JFrame {
 	private XYDataset createSampleData() {
 		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		XYSeries series = new XYSeries("Tuple");
-		
-		System.out.println("Lunghezza matrice: "+ asseXY.length);
 		for (int i = 0; i < asseXY.length; i++)
-		{
 			series.add(asseXY[i][0], asseXY[i][1]);
-			System.out.println("Asse X(distanza): " + asseXY[i][0] +  " " + "Asse Y(cluster): "+asseXY[i][1] );
-			
-		}
-
 		xySeriesCollection.addSeries(series);
 
 		return xySeriesCollection;

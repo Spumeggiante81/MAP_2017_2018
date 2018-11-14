@@ -75,25 +75,29 @@ public class Cluster implements Serializable{
 
 	}
 
-	public String toString(Data data){
+	public Object [] toString(Data data){
+		Object [] result = new Object [2];
+		double distance = 0;
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)
 			str+=centroid.get(i)+ " ";
 		str+=")\nExamples:\n";
 		int array [] = clusteredData.stream().mapToInt(Integer::intValue).toArray();
-		System.out.println("Array lunghezza "+array.length);
+		double [] distances = new double [array.length];
 		for(int i=0;i<array.length;i++){
 			str+="[";
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)
 				str+=data.getAttributeValue(array[i], j)+" ";
 			//str+="] \n";
-			str+="] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
-
-			
-			
+			distance = Math.abs(getCentroid().getDistance(data.getItemSet(array[i])));
+			str+="] dist="+ distance +"\n";
+			distances[i] = distance;
 		}
 		str+="\nAvgDistance="+getCentroid().avgDistance(data, array);
-		return str;
+		//return str;
+		result[0] = str;
+		result[1] = distances;
+		return result;
 
 	}
 }

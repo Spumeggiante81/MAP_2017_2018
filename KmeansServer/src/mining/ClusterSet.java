@@ -2,10 +2,12 @@ package mining;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import grafic.Grafico;
 
 import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
+import grafic.Grafico;
 
 public class ClusterSet implements Serializable {
 	//Attributi
@@ -137,12 +139,25 @@ public class ClusterSet implements Serializable {
 	 */
 	public String toString(Data data) {
 		String str="";
-
+		Grafico grafico;
+		Object [] result = new Object [2];
+		double [][] matTuple = new double[data.getNumberOfExamples()][2];
+		int k = 0;
 		for(int i=0;i<C.length;i++){
 			if(C[i]!=null){
-				str+=i+":"+C[i].toString(data)+"\n";
+				result = C[i].toString(data);
+				str+=i+":"+(String)result[0]+"\n";
+				double [] distances = (double []) result[1];
+				for(int j = 0; j<distances.length;j++){
+					matTuple[k][0] = distances[j];
+					matTuple[k][1] = i;
+					k++;
+				}
 			}
 		}
+		grafico = new Grafico("Tuple",matTuple);
+		grafico.setSize(400,400);
+		grafico.setVisible(true);
 		return str;
 	}	
 }
