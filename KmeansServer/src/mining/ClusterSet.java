@@ -1,9 +1,11 @@
 package mining;
 
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.Arrays;
-import grafic.Grafico;
+import java.util.Iterator;
 
+import grafic.Grafico;
 import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
@@ -13,8 +15,7 @@ public class ClusterSet implements Serializable {
 	//Attributi
 	private Cluster[] C;
 	private int i = 0; //indica la posizione per memorizzare un nuovo cluster in C
-	//private ArraySet a;
-
+	private ClusterPlot cPlot;
 	//Metodi
 
 	/**
@@ -26,6 +27,7 @@ public class ClusterSet implements Serializable {
 		try{
 			C = new Cluster[k];
 			Arrays.fill(C, null);
+			cPlot = new ClusterPlot("Cluster Plot","distance","#cluster",500,220);
 		}
 		catch(NegativeArraySizeException e){
 			throw new OutOfRangeSampleSize ("k deve essere un intero positivo");
@@ -69,18 +71,11 @@ public class ClusterSet implements Serializable {
 	}
 
 	/**
-	 * Logica usata
-	 * volevo associare a distanza un valore massimo in modo ciclando si sarebbe aggiornato con il valore minimo
-	 * double distanza2=tuple.getDistance(C[i].getCentroid()); Calcolare la distanza fra l'oggetto riferito da Tuple 
-	 * e quello riferito dal metodo getcentroid
-	 * associare il valore al cluster che ha la distanza minima e restituirlo
-	 * 
 	 * Calcola la distanza tra la tupla riferita da tuple ed il centroide di ciascun cluster C
 	 * @param tuple
 	 * @return restituisce il Cluster più vicino sulla base della distanza calcolata da getDistance della classe Tuple
 	 */
-	public Cluster nearestCluster(Tuple tuple)
-	{
+	public Cluster nearestCluster(Tuple tuple){
 		/*
 		 * Dato che la "distanza" massima ricavabile dal confronto dei centroidi con la tupla, corrisponderà al numero di elementi presenti nella tupla 
 		 * 
@@ -90,8 +85,7 @@ public class ClusterSet implements Serializable {
 		 */
 		double nearestDistance = tuple.getDistance(this.get(0).getCentroid());
 		Cluster C = this.get(0);
-		for(int i = 0 ; i < this.i ;i++)
-		{
+		for(int i = 0 ; i < this.i ;i++){
 			//ricordando che getCentroid della classe Cluster restituisce il centroide in 
 			//una tupla
 			double distance = tuple.getDistance(this.get(i).getCentroid());
@@ -111,15 +105,14 @@ public class ClusterSet implements Serializable {
 	 * @return
 	 */
 	public Cluster currentCluster(int id){
-		for(int i=0;i<this.i;i++) 
-		{
+		for(int i=0;i<this.i;i++) {
 			if(C[i].contain(id)) 
 				//C[i] è il riferimento del mio vettore di cluster
 				//contain della classe Cluster verifica se la transazione è presente
 				//restituisce il cluster [i] corrispondente
 				return C[i];
 		}
-		return null;//restituisce null
+		return null;
 	}
 
 	/**
@@ -131,6 +124,22 @@ public class ClusterSet implements Serializable {
 			this.get(i).computeCentroid(data);
 		}
 	}
+	
+	public void populatePlot(Data data){
+		for (int i = 0; i < this.i; i++){
+			Cluster c = this.get(i);
+			Iterator<Integer> it = c.getTuplesIterator();
+			while(it.hasNext()){
+				Integer t = it.next();
+				double distance = Math.abs(c.getCentroid().getDistance(data.getItemSet(t)));
+				cPlot.AddData(distance, i);
+			}
+		}
+	}
+
+	public void writePlot(Socket s){
+		this.cPlot.WritePlot(s);
+	}
 
 	/**
 	 * Restituisce una stringa che descrive lo stato di ciascun cluster in C
@@ -139,25 +148,11 @@ public class ClusterSet implements Serializable {
 	 */
 	public String toString(Data data) {
 		String str="";
-		Grafico grafico;
-		Object [] result = new Object [2];
-		double [][] matTuple = new double[data.getNumberOfExamples()][2];
-		int k = 0;
 		for(int i=0;i<C.length;i++){
 			if(C[i]!=null){
-				result = C[i].toString(data);
-				str+=i+":"+(String)result[0]+"\n";
-				double [] distances = (double []) result[1];
-				for(int j = 0; j<distances.length;j++){
-					matTuple[k][0] = distances[j];
-					matTuple[k][1] = i;
-					k++;
-				}
+				str+=i+":"+C[i].toString(data)+"\n";
 			}
 		}
-		grafico = new Grafico("Tuple",matTuple);
-		grafico.setSize(400,400);
-		grafico.setVisible(true);
 		return str;
 	}	
 }

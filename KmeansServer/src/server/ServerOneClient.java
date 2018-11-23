@@ -142,24 +142,18 @@ class ServerOneClient extends Thread {
 	 */
 	private void learningFromDbTable (Socket socket) throws IOException {
 
-		int numeroRighe,k,numIter;
-		double [][] matTuple = null;
-		ClusterSet clusterSet;
-		Tuple t, centroid;
-		Cluster cluster, clusterVet;
-		double distanza,idCluster;
-		DecimalFormat distanza1 = new DecimalFormat("0.00");
-
-
+		int k,numIter;
 		try{
 			if (!data.equals(null)){
 				k = (int)readObject(socket);
 				kmeans = new KMeansMiner(k);
 				numIter = kmeans.kmeans(data);
-
 				writeObject(socket,"OK");
 				writeObject(socket,numIter);
 				writeObject(socket,kmeans.getC().toString(data));
+				writeObject(socket,"IMG");
+				kmeans.getC().populatePlot(data);
+				kmeans.getC().writePlot(socket);
 			}
 			else
 				writeObject(socket,"Nessuna collezione di dati selezionata");

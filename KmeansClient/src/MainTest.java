@@ -1,10 +1,15 @@
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
@@ -12,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,6 +27,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -188,62 +196,57 @@ public class MainTest extends JApplet {
 		private class JPanelCluster extends JPanel {
 			private JTextField tableText;
 			private JTextField kText;
-			private TextArea clusterOutput;
+			private JTextArea clusterOutput;
 			private JDialogFileManager windowFile;
 			private JButton excecuteButton;
 			private JButton fileButton;
+			private JLabel plot = new JLabel("",null,JLabel.CENTER);
 			
 			JPanelCluster(String buttonName, ActionListener ae1, String fileButtonName, ActionListener ae2) {
-				setLayout(null);
+				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
 				JPanel upPanel = new JPanel();
 				upPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Input Boxes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				upPanel.setBounds(10, 11, 405, 50);
+				upPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 				add(upPanel);
-				upPanel.setLayout(null);
+				upPanel.setLayout(new GridBagLayout());
+				GridBagConstraints gbc = new GridBagConstraints();
 				
+				tableText = new JTextField(20);
+				kText = new JTextField(10);
 				
-				
-				JLabel tableLabel = new JLabel("Table");
-				tableLabel.setBounds(10, 25, 32, 14);
-				upPanel.add(tableLabel);
-				
-				tableText = new JTextField();
-				tableText.setBounds(52, 22, 86, 20);
-				upPanel.add(tableText);
-				tableText.setColumns(10);
-				
-				JLabel kLabel = new JLabel("k");
-				kLabel.setBounds(203, 25, 24, 14);
-				upPanel.add(kLabel);
-				
-				kText = new JTextField();
-				kText.setBounds(213, 22, 86, 20);
-				upPanel.add(kText);
-				kText.setColumns(10);
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				upPanel.add(new JLabel("Table"),gbc);
+				gbc.gridx = 1;
+				gbc.gridy = 0;
+				upPanel.add(tableText,gbc);
+				gbc.gridx = 0;
+				gbc.gridy = 1;
+				upPanel.add(new JLabel("k"),gbc);
+				gbc.gridx = 1;
+				gbc.gridy = 1;
+				upPanel.add(kText,gbc);
+								clusterOutput = new JTextArea();
+				clusterOutput.setEditable(false);
+				JScrollPane scrollingArea = new JScrollPane(clusterOutput);
 				
 				JPanel centralPanel = new JPanel();
 				centralPanel.setBorder(new TitledBorder(null, "Clusters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				centralPanel.setBounds(10, 65, 405, 130);
 				add(centralPanel);
-				centralPanel.setLayout(null);
-				
-				clusterOutput = new TextArea();
-				clusterOutput.setEditable(false);
-				clusterOutput.setBounds(10, 21, 380, 99);
-				centralPanel.add(clusterOutput);
+				centralPanel.setLayout(new BorderLayout(0, 0));
+				centralPanel.add(plot,BorderLayout.NORTH);
+				//centralPanel.add(clusterOutput, BorderLayout.CENTER);
+				centralPanel.add(scrollingArea,BorderLayout.CENTER);
 				
 				JPanel downPanel = new JPanel();
+				downPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 				downPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				downPanel.setBounds(10, 200, 400, 39);
+				downPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				add(downPanel);
-				downPanel.setLayout(null);
-				
-				
 				
 				excecuteButton = new JButton(buttonName);
 				excecuteButton.addActionListener(ae1);
-				excecuteButton.setBounds(10, 11, 89, 23);
 				downPanel.add(excecuteButton);
 				
 				fileButton = new JButton (fileButtonName);
@@ -252,41 +255,7 @@ public class MainTest extends JApplet {
 					windowFile.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					windowFile.setVisible(true);
 				});
-				fileButton.setBounds(306, 11, 89, 23);
 				downPanel.add(fileButton);
-				
-				/*
-				setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-				
-				//upPanel
-				JPanel upPanel = new JPanel();
-				add(upPanel);
-				JLabel tableLabel = new JLabel("table");
-				upPanel.add(tableLabel);
-				upPanel.add(tableText);
-				JLabel kLabel = new JLabel("k");
-				upPanel.add(kLabel);
-				upPanel.add(kText);
-				
-				//centralPanel
-				JPanel centralPanel = new JPanel();
-				add(centralPanel);
-				centralPanel.add(clusterOutput);
-				
-				//downPanel
-				JPanel downPanel = new JPanel();
-				add(downPanel);
-				excecuteButton = new JButton(buttonName);
-				excecuteButton.addActionListener(ae1);
-				fileButton = new JButton (fileButtonName);
-				fileButton.addActionListener((ae) -> {
-					windowFile = new JDialogFileManager ("Save", ae2);
-					windowFile.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					windowFile.setVisible(true);
-				});
-				downPanel.add(excecuteButton);
-				downPanel.add(fileButton);
-				*/
 			}
 		}
 		
@@ -373,20 +342,19 @@ public class MainTest extends JApplet {
 		}
 		
 		TabbedPane() {
-			super(new GridLayout(1, 1)); 
+			super(new GridLayout(0, 1, 0, 0)); 
 			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setBounds(10, 11, 430, 278);
 			panelDB = new JPanelCluster("MINE", (ae1) -> {
 				String table = panelDB.tableText.getText();
 				int k;
 				try {
-					//k = new Double(panelDB.kText.getText()).doubleValue();
 					k = new Integer((panelDB.kText.getText())).intValue();
 				} catch (NumberFormatException ex) {
 					k = 0;
 				}
-				String result = (String) new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).runasync();
-				panelDB.clusterOutput.setText(result);
+				//String result = (String) new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
+				new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
+				//panelDB.clusterOutput.setText(result);
 			}, "Save Clusters on File", (ae2) -> {
 				String fileName = panelDB.windowFile.fileNameText.getText();
 				String result = (String) new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).runasync();
@@ -404,7 +372,7 @@ public class MainTest extends JApplet {
 
 		@Override
 		public void asyncStart(AsyncClass o) {
-			TextArea textArea;
+			JTextArea textArea;
 			if (o instanceof AsyncLearningFromDatabaseRequest)
 				textArea = panelDB.clusterOutput;
 			else if (o instanceof AsyncLearningFromFileRequest)
@@ -416,18 +384,41 @@ public class MainTest extends JApplet {
 
 		@Override
 		public void asyncEnd(AsyncClass o, Object result) {
-			TextArea textArea;
-
+			JTextArea textArea;
+			JLabel plot;
+			
 			if (o instanceof AsyncLearningFromDatabaseRequest){
 				textArea = panelDB.clusterOutput;
+				plot = panelDB.plot;
 			}
 			else if (o instanceof AsyncLearningFromFileRequest) {
 				textArea = panelFile.clusterOutput;
+				plot = panelFile.plot;
 			}
 			else
 				return;
 			textArea.setText((String)result);
-			
+			try {
+				String is_img = (String) readObject (socket);
+				if (is_img.compareTo("IMG")==0){
+					byte[] buffer = (byte[])readObject(socket);
+					ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+					BufferedImage img = ImageIO.read(bais);
+					bais.close();
+					ImageIcon icon = new ImageIcon(img);
+					plot.setIcon(icon);
+				}
+				
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -446,8 +437,7 @@ public class MainTest extends JApplet {
 		if (strPort == null) { // se non � specificata la porta
 			port = DEFAULT_PORT; // allora imposta la porta di default
 		}
-		else
-		{
+		else{
 			// altrimenti la processa dal parametro
 			try {
 				port = Integer.parseInt(strPort);
@@ -465,16 +455,9 @@ public class MainTest extends JApplet {
 			System.out.println("Success! Connected to " + socket);
 
 			tab = new TabbedPane();
-			tab.setBounds(0, 0, 450, 300);
-			getContentPane().add(tab);
-			tab.setLayout(null);
-			
-			/*
-			tab = new TabbedPane();
-			getContentPane().setLayout(new GridLayout(1, 1));
+			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 			getContentPane().add(tab);
 			ResponsiveInterface = tab;
-			*/
 
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Unable to connect to " + strHost + ":" + port + ".\n" + e.getMessage(),

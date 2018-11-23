@@ -30,17 +30,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class Grafico extends JFrame {
 	private static final String title = "Kmeans";
 	
-	double[][] asseXY = new double[14][2];; 
-	
-	public Grafico(double[][] matrice) {
-		Grafico demo = new Grafico(title, asseXY);
-		demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		demo.pack();
-		demo.setLocationRelativeTo(null);
-		demo.setVisible(true);
-	}
+	double[][] asseXY; 
 
-	
 	public Grafico(String s,double [][] asseXY) {
 		super(s);
 		this.asseXY = asseXY;
