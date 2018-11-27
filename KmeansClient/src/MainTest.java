@@ -227,7 +227,8 @@ public class MainTest extends JApplet {
 				gbc.gridx = 1;
 				gbc.gridy = 1;
 				upPanel.add(kText,gbc);
-								clusterOutput = new JTextArea();
+				
+				clusterOutput = new JTextArea();
 				clusterOutput.setEditable(false);
 				JScrollPane scrollingArea = new JScrollPane(clusterOutput);
 				
@@ -236,7 +237,6 @@ public class MainTest extends JApplet {
 				add(centralPanel);
 				centralPanel.setLayout(new BorderLayout(0, 0));
 				centralPanel.add(plot,BorderLayout.NORTH);
-				//centralPanel.add(clusterOutput, BorderLayout.CENTER);
 				centralPanel.add(scrollingArea,BorderLayout.CENTER);
 				
 				JPanel downPanel = new JPanel();
@@ -260,42 +260,33 @@ public class MainTest extends JApplet {
 		}
 		
 		private class JDialogFileManager extends JDialog implements WindowListener {
-			private JPanel contentPanel = new JPanel();
-			private JTextField fileNameText;
+			private JTextField textField;
 			
 			JDialogFileManager (String buttonName, ActionListener ae){
-				setBounds(100, 100, 220, 120);
-				getContentPane().setLayout(new BorderLayout());
-				contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-				getContentPane().add(contentPanel, BorderLayout.CENTER);
-				contentPanel.setLayout(null);
-				{
-					JLabel fileNaleLabel = new JLabel("File name");
-					fileNaleLabel.setBounds(10, 11, 45, 14);
-					contentPanel.add(fileNaleLabel);
-				}
+				//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
-				fileNameText = new JTextField();
-				fileNameText.setBounds(65, 8, 129, 20);
-				contentPanel.add(fileNameText);
-				fileNameText.setColumns(10);
-				{
-					JPanel buttonPane = new JPanel();
-					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-					getContentPane().add(buttonPane, BorderLayout.SOUTH);
-					{
-						JButton okButton = new JButton("OK");
-						okButton.setActionCommand("OK");
-						okButton.addActionListener(ae);
-						buttonPane.add(okButton);
-						getRootPane().setDefaultButton(okButton);
-					}
-					{
-						JButton cancelButton = new JButton("Cancel");
-						cancelButton.setActionCommand("Cancel");
-						buttonPane.add(cancelButton);
-					}
-				}
+				JPanel dPanel = new JPanel();
+				dPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+				add(dPanel);
+				dPanel.setLayout(new GridBagLayout());
+				GridBagConstraints gbc = new GridBagConstraints();
+				
+				textField = new JTextField(10);
+				JButton executeButton = new JButton(buttonName);
+				executeButton.addActionListener(ae);
+				
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				dPanel.add(new JLabel("File Name"),gbc);
+				gbc.gridx = 1;
+				gbc.gridy = 0;
+				dPanel.add(textField,gbc);
+				gbc.gridx = 0;
+				gbc.gridy = 1;
+				dPanel.add(executeButton,gbc);
+				gbc.gridx = 1;
+				gbc.gridy = 1;
+				dPanel.add(new JButton("Cancel"),gbc);
 			}
 
 			@Override
@@ -352,20 +343,14 @@ public class MainTest extends JApplet {
 				} catch (NumberFormatException ex) {
 					k = 0;
 				}
-				//String result = (String) new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
 				new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
-				//panelDB.clusterOutput.setText(result);
 			}, "Save Clusters on File", (ae2) -> {
-				String fileName = panelDB.windowFile.fileNameText.getText();
-				String result = (String) new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).runasync();
-				JOptionPane.showMessageDialog(null, result, "Information", JOptionPane.INFORMATION_MESSAGE);
-				panelDB.windowFile.setEnabled(false);
+				String fileName = panelDB.windowFile.textField.getText();
+				new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
 			});
 			tabbedPane.addTab("DB", null, panelDB, null);
 			panelFile = new JPanelCluster("STORE FROM FILE", null, "Save Clusters on File",null);
 			tabbedPane.addTab("File", null, panelFile, null);
-			//panelEsempio = new JPanelCluster();
-			//tabbedPane.addTab("Esempio", null, panelEsempio, null);
 			add(tabbedPane);
 			tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		}
@@ -373,13 +358,21 @@ public class MainTest extends JApplet {
 		@Override
 		public void asyncStart(AsyncClass o) {
 			JTextArea textArea;
-			if (o instanceof AsyncLearningFromDatabaseRequest)
+			JLabel plot;
+			
+			if (o instanceof AsyncLearningFromDatabaseRequest){
 				textArea = panelDB.clusterOutput;
-			else if (o instanceof AsyncLearningFromFileRequest)
+				plot = panelDB.plot;
+			}
+			else if (o instanceof AsyncLearningFromFileRequest) {
 				textArea = panelFile.clusterOutput;
+				plot = panelFile.plot;
+			}
 			else
 				return;
 			textArea.setText("Processing the server...");
+			plot.setText("Plot loading...");
+			plot.setIcon(null);
 		}
 
 		@Override
@@ -395,9 +388,14 @@ public class MainTest extends JApplet {
 				textArea = panelFile.clusterOutput;
 				plot = panelFile.plot;
 			}
+			else if (o instanceof AsyncStoreInFileRequest) {
+				JOptionPane.showMessageDialog(null, result, "Information", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 			else
 				return;
 			textArea.setText((String)result);
+			plot.setText("");
 			try {
 				String is_img = (String) readObject (socket);
 				if (is_img.compareTo("IMG")==0){

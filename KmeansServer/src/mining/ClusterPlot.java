@@ -58,7 +58,7 @@ public class ClusterPlot implements Serializable{
      */
     public void AddData(Double x, Integer y){
         if(!values.containsKey(x))
-            values.put(x,y);
+            values.put(x,++y);
         series.add(x,values.get(x));
     }
 
