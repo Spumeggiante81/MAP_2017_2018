@@ -3,6 +3,7 @@ package mining;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import data.Data;
@@ -75,25 +76,25 @@ public class Cluster implements Serializable{
 
 	}
 
+	Iterator<Integer> getTuplesIterator(){
+		return this.clusteredData.iterator();
+	}
+	
 	public String toString(Data data){
+		double distance = 0;
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)
 			str+=centroid.get(i)+ " ";
 		str+=")\nExamples:\n";
 		int array [] = clusteredData.stream().mapToInt(Integer::intValue).toArray();
-		System.out.println("Array lunghezza "+array.length);
 		for(int i=0;i<array.length;i++){
 			str+="[";
 			for(int j=0;j<data.getNumberOfExplanatoryAttributes();j++)
 				str+=data.getAttributeValue(array[i], j)+" ";
-			//str+="] \n";
-			str+="] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
-
-			
-			
+			distance = Math.abs(getCentroid().getDistance(data.getItemSet(array[i])));
+			str+="] dist="+ distance +"\n";
 		}
 		str+="\nAvgDistance="+getCentroid().avgDistance(data, array);
 		return str;
-
 	}
 }

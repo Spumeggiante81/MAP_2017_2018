@@ -1,12 +1,10 @@
 abstract class AsyncClass extends Thread {
     private IAsyncResponsive asyncResponse = null;
 
-    AsyncClass(IAsyncResponsive response)
-    {
+    AsyncClass(IAsyncResponsive response){
         asyncResponse = response;
     }
-    public @Override final void run()
-    {
+    @Override public final void  run(){
         asyncResponse.asyncStart(this);
         asyncResponse.asyncEnd(this, runasync());
     }
