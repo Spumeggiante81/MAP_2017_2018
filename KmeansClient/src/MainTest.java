@@ -25,6 +25,8 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,7 +44,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 public class MainTest extends JApplet {
-	
+	private enum FieldType {table, k, FileName};
 	private static String DEFAULT_HOST = "localhost";
 	private static int DEFAULT_PORT = 8080;
 	private static IAsyncResponsive ResponsiveInterface;
@@ -116,6 +118,17 @@ public class MainTest extends JApplet {
 		else throw new ServerException(result);
 	}
 	
+	private String learningFromFile (String table, String fileName) throws IOException, ClassNotFoundException, ServerException{
+		writeObject(socket,3);
+		writeObject(socket, table);
+		writeObject(socket, fileName);
+		String result = (String)readObject(socket);
+		if(result.equals("OK")){
+			return ("Clustering output in file : " + fileName + "\n") + (String)readObject(socket);
+		}
+		else throw new ServerException(result);
+	}
+	
 	private class AsyncLearningFromDatabaseRequest extends AsyncClass {
 		Socket socket;
 		private String table;
@@ -147,19 +160,26 @@ public class MainTest extends JApplet {
 	private class AsyncLearningFromFileRequest extends AsyncClass {
 		Socket socket;
 		private String table;
-		private double k;
+		private String fileName;
 		
-		public AsyncLearningFromFileRequest(IAsyncResponsive responsive, Socket socket, String tableName, double k) {
+		public AsyncLearningFromFileRequest(IAsyncResponsive responsive, Socket socket,String table, String fileName) {
 			super(responsive);
-			this.socket = socket;
-			this.table = tableName;
-			this.k = k;
+			this.fileName = fileName;
+			this.table = table;
 		}
 
 		@Override
 		protected Object runasync() {
-			// TODO Auto-generated method stub
-			return null;
+			try{
+				return learningFromFile(table, fileName);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (ServerException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			return "Error";
 		}
 	}
 	
@@ -189,167 +209,150 @@ public class MainTest extends JApplet {
 	}
 	
 	private class TabbedPane extends JPanel implements IAsyncResponsive {
+
 		private JPanelCluster panelDB;
 		private JPanelCluster panelFile;
-		//private JPanelCluster panelEsempio;
 		
 		private class JPanelCluster extends JPanel {
-			private JTextField tableText;
-			private JTextField kText;
+
+			private Map<String, JTextField> upPanelFields;
+			private JPanel upPanel, centralPanel, downPanel;
 			private JTextArea clusterOutput;
-			private JDialogFileManager windowFile;
-			private JButton excecuteButton;
-			private JButton fileButton;
+			//private JDialogFileManager windowFile;
 			private JLabel plot = new JLabel("",null,JLabel.CENTER);
 			
-			JPanelCluster(String buttonName, ActionListener ae1, String fileButtonName, ActionListener ae2) {
+			/**
+			 * Istanzia un generico Pannello, suddiviso in tre sotto-pannelli : upPanel, centralPanel, downPanel.
+			 * 
+			 * Nel primo (upPanel) vi saranno indicati i campi che dovranno essere compilati dall'utente. Per definire tali
+			 * campi. 
+			 * 
+			 * Nel secondo (centralPanel) vi sarà un'area di testo su cui si potrà riportare qualsiasi genere di messaggio
+			 * da far visualizzare all'utente.
+			 * 
+			 * Nel terzo (downPanel) vi saranno riportati i pulsanti relativi alle azioni quali si vorranno far eseguire.
+			 *
+			 * @param upPanelName Stringa che descrive il pannello da usare (e verrà impostato ai margini del bordo di tale pannello).
+			 * Inserire null se si vuole omettere l'utilizzo di tale pannello.
+			 * @param centralPanelName Stringa che descrive il pannello da usare (e verrà impostato ai margini del bordo di tale pannello).
+			 * Inserire null se si vuole omettere l'utilizzo di tale pannello.
+			 * @param downPanelName Stringa che descrive il pannello da usare (e verrà impostato ai margini del bordo di tale pannello).
+			 * Inserire null se si vuole omettere l'utilizzo di tale pannello.
+			 */
+			JPanelCluster (String upPanelName, String centralPanelName, String downPanelName){
 				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
-				JPanel upPanel = new JPanel();
+				upPanelFields = new HashMap <>();
+				
+				upPanel = new JPanel();
 				upPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Input Boxes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				upPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-				add(upPanel);
 				upPanel.setLayout(new GridBagLayout());
-				GridBagConstraints gbc = new GridBagConstraints();
 				
-				tableText = new JTextField(20);
-				kText = new JTextField(10);
-				
-				gbc.gridx = 0;
-				gbc.gridy = 0;
-				upPanel.add(new JLabel("Table"),gbc);
-				gbc.gridx = 1;
-				gbc.gridy = 0;
-				upPanel.add(tableText,gbc);
-				gbc.gridx = 0;
-				gbc.gridy = 1;
-				upPanel.add(new JLabel("k"),gbc);
-				gbc.gridx = 1;
-				gbc.gridy = 1;
-				upPanel.add(kText,gbc);
-				
+				if (upPanelName != null)
+					add(upPanel);
+
 				clusterOutput = new JTextArea();
 				clusterOutput.setEditable(false);
 				JScrollPane scrollingArea = new JScrollPane(clusterOutput);
 				
-				JPanel centralPanel = new JPanel();
+				centralPanel = new JPanel();
 				centralPanel.setBorder(new TitledBorder(null, "Clusters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				add(centralPanel);
 				centralPanel.setLayout(new BorderLayout(0, 0));
 				centralPanel.add(plot,BorderLayout.NORTH);
 				centralPanel.add(scrollingArea,BorderLayout.CENTER);
 				
-				JPanel downPanel = new JPanel();
+				if (centralPanelName != null)
+					add(centralPanel);
+				
+				downPanel = new JPanel();
 				downPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 				downPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				downPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-				add(downPanel);
-				
-				excecuteButton = new JButton(buttonName);
-				excecuteButton.addActionListener(ae1);
-				downPanel.add(excecuteButton);
-				
-				fileButton = new JButton (fileButtonName);
-				fileButton.addActionListener((ae) -> {
-					windowFile = new JDialogFileManager ("Save", ae2);
-					windowFile.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					windowFile.setVisible(true);
-				});
-				downPanel.add(fileButton);
+				if (downPanelName != null)
+					add(downPanel);
 			}
-		}
-		
-		private class JDialogFileManager extends JDialog implements WindowListener {
-			private JTextField textField;
 			
-			JDialogFileManager (String buttonName, ActionListener ae){
-				//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-				
-				JPanel dPanel = new JPanel();
-				dPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-				add(dPanel);
-				dPanel.setLayout(new GridBagLayout());
+			/**
+			 * Permette di definire un nuovo campo compilabile, da inserire nel pannello "upPanel"
+			 * @param field nome del campo 
+			 */
+			public void addUpPanelField (FieldType field){
+				JTextField textField = new JTextField(10);
+				upPanelFields.put(field.name(), textField);
 				GridBagConstraints gbc = new GridBagConstraints();
-				
-				textField = new JTextField(10);
-				JButton executeButton = new JButton(buttonName);
-				executeButton.addActionListener(ae);
-				
 				gbc.gridx = 0;
-				gbc.gridy = 0;
-				dPanel.add(new JLabel("File Name"),gbc);
+				gbc.gridy = upPanelFields.size() - 1;
+				upPanel.add(new JLabel (field.name()), gbc);
 				gbc.gridx = 1;
-				gbc.gridy = 0;
-				dPanel.add(textField,gbc);
-				gbc.gridx = 0;
-				gbc.gridy = 1;
-				dPanel.add(executeButton,gbc);
-				gbc.gridx = 1;
-				gbc.gridy = 1;
-				dPanel.add(new JButton("Cancel"),gbc);
+				upPanel.add(textField, gbc);
 			}
-
-			@Override
-			public void windowActivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
+			
+			/**
+			 * Permette di recuperare l'oggetto associato al tipo di campo compilabile ricercato presente nel pannello upPanel(sempre
+			 * qualora sia aggiunto nel Pannello. In caso contrario, guardare "addUpPanelField").
+			 * @param field nome del campo
+			 * @return l'oggetto riferito al campo compilabile
+			 */
+			public JTextField getUpPanelField (FieldType field){
+				return upPanelFields.get(field.name());
 			}
-
-			@Override
-			public void windowClosed(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
+			
+			/**
+			 * Permette di aggiungere un bottone, associandoci un ActionListener quale sarà attivato quando tale bottone sarà premuto
+			 * @param buttonName Stringa da inserire sul bottone
+			 * @param ae evento associato all'attivazione di tale bottone
+			 */
+			public void addDownPanelButton (String buttonName, ActionListener ae){
+				JButton button = new JButton (buttonName);
+				button.addActionListener(ae);
+				downPanel.add(button);
 			}
-
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				//this.getParent().setEnabled(true);
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
 		}
-		
+				
 		TabbedPane() {
 			super(new GridLayout(0, 1, 0, 0)); 
 			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			panelDB = new JPanelCluster("MINE", (ae1) -> {
-				String table = panelDB.tableText.getText();
+			//PANEL DB
+			panelDB = new JPanelCluster("Input Boxes", "Clusters", "Comands");
+			panelDB.addUpPanelField(FieldType.table);
+			panelDB.addUpPanelField(FieldType.k);
+			panelDB.addDownPanelButton("MINE", (ae1) -> {
+				String table = panelDB.getUpPanelField(FieldType.table).getText();
 				int k;
 				try {
-					k = new Integer((panelDB.kText.getText())).intValue();
+					k = new Integer((panelDB.getUpPanelField(FieldType.k).getText())).intValue();
 				} catch (NumberFormatException ex) {
 					k = 0;
 				}
 				new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
-			}, "Save Clusters on File", (ae2) -> {
-				String fileName = panelDB.windowFile.textField.getText();
-				new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
+			});
+			panelDB.addDownPanelButton("Save Clusters on File", (ae) -> {
+				JPanelCluster windowFile = new JPanelCluster ("Input Boxes", null, "Comands");
+				JDialog dialogWindow = new JDialog();
+				JPanel contentPane = new JPanel();
+				contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+				windowFile.addDownPanelButton("Ok", (ae1) -> {
+					String fileName = windowFile.getUpPanelField(FieldType.FileName).getText();
+					new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
+				});
+				windowFile.addUpPanelField(FieldType.FileName);
+				windowFile.addDownPanelButton("Cancel", (ae1) -> {
+				});
+				contentPane.add(windowFile);
+				dialogWindow.add(contentPane);
+				dialogWindow.setVisible(true);
 			});
 			tabbedPane.addTab("DB", null, panelDB, null);
-			panelFile = new JPanelCluster("STORE FROM FILE", null, "Save Clusters on File",null);
+			//PANEL FILE
+			panelFile = new JPanelCluster("Input Boxes", "Clusters", "Comands");
+			panelFile.addUpPanelField(FieldType.table);
+			panelFile.addUpPanelField(FieldType.FileName);
+			panelFile.addDownPanelButton("MINE", (ae) -> {
+				String table = panelFile.getUpPanelField(FieldType.table).getText();
+				String fileName = panelFile.getUpPanelField(FieldType.FileName).getText();
+				new AsyncLearningFromFileRequest(ResponsiveInterface, socket, table, fileName).start();;
+			});
 			tabbedPane.addTab("File", null, panelFile, null);
 			add(tabbedPane);
 			tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

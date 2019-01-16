@@ -1,5 +1,3 @@
-/AsyncClass.class
-/IAsyncResponsive.class
 /MainTest$AsyncLearningFromDatabaseRequest.class
 /MainTest$AsyncLearningFromFileRequest.class
 /MainTest$AsyncStoreInFileRequest.class
@@ -11,3 +9,4 @@
 /keyboardinput/
 /mysql/
 /prova.class
+/MainTest$FieldType.class

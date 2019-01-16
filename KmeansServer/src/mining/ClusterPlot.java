@@ -3,7 +3,10 @@ package mining;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -47,6 +50,12 @@ public class ClusterPlot implements Serializable{
         data = new XYSeriesCollection(series);
 
         chart = ChartFactory.createScatterPlot( chartname, xaxis, yaxis, data, PlotOrientation.VERTICAL, false, true, false);
+        
+        XYPlot xyPlot = (XYPlot) chart.getPlot();
+        xyPlot.setRangeCrosshairVisible(true);
+        NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
+        range.setTickUnit(new NumberTickUnit(1));
+        
         panel = new ChartPanel(chart);
         panel.setPreferredSize(new java.awt.Dimension(width,height));
     }
