@@ -1,12 +1,13 @@
+/keyboardinput/
+/mysql/
+/AsyncClass.class
+/IAsyncResponsive.class
 /MainTest$AsyncLearningFromDatabaseRequest.class
 /MainTest$AsyncLearningFromFileRequest.class
 /MainTest$AsyncStoreInFileRequest.class
-/MainTest$TabbedPane$JDialogFileManager.class
+/MainTest$FieldType.class
 /MainTest$TabbedPane$JPanelCluster.class
 /MainTest$TabbedPane.class
 /MainTest.class
 /ServerException.class
-/keyboardinput/
-/mysql/
 /prova.class
-/MainTest$FieldType.class

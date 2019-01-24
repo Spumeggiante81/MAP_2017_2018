@@ -201,6 +201,8 @@ class ServerOneClient extends Thread {
 			kmeans = new KMeansMiner(fileName + ".dmp");
 			writeObject(socket,"OK");
 			writeObject(socket,kmeans.getC().toString(data));
+			writeObject(socket,"IMG");
+			kmeans.getC().writePlot(socket);
 		}
 		catch(IOException e){
 			writeObject(socket,e.getMessage());

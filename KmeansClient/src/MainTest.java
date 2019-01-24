@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,13 +20,17 @@ import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -36,12 +41,23 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 
 import keyboardinput.Keyboard;
 
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 public class MainTest extends JApplet {
 	private enum FieldType {table, k, FileName};
@@ -281,6 +297,12 @@ public class MainTest extends JApplet {
 				JTextField textField = new JTextField(10);
 				upPanelFields.put(field.name(), textField);
 				GridBagConstraints gbc = new GridBagConstraints();
+				/*
+				 * gridy = indica la posizione della "riga" nella griglia
+				 * gridx = indica la posizione della "colonna" nella riga
+				 * 
+				 * non a caso tutti i campi risulteranno "incolonnati", dato che tra di loro varierà solo il valore di gridy in base all'ordine di inserimento.
+				 */
 				gbc.gridx = 0;
 				gbc.gridy = upPanelFields.size() - 1;
 				upPanel.add(new JLabel (field.name()), gbc);
@@ -335,9 +357,11 @@ public class MainTest extends JApplet {
 				windowFile.addDownPanelButton("Ok", (ae1) -> {
 					String fileName = windowFile.getUpPanelField(FieldType.FileName).getText();
 					new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
+					dialogWindow.setVisible(false);
 				});
 				windowFile.addUpPanelField(FieldType.FileName);
 				windowFile.addDownPanelButton("Cancel", (ae1) -> {
+					dialogWindow.setVisible(false);
 				});
 				contentPane.add(windowFile);
 				dialogWindow.add(contentPane);
@@ -352,6 +376,54 @@ public class MainTest extends JApplet {
 				String table = panelFile.getUpPanelField(FieldType.table).getText();
 				String fileName = panelFile.getUpPanelField(FieldType.FileName).getText();
 				new AsyncLearningFromFileRequest(ResponsiveInterface, socket, table, fileName).start();;
+			});
+			panelDB.addDownPanelButton("Save as PDF", (ae) -> {
+				if (!panelDB.clusterOutput.getText().isEmpty()) {
+					Image img = ((ImageIcon)panelDB.plot.getIcon()).getImage();
+					BufferedImage image = (BufferedImage)img;
+
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.setMultiSelectionEnabled(false);
+					fileChooser.setFileFilter(new FileNameExtensionFilter("PDF file", "pdf"));
+
+					if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+						File file = fileChooser.getSelectedFile();
+						String fileName = file.getName();
+						int i = fileName.indexOf('.');
+						try {
+							if (i >= 0 && fileName.substring(i + 1).equalsIgnoreCase("pdf"))
+								PDFcreator(file.getAbsolutePath(), panelDB.clusterOutput.getText(), image);
+							else
+								PDFcreator(file.getAbsolutePath() + ".pdf", panelDB.clusterOutput.getText(), image);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			});
+			panelFile.addDownPanelButton("Save as PDF", (ae) -> {
+				if (!panelFile.clusterOutput.getText().isEmpty()) {
+					Image img = ((ImageIcon)panelFile.plot.getIcon()).getImage();
+					BufferedImage image = (BufferedImage)img;
+
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.setMultiSelectionEnabled(false);
+					fileChooser.setFileFilter(new FileNameExtensionFilter("PDF file", "pdf"));
+
+					if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+						File file = fileChooser.getSelectedFile();
+						String fileName = file.getName();
+						int i = fileName.indexOf('.');
+						try {
+							if (i >= 0 && fileName.substring(i + 1).equalsIgnoreCase("pdf"))
+								PDFcreator(file.getAbsolutePath(), panelFile.clusterOutput.getText(), image);
+							else
+								PDFcreator(file.getAbsolutePath() + ".pdf", panelFile.clusterOutput.getText(), image);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
 			});
 			tabbedPane.addTab("File", null, panelFile, null);
 			add(tabbedPane);
@@ -466,7 +538,68 @@ public class MainTest extends JApplet {
 			this.destroy();
 			System.exit(0);
 		}
-		
-
 	}
+	
+	private void PDFcreator (String title, String text, BufferedImage image ) throws Exception {
+
+        PDDocument doc = new PDDocument();
+        PDPage page = new PDPage();
+        doc.addPage(page);
+        PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+
+        PDFont pdfFont = PDType1Font.HELVETICA;
+        float fontSize = 12;
+        float leading = 1.5f * fontSize;
+
+        PDRectangle mediabox = page.findMediaBox();
+        float margin = 72;
+        float startX = mediabox.getLowerLeftX() + margin/2;
+        float startY = mediabox.getUpperRightY() - margin;
+		float center = mediabox.getWidth() /2.0f;
+
+        List<String> lines = new ArrayList<String>();
+        int lastSpace = -1;
+        while (text.length() > 0){
+            int spaceIndex = text.indexOf('\n');
+            if (spaceIndex < 0){
+                lines.add(text);
+                text = "";
+            }
+            else{
+                String subString = text.substring(0, spaceIndex);
+				if (lastSpace < 0)
+					lastSpace = spaceIndex;
+				else
+					lastSpace = spaceIndex;
+				lines.add(subString);
+				text = text.substring(lastSpace).trim();
+				lastSpace = -1;
+            }
+        }
+
+        contentStream.beginText();
+        contentStream.setFont(pdfFont, fontSize);
+        contentStream.moveTextPositionByAmount(startX, startY + margin - center);
+        for (String line: lines){
+            contentStream.drawString(line);
+            contentStream.moveTextPositionByAmount(0, -leading);
+        }
+        contentStream.endText(); 
+
+        
+        try {
+            PDXObjectImage ximage = new PDPixelMap(doc, image);
+            float scale = 0.75f;
+            contentStream.drawXObject(ximage, startX + center - ximage.getWidth()/2, ximage.getHeight()+ startY - center - margin,
+					                  ximage.getWidth()*scale, ximage.getHeight()*scale);
+        } 
+        
+        catch (FileNotFoundException fnfex) {
+            System.out.println("No image for you");
+        }
+        contentStream.close();
+        doc.save(title);
+        doc.close();
+        JOptionPane.showMessageDialog(null, "Cluster salvato nel percorso : \n" + title, "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
