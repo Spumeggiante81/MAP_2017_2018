@@ -5,11 +5,9 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import grafic.Grafico;
 import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
-import grafic.Grafico;
 
 public class ClusterSet implements Serializable {
 	//Attributi
@@ -32,10 +30,6 @@ public class ClusterSet implements Serializable {
 		catch(NegativeArraySizeException e){
 			throw new OutOfRangeSampleSize ("k deve essere un intero positivo");
 		}
-	}
-
-	public ClusterSet() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

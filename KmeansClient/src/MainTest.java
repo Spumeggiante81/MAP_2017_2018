@@ -12,12 +12,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.TextArea;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -39,7 +34,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -52,14 +46,13 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 
-import keyboardinput.Keyboard;
-
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 public class MainTest extends JApplet {
+	//definisco delle "tipi" di campi, quali potranno essere usati per definire dei campi d'intestazione nei pannelli
 	private enum FieldType {table, k, FileName};
 	private static String DEFAULT_HOST = "localhost";
 	private static int DEFAULT_PORT = 8080;
@@ -68,7 +61,13 @@ public class MainTest extends JApplet {
 	private Socket socket = null;
 
 	
-	
+	/**
+	 * Permette di leggere il contenuto presente in una socket
+	 * @param socket
+	 * @return oggetto contenuto nella socket
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	protected static Object readObject(Socket socket) throws ClassNotFoundException, IOException
 	{
 		Object o;
@@ -76,6 +75,14 @@ public class MainTest extends JApplet {
 		o = in.readObject();
 		return o;
 	}
+	
+	/**
+	 * Permette di riportare un oggetto all'interno di una socket, tale da rendere l'oggetto
+	 * condivisibile per coloro che comunicano utilizzando la stessa socket
+	 * @param socket
+	 * @param o Oggetto da passare alla socket
+	 * @throws IOException
+	 */
 	protected static void writeObject(Socket socket, Object o) throws IOException
 	{
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -90,7 +97,7 @@ public class MainTest extends JApplet {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	private void storeTableFromDb(String table) throws SocketException,ServerException,IOException,ClassNotFoundException{
+	private void storeTableFromDb(Socket socket, String table) throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,0);
 		writeObject(socket,table);
 		String result = (String)readObject(socket);
@@ -106,7 +113,7 @@ public class MainTest extends JApplet {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	private String storeClusterInFile(String fileName) throws SocketException,ServerException,IOException,ClassNotFoundException{
+	private String storeClusterInFile(Socket socket, String fileName) throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,2);
 		writeObject(socket,fileName);
 		String result = (String)readObject(socket);
@@ -124,7 +131,7 @@ public class MainTest extends JApplet {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	private String learningFromDbTable(int k) throws SocketException,ServerException,IOException,ClassNotFoundException{
+	private String learningFromDbTable(Socket socket, int k) throws SocketException,ServerException,IOException,ClassNotFoundException{
 		writeObject(socket,1);
 		writeObject(socket,k);
 		String result = (String)readObject(socket);
@@ -134,7 +141,16 @@ public class MainTest extends JApplet {
 		else throw new ServerException(result);
 	}
 	
-	private String learningFromFile (String table, String fileName) throws IOException, ClassNotFoundException, ServerException{
+	/**
+	 * Permette di ricavare i cluster che sono stati serializzati all'interno di un dato file
+	 * @param table nome della tabella da cui ricavare le tuple
+	 * @param fileName nome del file da cui si desidera estrapolare il cluster desiderato
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws ServerException
+	 */
+	private String learningFromFile (Socket socket, String table, String fileName) throws IOException, ClassNotFoundException, ServerException{
 		writeObject(socket,3);
 		writeObject(socket, table);
 		writeObject(socket, fileName);
@@ -145,6 +161,7 @@ public class MainTest extends JApplet {
 		else throw new ServerException(result);
 	}
 	
+	//Lettura e calcolo dei cluster dal database
 	private class AsyncLearningFromDatabaseRequest extends AsyncClass {
 		Socket socket;
 		private String table;
@@ -157,10 +174,9 @@ public class MainTest extends JApplet {
 			this.k = k;
 		}
 		@Override public Object runasync() {
-			try
-			{
-				storeTableFromDb(table);
-				return learningFromDbTable(k);
+			try{
+				storeTableFromDb(socket, table);
+				return learningFromDbTable(socket,k);
 				
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -173,6 +189,7 @@ public class MainTest extends JApplet {
 		}
 	}
 	
+	//Lettura dei cluster presenti in un file
 	private class AsyncLearningFromFileRequest extends AsyncClass {
 		Socket socket;
 		private String table;
@@ -187,7 +204,7 @@ public class MainTest extends JApplet {
 		@Override
 		protected Object runasync() {
 			try{
-				return learningFromFile(table, fileName);
+				return learningFromFile(socket, table, fileName);
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			} catch (ClassNotFoundException e) {
@@ -199,6 +216,7 @@ public class MainTest extends JApplet {
 		}
 	}
 	
+	//Salvataggio dei cluster in un file
 	private class AsyncStoreInFileRequest extends AsyncClass {
 		Socket socket;
 		private String fileName;
@@ -211,7 +229,7 @@ public class MainTest extends JApplet {
 		
  		protected Object runasync() {
 			try {
-				return storeClusterInFile(fileName);
+				return storeClusterInFile(socket, fileName);
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			} catch (ClassNotFoundException e) {
@@ -231,17 +249,21 @@ public class MainTest extends JApplet {
 		
 		private class JPanelCluster extends JPanel {
 
+			/*
+			 * upPanelFields conterrà tutti i campi compilabili presenti nella parte superiore di ciascun pannello
+			 * (upPanel). Ad ogni campo è associato un "tipo", quale servirà sia per identificarlo e sia per 
+			 * descrivere l'utilità di tale campo, indicando il tipo di valore richiesto da inserire
+			 */
 			private Map<String, JTextField> upPanelFields;
 			private JPanel upPanel, centralPanel, downPanel;
 			private JTextArea clusterOutput;
-			//private JDialogFileManager windowFile;
 			private JLabel plot = new JLabel("",null,JLabel.CENTER);
 			
 			/**
 			 * Istanzia un generico Pannello, suddiviso in tre sotto-pannelli : upPanel, centralPanel, downPanel.
 			 * 
 			 * Nel primo (upPanel) vi saranno indicati i campi che dovranno essere compilati dall'utente. Per definire tali
-			 * campi. 
+			 * campi ususfruire delle funzioni "addUpPanelField" e "getUpPanelField". 
 			 * 
 			 * Nel secondo (centralPanel) vi sarà un'area di testo su cui si potrà riportare qualsiasi genere di messaggio
 			 * da far visualizzare all'utente.
@@ -335,10 +357,12 @@ public class MainTest extends JApplet {
 		TabbedPane() {
 			super(new GridLayout(0, 1, 0, 0)); 
 			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			//PANEL DB
+			//----------------PANEL DB-----------------------------
 			panelDB = new JPanelCluster("Input Boxes", "Clusters", "Comands");
+			//----------------PANEL DB (upPanel)-------------------
 			panelDB.addUpPanelField(FieldType.table);
 			panelDB.addUpPanelField(FieldType.k);
+			//----------------PANEL DB(downPanel)------------------
 			panelDB.addDownPanelButton("MINE", (ae1) -> {
 				String table = panelDB.getUpPanelField(FieldType.table).getText();
 				int k;
@@ -350,6 +374,11 @@ public class MainTest extends JApplet {
 				new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
 			});
 			panelDB.addDownPanelButton("Save Clusters on File", (ae) -> {
+				/*
+				 * In questo caso non mi interessa che "windowFile" mostri la parte centrale,
+				 * perchè non ho interesse di mostrare nulla all'interno di questa finestra.
+				 * Pertanto, basta passare "null" nell'apposito campo
+				 */
 				JPanelCluster windowFile = new JPanelCluster ("Input Boxes", null, "Comands");
 				JDialog dialogWindow = new JDialog();
 				JPanel contentPane = new JPanel();
@@ -368,10 +397,12 @@ public class MainTest extends JApplet {
 				dialogWindow.setVisible(true);
 			});
 			tabbedPane.addTab("DB", null, panelDB, null);
-			//PANEL FILE
+			//-------------------PANEL FILE-----------------------------
 			panelFile = new JPanelCluster("Input Boxes", "Clusters", "Comands");
+			//-------------------PANEL FILE (upPanel)-------------------
 			panelFile.addUpPanelField(FieldType.table);
 			panelFile.addUpPanelField(FieldType.FileName);
+			//-------------------PANEL FILE (downPanel)-----------------
 			panelFile.addDownPanelButton("MINE", (ae) -> {
 				String table = panelFile.getUpPanelField(FieldType.table).getText();
 				String fileName = panelFile.getUpPanelField(FieldType.FileName).getText();
@@ -419,10 +450,11 @@ public class MainTest extends JApplet {
 								PDFcreator(file.getAbsolutePath(), panelFile.clusterOutput.getText(), image);
 							else
 								PDFcreator(file.getAbsolutePath() + ".pdf", panelFile.clusterOutput.getText(), image);
+							JOptionPane.showMessageDialog(null, "Cluster salvato nel percorso : \n" + file.getAbsolutePath(), "Information", JOptionPane.INFORMATION_MESSAGE);
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
+					}		
 				}
 			});
 			tabbedPane.addTab("File", null, panelFile, null);
@@ -540,6 +572,13 @@ public class MainTest extends JApplet {
 		}
 	}
 	
+	/**
+	 * Ricava un file PDF
+	 * @param title percorso / nome del file PDF da creare
+	 * @param text testo da inserire all'interno del file PDF
+	 * @param image immagine da inserire all'interno del file PDF 
+	 * @throws Exception
+	 */
 	private void PDFcreator (String title, String text, BufferedImage image ) throws Exception {
 
         PDDocument doc = new PDDocument();
@@ -600,6 +639,5 @@ public class MainTest extends JApplet {
         contentStream.close();
         doc.save(title);
         doc.close();
-        JOptionPane.showMessageDialog(null, "Cluster salvato nel percorso : \n" + title, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 }

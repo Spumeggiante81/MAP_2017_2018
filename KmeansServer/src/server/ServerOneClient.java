@@ -3,23 +3,15 @@ package server;
 import data.Attribute;
 
 import data.Data;
-import data.DiscreteAttribute;
 import data.OutOfRangeSampleSize;
-import data.Tuple;
 import database.DatabaseConnectionException;
-import mining.Cluster;
-import mining.ClusterSet;
 import mining.KMeansMiner;
 
 import java.net.*;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.TreeSet;
-import java.io.*;
-import java.math.BigDecimal;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 /**

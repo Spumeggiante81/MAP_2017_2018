@@ -19,7 +19,6 @@ import java.util.Map;
 
 /**
  * Classe che permette la creazione di un grafico sui cluster trovati alle varie distanze
- * @author Ciccariello Luciano, Palumbo Vito, Rosini Luigi
  */
 public class ClusterPlot implements Serializable{
 
