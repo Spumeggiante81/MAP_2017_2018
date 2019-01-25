@@ -197,6 +197,7 @@ public class MainTest extends JApplet {
 		
 		public AsyncLearningFromFileRequest(IAsyncResponsive responsive, Socket socket,String table, String fileName) {
 			super(responsive);
+			this.socket = socket;
 			this.fileName = fileName;
 			this.table = table;
 		}
@@ -379,22 +380,26 @@ public class MainTest extends JApplet {
 				 * perchè non ho interesse di mostrare nulla all'interno di questa finestra.
 				 * Pertanto, basta passare "null" nell'apposito campo
 				 */
-				JPanelCluster windowFile = new JPanelCluster ("Input Boxes", null, "Comands");
-				JDialog dialogWindow = new JDialog();
-				JPanel contentPane = new JPanel();
-				contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-				windowFile.addDownPanelButton("Ok", (ae1) -> {
-					String fileName = windowFile.getUpPanelField(FieldType.FileName).getText();
-					new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
-					dialogWindow.setVisible(false);
-				});
-				windowFile.addUpPanelField(FieldType.FileName);
-				windowFile.addDownPanelButton("Cancel", (ae1) -> {
-					dialogWindow.setVisible(false);
-				});
-				contentPane.add(windowFile);
-				dialogWindow.add(contentPane);
-				dialogWindow.setVisible(true);
+				if ((!panelDB.clusterOutput.getText().isEmpty())&&(!panelDB.clusterOutput.getText().equals("Error"))){
+					JPanelCluster windowFile = new JPanelCluster ("Input Boxes", null, "Comands");
+					JDialog dialogWindow = new JDialog();
+					JPanel contentPane = new JPanel();
+					contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+					windowFile.addDownPanelButton("Ok", (ae1) -> {
+						String fileName = windowFile.getUpPanelField(FieldType.FileName).getText();
+						new AsyncStoreInFileRequest(ResponsiveInterface, socket, fileName).start();
+						dialogWindow.setVisible(false);
+					});
+					windowFile.addUpPanelField(FieldType.FileName);
+					windowFile.addDownPanelButton("Cancel", (ae1) -> {
+						dialogWindow.setVisible(false);
+					});
+					contentPane.add(windowFile);
+					dialogWindow.add(contentPane);
+					dialogWindow.setVisible(true);
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
 			tabbedPane.addTab("DB", null, panelDB, null);
 			//-------------------PANEL FILE-----------------------------
@@ -409,7 +414,7 @@ public class MainTest extends JApplet {
 				new AsyncLearningFromFileRequest(ResponsiveInterface, socket, table, fileName).start();;
 			});
 			panelDB.addDownPanelButton("Save as PDF", (ae) -> {
-				if (!panelDB.clusterOutput.getText().isEmpty()) {
+				if ((!panelDB.clusterOutput.getText().isEmpty())&&(!panelDB.clusterOutput.getText().equals("Error"))) {
 					Image img = ((ImageIcon)panelDB.plot.getIcon()).getImage();
 					BufferedImage image = (BufferedImage)img;
 
@@ -431,9 +436,11 @@ public class MainTest extends JApplet {
 						}
 					}
 				}
+				else
+					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
 			panelFile.addDownPanelButton("Save as PDF", (ae) -> {
-				if (!panelFile.clusterOutput.getText().isEmpty()) {
+				if ((!panelFile.clusterOutput.getText().isEmpty())&&(!panelFile.clusterOutput.getText().equals("Error"))) {
 					Image img = ((ImageIcon)panelFile.plot.getIcon()).getImage();
 					BufferedImage image = (BufferedImage)img;
 
@@ -456,6 +463,8 @@ public class MainTest extends JApplet {
 						}
 					}		
 				}
+				else
+					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
 			tabbedPane.addTab("File", null, panelFile, null);
 			add(tabbedPane);
@@ -503,26 +512,27 @@ public class MainTest extends JApplet {
 				return;
 			textArea.setText((String)result);
 			plot.setText("");
-			try {
-				String is_img = (String) readObject (socket);
-				if (is_img.compareTo("IMG")==0){
-					byte[] buffer = (byte[])readObject(socket);
-					ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
-					BufferedImage img = ImageIO.read(bais);
-					bais.close();
-					ImageIcon icon = new ImageIcon(img);
-					plot.setIcon(icon);
+			if (!result.equals("Error")){
+				try {
+					String is_img = (String) readObject (socket);
+					if (is_img.compareTo("IMG")==0){
+						byte[] buffer = (byte[])readObject(socket);
+						ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+						BufferedImage img = ImageIO.read(bais);
+						bais.close();
+						ImageIcon icon = new ImageIcon(img);
+						plot.setIcon(icon);
+					}	
 				}
-				
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
+				catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
