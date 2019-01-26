@@ -374,7 +374,7 @@ public class MainTest extends JApplet {
 				}
 				new AsyncLearningFromDatabaseRequest(ResponsiveInterface, socket, table, k).start();
 			});
-			panelDB.addDownPanelButton("Save Clusters on File", (ae) -> {
+			panelDB.addDownPanelButton("Save", (ae) -> {
 				/*
 				 * In questo caso non mi interessa che "windowFile" mostri la parte centrale,
 				 * perchè non ho interesse di mostrare nulla all'interno di questa finestra.
@@ -396,22 +396,11 @@ public class MainTest extends JApplet {
 					});
 					contentPane.add(windowFile);
 					dialogWindow.add(contentPane);
+					dialogWindow.setSize(300, 150);
 					dialogWindow.setVisible(true);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
-			});
-			tabbedPane.addTab("DB", null, panelDB, null);
-			//-------------------PANEL FILE-----------------------------
-			panelFile = new JPanelCluster("Input Boxes", "Clusters", "Comands");
-			//-------------------PANEL FILE (upPanel)-------------------
-			panelFile.addUpPanelField(FieldType.table);
-			panelFile.addUpPanelField(FieldType.FileName);
-			//-------------------PANEL FILE (downPanel)-----------------
-			panelFile.addDownPanelButton("MINE", (ae) -> {
-				String table = panelFile.getUpPanelField(FieldType.table).getText();
-				String fileName = panelFile.getUpPanelField(FieldType.FileName).getText();
-				new AsyncLearningFromFileRequest(ResponsiveInterface, socket, table, fileName).start();;
 			});
 			panelDB.addDownPanelButton("Save as PDF", (ae) -> {
 				if ((!panelDB.clusterOutput.getText().isEmpty())&&(!panelDB.clusterOutput.getText().equals("Error"))) {
@@ -439,6 +428,22 @@ public class MainTest extends JApplet {
 				else
 					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
+			panelDB.addDownPanelButton("Clear Text Area", (ae) -> {
+				panelDB.clusterOutput.setText("");
+				panelDB.plot.setIcon(null);
+			});
+			tabbedPane.addTab("DB", null, panelDB, null);
+			//-------------------PANEL FILE-----------------------------
+			panelFile = new JPanelCluster("Input Boxes", "Clusters", "Comands");
+			//-------------------PANEL FILE (upPanel)-------------------
+			panelFile.addUpPanelField(FieldType.table);
+			panelFile.addUpPanelField(FieldType.FileName);
+			//-------------------PANEL FILE (downPanel)-----------------
+			panelFile.addDownPanelButton("MINE", (ae) -> {
+				String table = panelFile.getUpPanelField(FieldType.table).getText();
+				String fileName = panelFile.getUpPanelField(FieldType.FileName).getText();
+				new AsyncLearningFromFileRequest(ResponsiveInterface, socket, table, fileName).start();;
+			});
 			panelFile.addDownPanelButton("Save as PDF", (ae) -> {
 				if ((!panelFile.clusterOutput.getText().isEmpty())&&(!panelFile.clusterOutput.getText().equals("Error"))) {
 					Image img = ((ImageIcon)panelFile.plot.getIcon()).getImage();
@@ -465,6 +470,10 @@ public class MainTest extends JApplet {
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
+			});
+			panelFile.addDownPanelButton("Clear Text Area", (ae) -> {
+				panelFile.clusterOutput.setText("");
+				panelFile.plot.setIcon(null);
 			});
 			tabbedPane.addTab("File", null, panelFile, null);
 			add(tabbedPane);
@@ -571,6 +580,7 @@ public class MainTest extends JApplet {
 
 			tab = new TabbedPane();
 			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
+			setSize(550,650);
 			getContentPane().add(tab);
 			ResponsiveInterface = tab;
 
