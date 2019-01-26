@@ -33,9 +33,8 @@ public class ClusterSet implements Serializable {
 	}
 
 	/**
-	 * Asseggna c a C[i]
-	 * Incrementa i
-	 * @param c
+	 * Definisce il cluster passato in parametro nella posizione i-esima della collezione
+	 * @param c cluster da inserire nella collezione di Clusters
 	 */
 	void add(Cluster c){
 		C[i]=c;
@@ -43,9 +42,9 @@ public class ClusterSet implements Serializable {
 	} 
 
 	/**
-	 * Restituisce C[i]
-	 * @param i
-	 * @return
+	 * Restituisce il cluster in posizione i-esima
+	 * @param i posizione da cui si vuole ricavare un definito cluster
+	 * @return Cluster
 	 */
 	public Cluster get(int i){
 		return C[i];
