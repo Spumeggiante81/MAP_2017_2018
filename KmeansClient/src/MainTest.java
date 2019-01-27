@@ -428,7 +428,9 @@ public class MainTest extends JApplet {
 				else
 					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
-			panelDB.addDownPanelButton("Clear Text Area", (ae) -> {
+			panelDB.addDownPanelButton("Clear Text", (ae) -> {
+				panelDB.getUpPanelField(FieldType.table).setText("");
+				panelDB.getUpPanelField(FieldType.k).setText("");
 				panelDB.clusterOutput.setText("");
 				panelDB.plot.setIcon(null);
 			});
@@ -472,6 +474,8 @@ public class MainTest extends JApplet {
 					JOptionPane.showMessageDialog(null, "Ricavare il calcolo dei cluster prima di effettuare questa opzione", "Error", JOptionPane.ERROR_MESSAGE);
 			});
 			panelFile.addDownPanelButton("Clear Text Area", (ae) -> {
+				panelFile.getUpPanelField(FieldType.table).setText("");
+				panelFile.getUpPanelField(FieldType.FileName).setText("");
 				panelFile.clusterOutput.setText("");
 				panelFile.plot.setIcon(null);
 			});
@@ -579,6 +583,14 @@ public class MainTest extends JApplet {
 			System.out.println("Success! Connected to " + socket);
 
 			tab = new TabbedPane();
+			tab.panelDB.addDownPanelButton("Exit", (ae) -> {
+				this.destroy();
+				System.exit(0);
+			});
+			tab.panelFile.addDownPanelButton("Exit", (ae) -> {
+				this.destroy();
+				System.exit(0);
+			});
 			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 			setSize(550,650);
 			getContentPane().add(tab);
