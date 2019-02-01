@@ -10,6 +10,11 @@ import java.io.Serializable;
 import data.Data;
 import data.OutOfRangeSampleSize;
 
+/**
+ * Classe nella quale è definito il calcolo del KMeans
+ 
+ *
+ */
 public class KMeansMiner {
 
 	ClusterSet C;

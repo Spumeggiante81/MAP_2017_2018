@@ -9,6 +9,9 @@ import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
 
+/**
+ * Classe che rappresenta un insieme di Cluster
+ */
 public class ClusterSet implements Serializable {
 	//Attributi
 	private Cluster[] C;

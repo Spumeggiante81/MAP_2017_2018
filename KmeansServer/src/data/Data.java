@@ -16,6 +16,11 @@ import database.DbAccess;
 import database.Example;
 import database.TableData;
 
+/**
+ * 
+ * Modella l'insieme delle transazioni
+ *
+ */
 
 public class Data {
 

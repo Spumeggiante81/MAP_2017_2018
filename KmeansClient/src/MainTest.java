@@ -51,6 +51,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
+/**
+ * 
+ * Stabilisce la connessione al Server e, una volta avvenuta la connessione, 
+ * invia e riceve messaggi, a seconda della scelta effettuata dall'utente.
+ *
+ * Si potrà scegliere la definzione dei cluster su DB oppure la lettura da File
+ */
 public class MainTest extends JApplet {
 	//definisco delle "tipi" di campi, quali potranno essere usati per definire dei campi d'intestazione nei pannelli
 	private enum FieldType {table, k, FileName};

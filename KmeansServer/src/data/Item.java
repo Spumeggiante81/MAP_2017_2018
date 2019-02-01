@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * Modella un generico item (coppia attributo-valore, per esempio Outlook=”Sunny”)
+ *
+ */
 public abstract class Item implements Serializable{
 	Attribute attribute;//attributo coinvolto nell'item
 	Object value;//valore assegnato all'attributo

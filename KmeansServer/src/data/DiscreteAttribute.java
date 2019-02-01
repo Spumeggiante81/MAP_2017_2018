@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * 
+ * Estende la classe Attribute e rappresenta un attributo discreto
+ *
+ */
 public class DiscreteAttribute extends Attribute implements Iterable<String> {
 	private Set<String> values;
 
