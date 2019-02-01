@@ -1,2 +1,4 @@
 .metadata/
 KmeansServer/.classpath
+KmeansClient/.classpath
+KmeansServer/.classpath

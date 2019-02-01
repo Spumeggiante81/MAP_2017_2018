@@ -37,14 +37,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
-import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
+import org.apache.pdfbox.pdmodel.*;
 
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -591,12 +584,7 @@ public class MainTest extends JApplet {
 
 			tab = new TabbedPane();
 			tab.panelDB.addDownPanelButton("Exit", (ae) -> {
-				this.destroy();
-				System.exit(0);
-			});
-			tab.panelFile.addDownPanelButton("Exit", (ae) -> {
-				this.destroy();
-				System.exit(0);
+				
 			});
 			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 			setSize(550,650);
@@ -606,8 +594,6 @@ public class MainTest extends JApplet {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Unable to connect to " + strHost + ":" + port + ".\n" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
-			this.destroy();
-			System.exit(0);
 		}
 	}
 	
