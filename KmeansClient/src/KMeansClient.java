@@ -1,12 +1,7 @@
-
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JApplet;
-import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,16 +23,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
@@ -45,10 +50,6 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 /**
  * 
@@ -57,7 +58,7 @@ import javax.swing.JFileChooser;
  *
  * Si potrà scegliere la definzione dei cluster su DB oppure la lettura da File
  */
-public class MainTest extends JApplet {
+public class KMeansClient extends JFrame {
 	//definisco delle "tipi" di campi, quali potranno essere usati per definire dei campi d'intestazione nei pannelli
 	private enum FieldType {table, k, FileName};
 	private static String DEFAULT_HOST = "localhost";
@@ -558,7 +559,8 @@ public class MainTest extends JApplet {
 	
 	private TabbedPane tab;
 	
-	public void init() {
+	public KMeansClient() {
+		/*
 		String strHost = getParameter("ServerIP");
 		String strPort = getParameter("Port");
 		int port;
@@ -581,7 +583,9 @@ public class MainTest extends JApplet {
 				port = DEFAULT_PORT;
 			}
 		}
-
+		*/
+		String strHost = DEFAULT_HOST;
+		int port = DEFAULT_PORT;
 		try {
 			InetAddress addr = InetAddress.getByName(strHost); // ottiene l'indirizzo dell'host specificato
 			System.out.println("Connecting to " + addr + "...");
@@ -589,8 +593,23 @@ public class MainTest extends JApplet {
 			System.out.println("Success! Connected to " + socket);
 
 			tab = new TabbedPane();
+			tab.panelFile.addDownPanelButton("Exit", (ae) -> {
+				try {
+					socket.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.exit(0);
+			});
 			tab.panelDB.addDownPanelButton("Exit", (ae) -> {
-				
+				try {
+					socket.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.exit(0);
 			});
 			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 			setSize(550,650);
@@ -671,4 +690,17 @@ public class MainTest extends JApplet {
         doc.save(title);
         doc.close();
     }
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					KMeansClient frame = new KMeansClient();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }
