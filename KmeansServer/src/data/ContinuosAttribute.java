@@ -3,6 +3,14 @@ package data;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * 
+ * Estende la classe Attribute e modella un attributo continuo (numerico).
+ * Con i suoi metodi permette di normalizzare il dominio dell'attributo 
+ * nell'intervallo [0,1] al fine da rendere confrontabili attributi 
+ * aventi domini diversi
+ *
+ */
 class ContinuosAttribute extends Attribute 
 {
 	private double max; 

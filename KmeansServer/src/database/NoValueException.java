@@ -1,7 +1,7 @@
 package database;
 
 /**
- * Lanciato quando non viene trovato nessun valore
+ * Lancia un'eccezione quando non viene trovato nessun valore
  */
 class NoValueException extends Exception {
 

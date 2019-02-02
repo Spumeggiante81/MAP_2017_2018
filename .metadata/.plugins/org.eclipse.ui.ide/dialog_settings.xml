@@ -9,8 +9,8 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\grafico"/>
-			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\Mat"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansClient"/>
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7"/>
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_6"/>
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5"/>
@@ -18,6 +18,9 @@
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_3"/>
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_2"/>
 			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_1"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\grafico"/>
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018\Mat"/>
 			<item value="C:\Users\Dany\Desktop\sig\sig"/>
 			<item value="C:\Users\Dany\Desktop\registro (1)"/>
 			<item value="C:\Users\Dany\Desktop\login\login"/>
