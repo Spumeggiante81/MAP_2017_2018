@@ -19,16 +19,7 @@
 	</section>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
-	</section>
-	<section name="quick_assist_proposal_size">
-	</section>
-	<section name="NewPackageWizardPage">
-		<item value="false" key="create_package_info_java"/>
-	</section>
-	<section name="BuildPathsPropertyPage">
-		<item value="2" key="pageIndex"/>
-	</section>
-	<section name="completion_proposal_size">
+		<item value="false" key="RunnableJar.export.ipwarning"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item value="true" key="ShowStatusLine"/>
@@ -41,6 +32,135 @@
 			<item value="391" key="DIALOG_X_ORIGIN"/>
 			<item value="39" key="DIALOG_Y_ORIGIN"/>
 		</section>
+	</section>
+	<section name="javadoc">
+		<item value="package" key="access"/>
+		<item value="false" key="noindex"/>
+		<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer\javadoc.xml" key="antpath"/>
+		<item value="false" key="nodeprecatedlist"/>
+		<item value="true" key="use"/>
+		<item value="true" key="author"/>
+		<item value="false" key="nodeprecated"/>
+		<item value="false" key="nonavbar"/>
+		<item value="" key="docletpath"/>
+		<item value="C:\Program Files\Java\jdk1.8.0_171\bin\javadoc.exe" key="javadoc_command_history"/>
+		<item value="1.8" key="source"/>
+		<item value="true" key="version"/>
+		<item value="KMeans" key="doctitle"/>
+		<item value="" key="docletname"/>
+		<item value="true" key="splitindex"/>
+		<item value="true" key="fromStandard"/>
+		<item value="false" key="notree"/>
+		<item value="C:\Users\Dany\Desktop\MAP_2017_2018\documentazione" key="destdir"/>
+		<item value="true" key="openinbrowser"/>
+		<section name="projects">
+			<section name="esercitazione_1">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_1\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\documentazione" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_7(Client)">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\client_7\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\client_7\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_7(Server)">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\server_7\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_7\server_7\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_3">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_3\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_3\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_2">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_2\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_2\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_5">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_5\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="KmeansClient">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\documentazione" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_4">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_4\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_4\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="esercitazione_6">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_6\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\esercitazione_6\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="KmeansServer">
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Dany\Desktop\MAP_2017_2018\KmeansServer\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+		</section>
+	</section>
+	<section name="FatJarPackageWizard">
+		<item value="C:\Users\Dany\Desktop\MAP_2017_2018" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="MultiServer - KmeansServer" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="provaclient2.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="provaclient2.jar"/>
+			<item value="prova2.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="C:\Users\Dany\Desktop\MAP_2017_2018.xml"/>
+			<item value=".xml"/>
+		</list>
+	</section>
+	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="NewPackageWizardPage">
+		<item value="false" key="create_package_info_java"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
+	</section>
+	<section name="JavadocWizardDialog">
+		<item value="616" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="566" key="DIALOG_HEIGHT"/>
+		<item value="383" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="JarPackageWizard">
+		<item value="false" key="JarPackageWizardPage.INCLUDE_DIRECTORY_ENTRIES"/>
+		<item value="" key="JarManifestWizardPage.MANIFEST_LOCATION"/>
+		<item value="false" key="JarManifestWizardPage.SEAL_JAR"/>
+		<item value="true" key="JarPackageWizardPage.COMPRESS"/>
+		<item value="false" key="JarManifestWizardPage.REUSE_MANIFEST"/>
+		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
+		<item value="true" key="jarOptionsWizardPage.EXPORT_WARNINGS"/>
+		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
+		<item value="true" key="jarOptionsWizardPage.BUILD_IF_NEEDED"/>
+		<item value="false" key="JarPackageWizardPage.EXPORT_JAVA_FILES"/>
+		<item value="true" key="jarOptionsWizardPage.EXPORT_ERRORS"/>
+		<item value="true" key="JarManifestWizardPage.GENERATE_MANIFEST"/>
+		<item value="true" key="JarPackageWizardPage.EXPORT_CLASS_FILES"/>
+		<item value="false" key="JarPackageWizardPage.OVERWRITE"/>
+		<item value="false" key="jarOptionsWizardPage.SAVE_DESCRIPTION"/>
+		<item value="false" key="JarPackageWizardPage.REFACTORINGS"/>
+		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
+		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
+		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="provaclient.jar"/>
+			<item value="prova.jar"/>
+		</list>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>

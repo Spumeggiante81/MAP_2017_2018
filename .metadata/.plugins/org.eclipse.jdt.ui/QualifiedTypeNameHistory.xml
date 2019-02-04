@@ -31,4 +31,10 @@
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="MainTest.TabbedPane"/>
 <fullyQualifiedTypeName name="MainTest"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.edit.PDPageContentStream"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.font.PDType1Font"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.font.PDFont"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.common.PDRectangle"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage"/>
+<fullyQualifiedTypeName name="org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap"/>
 </qualifiedTypeNameHistroy>
