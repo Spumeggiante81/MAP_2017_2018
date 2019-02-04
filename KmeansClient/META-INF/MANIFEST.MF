@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KmeansClient
+Bundle-SymbolicName: KmeansClient
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: KmeansClient.jar,
+ Windows 7/Documents/GitHub/MAP_2017_2018/KmeansClient/pdfbox-app-1.8.10.jar
+Export-Package: .
